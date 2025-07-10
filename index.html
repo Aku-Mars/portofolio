@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Portofolio">
+    <meta property="og:description" content="Web Portofolio - Muhamad Arifin Syam">
+    <meta property="og:url" content="https://akumars.my.id/portofolio">    
+    <link rel="icon" href="img/ico.png" type="image/x-icon">
+    <meta property="og:image" content="https://raw.githubusercontent.com/Aku-Mars/gambar/main/bannercps.png">
+    <title>Portofolio - Muhamad Arifin Syam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #111827;
+            color: #d1d5db;
+            font-family: 'Poppins', sans-serif;
+        }
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(17, 24, 39, 0.8);
+            z-index: 1;
+            transition: background 0.3s ease;
+        }
+        .project-card:hover::before {
+            background: rgba(17, 24, 39, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-300">
+
+    <!-- Header & Navbar -->
+    <header class="bg-gray-900/70 backdrop-blur-lg fixed top-0 left-0 right-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl md:text-2xl font-bold text-white">MARS</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#profil" class="text-gray-300 hover:text-teal-400 transition duration-300">Profil</a>
+                <a href="#pengalaman" class="text-gray-300 hover:text-teal-400 transition duration-300">Pengalaman</a>
+                <a href="#proyek" class="text-gray-300 hover:text-teal-400 transition duration-300">Proyek</a>
+                <a href="#cv" class="text-gray-300 hover:text-teal-400 transition duration-300">CV</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-white">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#profil" class="block py-2 px-4 text-sm hover:bg-gray-700">Profil</a>
+            <a href="#pengalaman" class="block py-2 px-4 text-sm hover:bg-gray-700">Pengalaman</a>
+            <a href="#proyek" class="block py-2 px-4 text-sm hover:bg-gray-700">Proyek</a>
+            <a href="#cv" class="block py-2 px-4 text-sm hover:bg-gray-700">CV</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Bagian Profil -->
+        <section id="profil" class="min-h-screen flex items-center justify-center text-center p-5 pt-20">
+            <div data-aos="fade-up">
+                <img src="img/Mars.jpg" alt="Foto Profil Muhamad Arifin Syam" class="w-36 h-36 md:w-48 md:h-48 rounded-full mx-auto mb-6 border-4 border-teal-500 shadow-lg">
+                <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-2">Muhamad Arifin Syam</h1>
+                <p class="text-lg md:text-xl text-teal-400 mb-6">Mahasiswa Teknik Informatika, Universitas Lampung</p>
+                <p class="max-w-3xl mx-auto text-gray-400 text-base md:text-lg mb-8">
+                    Saya adalah seorang mahasiswa Teknik Informatika dengan antusiasme tinggi di bidang IT, khususnya <i>Cloud Engineering</i>. Berpengalaman dalam dasar-dasar <i>Cloud Computing</i> dan <i>Web Development</i>, saya mampu bekerja dalam tim, mengelola proyek kompleks, dan selalu bersemangat mempelajari hal-hal baru untuk menemukan solusi kreatif. Saya memiliki kemampuan komunikasi yang baik dan berkomitmen untuk memberikan hasil berkualitas tinggi.
+                </p>
+                <div class="flex justify-center items-center space-x-6">
+                    <a href="http://linkedin.com/in/muhamad-arifin-syam" target="_blank" class="text-teal-400 hover:text-white transition duration-300"><i class="fab fa-linkedin fa-lg md:fa-2x"></i></a>
+                    <a href="https://github.com/Aku-Mars" target="_blank" class="text-teal-400 hover:text-white transition duration-300"><i class="fab fa-github fa-lg md:fa-2x"></i></a>
+                    <a href="https://instagram.com/m_arifin_syam" target="_blank" class="text-teal-400 hover:text-white transition duration-300"><i class="fab fa-instagram fa-lg md:fa-2x"></i></a>
+                    <a href="mailto:marifinsyam73@gmail.com" class="text-teal-400 hover:text-white transition duration-300"><i class="fas fa-envelope fa-lg md:fa-2x"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian Pengalaman -->
+        <section id="pengalaman" class="py-20 bg-gray-800">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12" data-aos="fade-up">Pengalaman Saya</h2>
+                <div class="relative wrap p-4 md:p-10 h-full">
+                    <div class="hidden md:block border-2-2 absolute border-opacity-20 border-teal-400 h-full border" style="left: 50%"></div>
+                    
+                    <div class="mb-8 flex md:justify-between items-center w-full flex-row-reverse md:flex-row" data-aos="fade-up">
+                        <div class="hidden md:block w-5/12"></div>
+                        <div class="z-20 hidden md:flex items-center order-1 bg-teal-500 shadow-xl w-10 h-10 md:w-12 md:h-12 rounded-full">
+                            <i class="fas fa-briefcase mx-auto text-white text-xl md:text-2xl"></i>
+                        </div>
+                        <div class="order-1 bg-gray-900 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4">
+                            <p class="text-sm text-teal-400 mb-1">Agustus 2024 - Januari 2025</p>
+                            <h3 class="text-xl md:text-2xl font-bold text-white">Cloud Computing Cohort & Capstone Project Lead</h3>
+                            <p class="text-base md:text-md text-gray-400 mb-4">Bangkit Academy</p>
+                            <ul class="list-disc text-gray-300 space-y-2 pl-5 text-sm md:text-base">
+                                <li>Mendalami arsitektur cloud, GCP, dan rekayasa perangkat lunak.</li>
+                                <li>Memimpin proyek capstone "Mindcraft" sebagai Project Manager.</li>
+                                <li>Merancang arsitektur backend di GCP dan mengembangkan API inti.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mb-8 flex md:justify-between items-center w-full flex-row-reverse" data-aos="fade-up">
+                        <div class="hidden md:block w-5/12"></div>
+                        <div class="z-20 hidden md:flex items-center order-1 bg-teal-500 shadow-xl w-10 h-10 md:w-12 md:h-12 rounded-full">
+                            <i class="fas fa-graduation-cap mx-auto text-white text-xl md:text-2xl"></i>
+                        </div>
+                        <div class="order-1 bg-gray-900 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4">
+                            <p class="text-sm text-teal-400 mb-1">Februari 2025 - Juni 2025</p>
+                            <h3 class="text-xl md:text-2xl font-bold text-white">Peserta Program AI, elevAlte with Dicoding</h3>
+                            <p class="text-base md:text-md text-gray-400 mb-4">Microsoft & Dicoding</p>
+                            <ul class="list-disc text-gray-300 space-y-2 pl-5 text-sm md:text-base">
+                                <li>Mendalami pengembangan Kecerdasan Buatan (AI) dan Generative AI.</li>
+                                <li>Menguasai teknologi AI dari Microsoft dengan fokus pada platform cloud Azure.</li>
+                                <li>Menyelesaikan jalur pembelajaran intensif untuk menjadi talenta AI yang siap industri.</li>
+                           </ul>
+                        </div>
+                    </div>
+
+                    <div class="mb-8 flex md:justify-between items-center w-full flex-row-reverse md:flex-row" data-aos="fade-up">
+                        <div class="hidden md:block w-5/12"></div>
+                        <div class="z-20 hidden md:flex items-center order-1 bg-teal-500 shadow-xl w-10 h-10 md:w-12 md:h-12 rounded-full">
+                            <i class="fas fa-briefcase mx-auto text-white text-xl md:text-2xl"></i>
+                        </div>
+                        <div class="order-1 bg-gray-900 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4">
+                            <p class="text-sm text-teal-400 mb-1">Oktober 2022 - Sekarang</p>
+                            <h3 class="text-xl md:text-2xl font-bold text-white">Freelance Cloud Engineer</h3>
+                            <p class="text-base md:text-md text-gray-400 mb-4">Freelance</p>
+                            <ul class="list-disc text-gray-300 space-y-2 pl-5 text-sm md:text-base">
+                                <li>Menyediakan solusi cloud computing dan pengembangan web untuk berbagai klien.</li>
+                                <li>Berpengalaman mengelola layanan cloud dari AWS, GCP, Microsoft Azure, dan Alibaba Cloud.</li>
+                                <li>Mengembangkan proyek seperti toko online "Mars Store" dari perancangan hingga implementasi di VPS.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mb-8 flex md:justify-between items-center w-full flex-row-reverse" data-aos="fade-up">
+                        <div class="hidden md:block w-5/12"></div>
+                        <div class="z-20 hidden md:flex items-center order-1 bg-teal-500 shadow-xl w-10 h-10 md:w-12 md:h-12 rounded-full">
+                            <i class="fas fa-briefcase mx-auto text-white text-xl md:text-2xl"></i>
+                        </div>
+                        <div class="order-1 bg-gray-900 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4">
+                            <p class="text-sm text-teal-400 mb-1">Juni 2025 - Sekarang</p>
+                            <h3 class="text-xl md:text-2xl font-bold text-white">Back End Developer Intern</h3>
+                            <p class="text-base md:text-md text-gray-400 mb-4">Diskominfosantik Kabupaten Serang</p>
+                            <ul class="list-disc text-gray-300 space-y-2 pl-5 text-sm md:text-base">
+                                <li>Bertanggung jawab atas pengembangan dan operasional back-end.</li>
+                                <li>Mengimplementasikan fitur dan layanan menggunakan PHP, Laravel, dan MySQL.</li>
+                                <li>Mendukung pemeliharaan dan optimalisasi sistem di lingkungan pemerintahan.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian Proyek -->
+        <section id="proyek">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white py-12 bg-gray-900" data-aos="fade-up" data-aos-offset="-500">Proyek Saya</h2>
+            <div>
+                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center justify-end" style="background-image: url('https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max');" data-aos="fade-left" data-aos-offset="-500">
+                    <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12 text-left md:text-right">
+                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Mindcraft</h3>
+                        <p class="text-sm md:text-base text-gray-200 mb-4">Aplikasi penghasil kuis otomatis dari materi pengguna.</p>
+                        <a href="https://github.com/The-Petot/Mindcraft" target="_blank" class="inline-block bg-teal-500 text-white font-bold py-2 px-4 text-sm md:py-3 md:px-6 md:text-base rounded-lg hover:bg-teal-600 transition duration-300">Lihat Proyek</a>
+                    </div>
+                </div>
+
+                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center" style="background-image: url('img/epic-dragon.png');" data-aos="fade-right" data-aos-offset="-500">
+                    <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12">
+                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Epic Dragon</h3>
+                        <p class="text-sm md:text-base text-gray-200 mb-4">Sebuah game turn bases berbasis website dibuat dengan teknologi AI Studio</p>
+                        <a href="https://akumars.my.id/game" target="_blank" class="inline-block bg-teal-500 text-white font-bold py-2 px-4 text-sm md:py-3 md:px-6 md:text-base rounded-lg hover:bg-teal-600 transition duration-300">Lihat Proyek</a>
+                    </div>
+                </div>
+
+                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center justify-end" style="background-image: url('img/monitoring.png');" data-aos="fade-left" data-aos-offset="-500">
+                    <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12 text-left md:text-right">
+                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Dashboard Monitoring Host</h3>
+                        <p class="text-sm md:text-base text-gray-200 mb-4">Antarmuka web untuk memantau status host secara real-time.</p>
+                        <a href="https://akumars.my.id/monitoring" target="_blank" class="inline-block bg-teal-500 text-white font-bold py-2 px-4 text-sm md:py-3 md:px-6 md:text-base rounded-lg hover:bg-teal-600 transition duration-300">Lihat Proyek</a>
+                    </div>
+                </div>
+
+                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center" style="background-image: url('img/to-do-List.png');" data-aos="fade-right" data-aos-offset="-500">
+                    <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12">
+                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Aplikasi To-Do List</h3>
+                        <p class="text-sm md:text-base text-gray-200 mb-4">Aplikasi untuk mengelola daftar tugas ataupun pekerjaan yang harus dilakukan.</p>
+                        <a href="https://akumars.my.id/list" target="_blank" class="inline-block bg-teal-500 text-white font-bold py-2 px-4 text-sm md:py-3 md:px-6 md:text-base rounded-lg hover:bg-teal-600 transition duration-300">Lihat Proyek</a>
+                    </div>
+                </div>
+
+                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center justify-end" style="background-image: url('img/crime_management.jpg');" data-aos="fade-left" data-aos-offset="-500">
+                    <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12 text-left md:text-right">
+                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Sistem Manajemen Kriminal</h3>
+                        <p class="text-sm md:text-base text-gray-200 mb-4">Aplikasi desktop untuk membantu polisi mengelola data kriminal.</p>
+                        <a href="https://github.com/Aku-Mars/middle-project/tree/main/crime_management" target="_blank" class="inline-block bg-teal-500 text-white font-bold py-2 px-4 text-sm md:py-3 md:px-6 md:text-base rounded-lg hover:bg-teal-600 transition duration-300">Lihat Proyek</a>
+                    </div>
+                </div>
+                
+                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center" style="background-image: url('img/edge_detection.jpg');" data-aos="fade-right" data-aos-offset="-500">
+                    <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12">
+                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Deteksi Tepi & Pencocokan Template</h3>
+                        <p class="text-sm md:text-base text-gray-200 mb-4">Kumpulan skrip Python untuk pemrosesan gambar fundamental.</p>
+                        <a href="https://github.com/Aku-Mars/middle-project/tree/main/edge_detection" target="_blank" class="inline-block bg-teal-500 text-white font-bold py-2 px-4 text-sm md:py-3 md:px-6 md:text-base rounded-lg hover:bg-teal-600 transition duration-300">Lihat Proyek</a>
+                    </div>
+                </div>
+
+                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center justify-end" style="background-image: url('img/Jawari.png');" data-aos="fade-left" data-aos-offset="-500">
+                    <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12 text-left md:text-right">
+                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Jawari (Proyek Dalam Pengerjaan)</h3>
+                        <p class="text-sm md:text-base text-gray-200 mb-4">Aplikasi berbasis web untuk kesenian Tari di Banten - DISPORAPAR</p>
+                        <span class="inline-block bg-gray-500 text-white font-bold py-2 px-4 text-sm md:py-3 md:px-6 md:text-base rounded-lg cursor-not-allowed">Segera Hadir</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian Tech & Tools -->
+        <section id="tech" class="py-20 bg-gray-900" data-aos="fade-up" data-aos-offset="-500">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12">Tech & Tools I Use</h2>
+                <div class="text-center mb-12">
+                    <p align="center">
+                      <a href="https://skillicons.dev">
+                        <img src="https://skillicons.dev/icons?i=php,laravel,js,react,nodejs,html,css,vscode,figma" class="h-12 md:h-16"/>
+                      </a>
+                    </p>
+                </div>
+                <h3 class="text-2xl md:text-3xl font-bold text-center text-white mb-12">☁️ Cloud & Hosting Platforms</h3>
+                <div class="text-center">
+                    <p align="center">
+                      <a href="https://skillicons.dev">
+                        <img src="https://skillicons.dev/icons?i=gcp,aws,azure" class="h-12 md:h-16"/>
+                      </a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian CV -->
+        <section id="cv" class="text-center py-20 bg-gray-800" data-aos="fade-up" data-aos-offset="-1000">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">Tertarik untuk Bekerja Sama?</h2>
+                <p class="text-gray-300 mb-8">Lihat riwayat hidup saya untuk informasi lebih lanjut.</p>
+                <a href="CV.pdf" class="inline-block bg-teal-500 text-white font-bold py-3 px-6 md:py-4 md:px-8 rounded-lg hover:bg-teal-600 transition duration-300 text-base md:text-lg">Unduh CV Saya</a>
+            </div>
+        </section>
+
+        <footer class="text-center p-4 bg-gray-900 text-gray-500">
+            <p class="text-sm">&copy; 2024 Muhamad Arifin Syam.</p>
+        </footer>
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 20,
+        });
+
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#mobile-menu a, nav a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if(e.currentTarget.id !== 'mobile-menu-button') {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

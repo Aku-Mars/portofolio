@@ -1,0 +1,363 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #d1d8df80;
+}
+
+header.navbar-container {
+  width: 100%;
+  padding-block: 10px;
+  margin-inline: auto;
+  background-color: #0d47a1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 9999;
+  position: fixed;
+}
+
+header.navbar-container .logo img {
+  width: 150px;
+}
+
+header.navbar-container .nav-list ul {
+  padding-left: 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem 1rem;
+}
+
+header.navbar-container .nav-list li {
+  list-style-type: none;
+}
+
+header.navbar-container .nav-list li a {
+  padding: 0.5rem 1.5rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: white;
+  background-color: #0d47a1;
+  transition: all 0.2s ease-in-out;
+}
+
+header.navbar-container .nav-list li:hover a {
+  background-color: #1280db;
+  color: white;
+}
+
+#home {
+  margin-top: -8rem;
+  margin-bottom: 15rem;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 2rem 4rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+main .content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 5rem;
+}
+
+main .content .content-description {
+  flex: 1 1 50%;
+}
+
+main .content .content-description .title {
+  margin-block: 1rem;
+  font-size: 2.5rem;
+}
+
+main .content .content-description p {
+  font-size: 1.2rem;
+  line-height: 1.7rem;
+  color: #455a64;
+  text-align: justify;
+}
+
+main .content .content-description button {
+  padding: 0.8rem 2.5rem;
+  border: 3px solid transparent;
+  border-radius: 999px;
+  margin-block-start: 1rem;
+  background-color: #0d47a1;
+  font-family: 'Quicksand', sans-serif;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  transition: all 0.15s ease-in;
+}
+
+main .content .content-description button:hover {
+  border: 3px solid #0d47a1;
+  background-color: transparent;
+  color: #0d47a1;
+}
+
+main .content .content-image {
+  flex: 1 1 50%;
+  display: flex;
+  justify-content: center;
+}
+
+main .content .content-image img {
+  width: 300px;
+  min-width: 250px;
+  margin: auto;
+}
+
+#menu {
+  margin-top: 8rem;
+  margin-bottom: 5rem;
+  width: 100%;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #0d47a1;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.project-card {
+  background-color: #f0f4f8;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.project-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.project-card p {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #455a64;
+}
+
+.project-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1.5rem;
+  background-color: #0d47a1;
+  color: white;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.project-btn:hover {
+  background-color: #1280db;
+}
+
+main aside {
+  position: fixed;
+  inset-block: 0;
+  inset-inline-end: 0;
+}
+
+main aside .social-media {
+  height: 100%;
+  display: flex;
+}
+
+main aside .social-media ul {
+  padding: 1.5rem 1rem;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  margin: auto;
+  background-color: #0d47a1;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+main aside .social-media li {
+  list-style-type: none;
+}
+
+main aside .social-media li a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: white;
+  transition: all 0.1s ease-in-out;
+}
+
+main aside .social-media li a:hover {
+  color: #64b5f6;
+}
+
+footer {
+    padding: 10px;
+    color: white;
+    background-color: #0d47a1;
+   
+    text-align: center;
+    font-weight: bold; 
+}
+
+@media (max-width: 768px) {
+    header.navbar-container {
+      flex-direction: column; 
+      align-items: center; 
+    }
+  
+    header.navbar-container .nav-list ul {
+      flex-direction: column; 
+      align-items: center; 
+      gap: 5px 1rem;
+    }  
+
+    header ul {
+      margin: 0;
+    }
+
+    header ul {
+      max-height: fit-content;
+    }
+  
+    header.navbar-container .nav-list li {
+      margin-bottom: 10px;
+    }
+  
+    main {
+      padding: 1rem 2rem;
+    }
+  
+    main .content {
+      flex-direction: column; 
+      align-items: center; 
+      margin-bottom: 3rem; 
+    }
+
+    main .content .content-image {
+      order: -1; 
+      flex: none; 
+      margin-top: 1rem; 
+    }
+
+    main .content .content-description {
+      text-align: center; 
+    }
+
+    main .content .content-description .title {
+      font-size: 1.8rem;
+    }
+  
+    main .content .content-image img {
+      width: 80%; 
+      max-width: 250px; 
+    }
+
+    #nav-list {
+      display: none;
+      flex-direction: column;
+      background-color: #2c7873;
+    }
+  
+    #nav-list li {
+      margin: 10px 0;
+    }
+  
+    nav ul {
+      flex-direction: column;
+      gap: 0;
+      text-align: center;
+    }
+  
+    nav a {
+      color: white;
+      padding: 10px;
+      display: block;
+    }
+  
+    .section-title {
+      font-size: 2rem; 
+    }
+  
+    .project-grid {
+      grid-template-columns: 1fr; 
+    }
+  
+    .content-description .title {
+      font-size: 2.5rem;
+    }
+  
+    .content-description p {
+      font-size: 1rem;
+    }
+  }
+  
+
+@media (max-width: 480px) {
+  .navbar-container .nav-list ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar-container .nav-list li {
+    margin-bottom: 10px;
+  }
+
+  .content-description .title {
+    font-size: 2rem;
+  }
+
+  .content-description p {
+    font-size: 0.9rem;
+  }
+
+  .content-image img {
+    width: 150px;
+  }
+
+  main aside {
+    display: none;
+  }
+
+  .social-media ul {
+    padding: 1rem; 
+    background-color: transparent; 
+    border-radius: 0; 
+  }
+
+  .social-media li a {
+    font-size: 1.25rem; 
+  }
+}
