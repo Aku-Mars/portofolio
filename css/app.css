@@ -184,6 +184,47 @@ main .content .content-image img {
   background-color: #1280db;
 }
 
+#sertifikat {
+  margin-top: 5rem;
+  width: 100%;
+}
+
+.sertifikat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.sertifikat-card {
+  background-color: #f0f4f8;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+}
+
+.sertifikat-card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.sertifikat-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.8rem 2.5rem;
+  background-color: #0d47a1;
+  color: white;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: background-color 0.2s;
+}
+
+.sertifikat-btn:hover {
+  background-color: #1280db;
+}
+
 main aside {
   position: fixed;
   inset-block: 0;
