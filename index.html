@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="Portofolio">
+    <meta name="author" content="Muhamad Arifin Syam">
+    <meta name="keywords" content="Portofolio, Web Developer, Cloud Engineer, Muhamad Arifin Syam, Full-Stack, Back-End, Front-End">
+    <meta property="og:title" content="Portofolio - Muhamad Arifin Syam">
     <meta property="og:description" content="Web Portofolio - Muhamad Arifin Syam">
     <meta property="og:url" content="https://akumars.my.id/portofolio">    
     <link rel="icon" href="img/ico.png" type="image/x-icon">
@@ -34,7 +36,7 @@
         }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-300">
+<body class="bg-gray-900 text-gray-300" style="overflow-x: hidden;">
 
     <!-- Header & Navbar -->
     <header class="bg-gray-900/70 backdrop-blur-lg fixed top-0 left-0 right-0 z-50">
@@ -44,6 +46,7 @@
                 <a href="#profil" class="text-gray-300 hover:text-teal-400 transition duration-300">Profil</a>
                 <a href="#pengalaman" class="text-gray-300 hover:text-teal-400 transition duration-300">Pengalaman</a>
                 <a href="#proyek" class="text-gray-300 hover:text-teal-400 transition duration-300">Proyek</a>
+                <a href="#sertifikat" class="text-gray-300 hover:text-teal-400 transition duration-300">Sertifikat</a>
                 <a href="#cv" class="text-gray-300 hover:text-teal-400 transition duration-300">CV</a>
             </div>
             <button id="mobile-menu-button" class="md:hidden text-white">
@@ -55,6 +58,7 @@
             <a href="#profil" class="block py-2 px-4 text-sm hover:bg-gray-700">Profil</a>
             <a href="#pengalaman" class="block py-2 px-4 text-sm hover:bg-gray-700">Pengalaman</a>
             <a href="#proyek" class="block py-2 px-4 text-sm hover:bg-gray-700">Proyek</a>
+            <a href="#sertifikat" class="block py-2 px-4 text-sm hover:bg-gray-700">Sertifikat</a>
             <a href="#cv" class="block py-2 px-4 text-sm hover:bg-gray-700">CV</a>
         </div>
     </header>
@@ -157,10 +161,10 @@
         </section>
 
         <!-- Bagian Proyek -->
-        <section id="proyek">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-white py-12 bg-gray-900" data-aos="fade-up" data-aos-offset="-500">Proyek Saya</h2>
+        <section id="proyek" class="pt-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white py-12 bg-gray-900" data-aos="fade-up">Proyek Saya</h2>
             <div>
-                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center justify-end" style="background-image: url('https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max');" data-aos="fade-left" data-aos-offset="-500">
+                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center justify-end" style="background-image: url('https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max');" data-aos="fade-left">
                     <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12 text-left md:text-right">
                         <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Mindcraft</h3>
                         <p class="text-sm md:text-base text-gray-200 mb-4">Aplikasi penghasil kuis otomatis dari materi pengguna.</p>
@@ -168,7 +172,7 @@
                     </div>
                 </div>
 
-                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center" style="background-image: url('img/epic-dragon.png');" data-aos="fade-right" data-aos-offset="-500">
+                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center" style="background-image: url('img/epic-dragon.png');" data-aos="fade-right">
                     <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12">
                         <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Epic Dragon</h3>
                         <p class="text-sm md:text-base text-gray-200 mb-4">Sebuah game turn bases berbasis website dibuat dengan teknologi AI Studio</p>
@@ -176,7 +180,7 @@
                     </div>
                 </div>
 
-                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center justify-end" style="background-image: url('img/monitoring.png');" data-aos="fade-left" data-aos-offset="-500">
+                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center justify-end" style="background-image: url('img/monitoring.png');" data-aos="fade-left">
                     <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12 text-left md:text-right">
                         <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Dashboard Monitoring Host</h3>
                         <p class="text-sm md:text-base text-gray-200 mb-4">Antarmuka web untuk memantau status host secara real-time.</p>
@@ -184,7 +188,7 @@
                     </div>
                 </div>
 
-                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center" style="background-image: url('img/to-do-List.png');" data-aos="fade-right" data-aos-offset="-500">
+                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center" style="background-image: url('img/to-do-List.png');" data-aos="fade-right">
                     <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12">
                         <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Aplikasi To-Do List</h3>
                         <p class="text-sm md:text-base text-gray-200 mb-4">Aplikasi untuk mengelola daftar tugas ataupun pekerjaan yang harus dilakukan.</p>
@@ -192,7 +196,7 @@
                     </div>
                 </div>
 
-                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center justify-end" style="background-image: url('img/crime_management.jpg');" data-aos="fade-left" data-aos-offset="-500">
+                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center justify-end" style="background-image: url('img/crime_management.jpg');" data-aos="fade-left">
                     <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12 text-left md:text-right">
                         <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Sistem Manajemen Kriminal</h3>
                         <p class="text-sm md:text-base text-gray-200 mb-4">Aplikasi desktop untuk membantu polisi mengelola data kriminal.</p>
@@ -200,7 +204,7 @@
                     </div>
                 </div>
                 
-                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center" style="background-image: url('img/edge_detection.jpg');" data-aos="fade-right" data-aos-offset="-500">
+                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center" style="background-image: url('img/edge_detection.jpg');" data-aos="fade-right">
                     <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12">
                         <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Deteksi Tepi & Pencocokan Template</h3>
                         <p class="text-sm md:text-base text-gray-200 mb-4">Kumpulan skrip Python untuk pemrosesan gambar fundamental.</p>
@@ -208,7 +212,7 @@
                     </div>
                 </div>
 
-                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center justify-end" style="background-image: url('img/Jawari.png');" data-aos="fade-left" data-aos-offset="-500">
+                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center justify-end" style="background-image: url('img/Jawari.png');" data-aos="fade-left">
                     <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12 text-left md:text-right">
                         <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Jawari (Proyek Dalam Pengerjaan)</h3>
                         <p class="text-sm md:text-base text-gray-200 mb-4">Aplikasi berbasis web untuk kesenian Tari di Banten - DISPORAPAR</p>
@@ -218,14 +222,42 @@
             </div>
         </section>
 
+        <!-- Bagian Sertifikat -->
+        <section id="sertifikat" class="py-20 bg-gray-800 pt-20">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12" data-aos="fade-up">Sertifikat Saya</h2>
+                <div class="grid grid-cols-1 m-10 sm:grid-cols-2 gap-8">
+                    <div class="bg-gray-900 rounded-lg shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                        <img src="img/ser.png" alt="Sertifikat Belajar Back-End Pemula dengan JavaScript" class="w-full h-128 object-cover">
+                        <p class="text-center py-2">Belajar Back-End Pemula dengan JavaScript</p>
+                    </div>
+                    <div class="bg-gray-900 rounded-lg shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                        <img src="img/cloud.png" alt="Sertifikat Menjadi Google Cloud Engineer" class="w-full h-128 object-cover">
+                        <p class="text-center py-2">Menjadi Google Cloud Engineer</p>
+                    </div>
+                    <div class="bg-gray-900 rounded-lg shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                        <img src="img/ai.png" alt="Sertifikat Belajar Penggunaan Generative AI" class="w-full h-128 object-cover">
+                        <p class="text-center py-2">Belajar Penggunaan Generative AI</p>
+                    </div>
+                    <div class="bg-gray-900 rounded-lg shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="1250" data-aos-offset="-1000">
+                        <img src="img/ccna.png" alt="Sertifikat CCNA: Enterprise Networking, Security, and Automation" class="w-full h-128 object-cover">
+                        <p class="text-center py-2">CCNA: Enterprise Networking, Security, and Automation</p>
+                    </div>
+                </div>
+                <div class="text-center mt-12">
+                    <a href="https://www.linkedin.com/in/muhamad-arifin-syam/details/certifications/" target="_blank" class="inline-block bg-teal-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-teal-600 transition duration-300">Lihat Semua</a>
+                </div>
+            </div>
+        </section>
+
         <!-- Bagian Tech & Tools -->
-        <section id="tech" class="py-20 bg-gray-900" data-aos="fade-up" data-aos-offset="-500">
+        <section id="tech" class="py-20 bg-gray-900" data-aos="fade-up">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12">Tech & Tools I Use</h2>
                 <div class="text-center mb-12">
                     <p align="center">
                       <a href="https://skillicons.dev">
-                        <img src="https://skillicons.dev/icons?i=php,laravel,js,react,nodejs,html,css,vscode,figma" class="h-12 md:h-16"/>
+                        <img src="https://skillicons.dev/icons?i=php,laravel,js,react,nodejs,html,css,vscode,figma" alt="Ikon Skill Pemrograman" class="h-12 md:h-16"/>
                       </a>
                     </p>
                 </div>
@@ -233,7 +265,7 @@
                 <div class="text-center">
                     <p align="center">
                       <a href="https://skillicons.dev">
-                        <img src="https://skillicons.dev/icons?i=gcp,aws,azure" class="h-12 md:h-16"/>
+                        <img src="https://skillicons.dev/icons?i=gcp,aws,azure" alt="Ikon Platform Cloud" class="h-12 md:h-16"/>
                       </a>
                     </p>
                 </div>
@@ -241,7 +273,7 @@
         </section>
 
         <!-- Bagian CV -->
-        <section id="cv" class="text-center py-20 bg-gray-800" data-aos="fade-up" data-aos-offset="-1000">
+        <section id="cv" class="text-center py-20 bg-gray-800" data-aos="fade-up" data-aos-offset="-1500" data-aos-delay="750">
             <div class="container mx-auto px-4">
                 <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">Tertarik untuk Bekerja Sama?</h2>
                 <p class="text-gray-300 mb-8">Lihat riwayat hidup saya untuk informasi lebih lanjut.</p>
@@ -251,15 +283,17 @@
 
         <footer class="text-center p-4 bg-gray-900 text-gray-500">
             <p class="text-sm">&copy; 2024 Muhamad Arifin Syam.</p>
+            <p class="text-sm">Jumlah Pengunjung: <span id="view-count">0</span></p>
         </footer>
     </main>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/script.js"></script>
     <script>
         AOS.init({
             duration: 1000,
             once: true,
-            offset: 20,
+            offset: window.innerWidth < 768 ? -750 : 10,
         });
 
         const mobileMenuButton = document.getElementById('mobile-menu-button');
