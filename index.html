@@ -7,310 +7,1202 @@
     <meta name="keywords" content="Portofolio, Web Developer, Cloud Engineer, Muhamad Arifin Syam, Full-Stack, Back-End, Front-End">
     <meta property="og:title" content="Portofolio - Muhamad Arifin Syam">
     <meta property="og:description" content="Web Portofolio - Muhamad Arifin Syam">
-    <meta property="og:url" content="https://akumars.my.id/portofolio">    
+    <meta property="og:url" content="https://akumars.my.id/portofolio">
+    <meta property="og:type" content="website">
     <link rel="icon" href="img/ico.png" type="image/x-icon">
     <meta property="og:image" content="https://raw.githubusercontent.com/Aku-Mars/gambar/main/bannercps.png">
     <title>Portofolio - Muhamad Arifin Syam</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <!-- AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'syne': ['Syne', 'sans-serif'],
+                        'mono': ['Space Mono', 'monospace'],
+                    },
+                    colors: {
+                        'mars': {
+                            'dark': '#0a0a0f',
+                            'card': '#111118',
+                            'border': '#1e1e2e',
+                            'teal': '#2dd4bf',
+                            'teal-dim': '#14b8a6',
+                            'accent': '#f97316',
+                            'muted': '#6b7280',
+                            'text': '#e2e8f0',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
+        :root {
+            --teal: #2dd4bf;
+            --accent: #f97316;
+            --dark: #0a0a0f;
+            --card: #111118;
+            --border: #1e1e2e;
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
         body {
-            background-color: #111827;
-            color: #d1d5db;
-            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
+            color: #e2e8f0;
+            font-family: 'Syne', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.4;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 2px; }
+
+        /* Navbar */
+        .navbar {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(45, 212, 191, 0.1);
+        }
+
+        /* Cursor dot */
+        .cursor-dot {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--teal);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.15s ease;
+            mix-blend-mode: screen;
+        }
+        .cursor-ring {
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            border: 1px solid rgba(45,212,191,0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.1s ease, width 0.2s, height 0.2s;
+        }
+
+        /* Hero glow */
+        .hero-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        /* Profile ring */
+        .profile-ring {
+            position: relative;
+            display: inline-block;
+        }
+        .profile-ring::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: conic-gradient(var(--teal), var(--accent), var(--teal));
+            animation: spin 4s linear infinite;
+            z-index: -1;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Typing cursor */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+            color: var(--teal);
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Timeline */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0; bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, var(--teal), transparent);
+        }
+
+        .timeline-dot {
+            background: var(--teal);
+            box-shadow: 0 0 20px rgba(45, 212, 191, 0.6);
+        }
+
+        /* Project cards */
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: border-color 0.3s, transform 0.3s;
         }
         .project-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(17, 24, 39, 0.8);
+            inset: 0;
+            background: linear-gradient(to top, rgba(10,10,15,0.95) 40%, rgba(10,10,15,0.4) 100%);
             z-index: 1;
-            transition: background 0.3s ease;
+            transition: opacity 0.3s;
         }
         .project-card:hover::before {
-            background: rgba(17, 24, 39, 0.6);
+            opacity: 0.7;
+        }
+        .project-card:hover {
+            border-color: var(--teal);
+            transform: scale(1.005);
+        }
+        .project-card img, .project-card .bg-img {
+            transition: transform 0.5s ease;
+        }
+        .project-card:hover img, .project-card:hover .bg-img {
+            transform: scale(1.05);
+        }
+
+        /* Certificate cards */
+        .cert-card {
+            border: 1px solid var(--border);
+            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+        .cert-card:hover {
+            border-color: var(--teal);
+            transform: translateY(-4px);
+            box-shadow: 0 0 30px rgba(45, 212, 191, 0.15);
+        }
+
+        /* Counter */
+        .counter-badge {
+            background: rgba(45, 212, 191, 0.1);
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Skills icon */
+        .skill-icon {
+            border: 1px solid var(--border);
+            transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+        }
+        .skill-icon:hover {
+            border-color: var(--teal);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 20px rgba(45, 212, 191, 0.2);
+        }
+
+        /* Mobile menu */
+        #mobile-menu {
+            border-top: 1px solid var(--border);
+        }
+
+        /* Section tag */
+        .section-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            color: var(--teal);
+            text-transform: uppercase;
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--teal), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Button */
+        .btn-primary {
+            background: var(--teal);
+            color: var(--dark);
+            font-weight: 700;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-primary:hover {
+            background: #14b8a6;
+            transform: translateY(-1px);
+            box-shadow: 0 0 25px rgba(45, 212, 191, 0.4);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--teal);
+            color: var(--teal);
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+        }
+        .btn-outline:hover {
+            background: var(--teal);
+            color: var(--dark);
+            transform: translateY(-1px);
+        }
+
+        /* Fade in animation */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+
+        /* Pulse dot */
+        .pulse-dot {
+            width: 8px; height: 8px;
+            background: var(--teal);
+            border-radius: 50%;
+            animation: pulse-glow 2s infinite;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(45,212,191,0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(45,212,191,0); }
+        }
+
+        /* Glitch effect on name */
+        @keyframes glitch {
+            0%, 95%, 100% { transform: translate(0); }
+            96% { transform: translate(-2px, 1px); }
+            97% { transform: translate(2px, -1px); }
+            98% { transform: translate(-1px, 2px); }
+            99% { transform: translate(1px, -1px); }
+        }
+        .glitch-name { animation: glitch 8s infinite; }
+
+        /* Scrolling marquee */
+        .marquee-track {
+            display: flex;
+            gap: 3rem;
+            animation: marquee 20s linear infinite;
+            white-space: nowrap;
+        }
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        @media (max-width: 768px) {
+            .timeline-line { left: 20px; }
+            .cursor-dot, .cursor-ring { display: none; }
         }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-300" style="overflow-x: hidden;">
+<body>
 
-    <!-- Header & Navbar -->
-    <header class="bg-gray-900/70 backdrop-blur-lg fixed top-0 left-0 right-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-xl md:text-2xl font-bold text-white">MARS</a>
-            <div class="hidden md:flex space-x-8">
-                <a href="#profil" class="text-gray-300 hover:text-teal-400 transition duration-300">Profil</a>
-                <a href="#pengalaman" class="text-gray-300 hover:text-teal-400 transition duration-300">Pengalaman</a>
-                <a href="#proyek" class="text-gray-300 hover:text-teal-400 transition duration-300">Proyek</a>
-                <a href="#sertifikat" class="text-gray-300 hover:text-teal-400 transition duration-300">Sertifikat</a>
-                <a href="#cv" class="text-gray-300 hover:text-teal-400 transition duration-300">CV</a>
+<!-- Custom Cursor -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Navbar -->
+<header class="navbar bg-mars-dark/80 fixed top-0 left-0 right-0 z-50">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="font-syne text-xl font-extrabold tracking-tight">
+            <span class="gradient-text">MARS</span>
+            <span class="text-mars-muted font-mono text-xs ml-1">/ dev</span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-8">
+            <a href="#profil" class="text-sm font-mono text-gray-400 hover:text-mars-teal transition-colors" data-translate-key="nav_profile">Profil</a>
+            <a href="#pengalaman" class="text-sm font-mono text-gray-400 hover:text-mars-teal transition-colors" data-translate-key="nav_experience">Pengalaman</a>
+            <a href="#proyek" class="text-sm font-mono text-gray-400 hover:text-mars-teal transition-colors" data-translate-key="nav_projects">Proyek</a>
+            <a href="#sertifikat" class="text-sm font-mono text-gray-400 hover:text-mars-teal transition-colors" data-translate-key="nav_certificates">Sertifikat</a>
+            <a href="#cv" class="text-sm font-mono text-gray-400 hover:text-mars-teal transition-colors" data-translate-key="nav_cv">CV</a>
+            <div class="flex gap-1 items-center border border-mars-border rounded-full px-3 py-1">
+                <button class="lang-switcher text-xs font-mono font-bold text-gray-400 hover:text-mars-teal transition-colors" data-lang="id">ID</button>
+                <span class="text-mars-border text-xs">/</span>
+                <button class="lang-switcher text-xs font-mono font-bold text-gray-400 hover:text-mars-teal transition-colors" data-lang="en">EN</button>
             </div>
-            <button id="mobile-menu-button" class="md:hidden text-white">
-                <i class="fas fa-bars fa-lg"></i>
-            </button>
-        </nav>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden">
-            <a href="#profil" class="block py-2 px-4 text-sm hover:bg-gray-700">Profil</a>
-            <a href="#pengalaman" class="block py-2 px-4 text-sm hover:bg-gray-700">Pengalaman</a>
-            <a href="#proyek" class="block py-2 px-4 text-sm hover:bg-gray-700">Proyek</a>
-            <a href="#sertifikat" class="block py-2 px-4 text-sm hover:bg-gray-700">Sertifikat</a>
-            <a href="#cv" class="block py-2 px-4 text-sm hover:bg-gray-700">CV</a>
         </div>
-    </header>
 
-    <main>
-        <!-- Bagian Profil -->
-        <section id="profil" class="min-h-screen flex items-center justify-center text-center p-5 pt-20">
-            <div data-aos="fade-up">
-                <img src="img/Mars.jpg" alt="Foto Profil Muhamad Arifin Syam" class="w-36 h-36 md:w-48 md:h-48 rounded-full mx-auto mb-6 border-4 border-teal-500 shadow-lg">
-                <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-2">Muhamad Arifin Syam</h1>
-                <p class="text-lg md:text-xl text-teal-400 mb-6">Mahasiswa Teknik Informatika, Universitas Lampung</p>
-                <p class="max-w-3xl mx-auto text-gray-400 text-base md:text-lg mb-8">
-                    Saya adalah seorang mahasiswa Teknik Informatika dengan antusiasme tinggi di bidang IT, khususnya <i>Cloud Engineering</i>. Berpengalaman dalam dasar-dasar <i>Cloud Computing</i> dan <i>Web Development</i>, saya mampu bekerja dalam tim, mengelola proyek kompleks, dan selalu bersemangat mempelajari hal-hal baru untuk menemukan solusi kreatif. Saya memiliki kemampuan komunikasi yang baik dan berkomitmen untuk memberikan hasil berkualitas tinggi.
-                </p>
-                <div class="flex justify-center items-center space-x-6">
-                    <a href="http://linkedin.com/in/muhamad-arifin-syam" target="_blank" class="text-teal-400 hover:text-white transition duration-300"><i class="fab fa-linkedin fa-lg md:fa-2x"></i></a>
-                    <a href="https://github.com/Aku-Mars" target="_blank" class="text-teal-400 hover:text-white transition duration-300"><i class="fab fa-github fa-lg md:fa-2x"></i></a>
-                    <a href="https://instagram.com/m_arifin_syam" target="_blank" class="text-teal-400 hover:text-white transition duration-300"><i class="fab fa-instagram fa-lg md:fa-2x"></i></a>
-                    <a href="mailto:marifinsyam73@gmail.com" class="text-teal-400 hover:text-white transition duration-300"><i class="fas fa-envelope fa-lg md:fa-2x"></i></a>
+        <button id="mobile-menu-button" class="md:hidden text-white p-2">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+    <div id="mobile-menu" class="hidden md:hidden bg-mars-card px-6 pb-4">
+        <a href="#profil" class="block py-2 text-sm font-mono text-gray-400 hover:text-mars-teal" data-translate-key="nav_profile">Profil</a>
+        <a href="#pengalaman" class="block py-2 text-sm font-mono text-gray-400 hover:text-mars-teal" data-translate-key="nav_experience">Pengalaman</a>
+        <a href="#proyek" class="block py-2 text-sm font-mono text-gray-400 hover:text-mars-teal" data-translate-key="nav_projects">Proyek</a>
+        <a href="#sertifikat" class="block py-2 text-sm font-mono text-gray-400 hover:text-mars-teal" data-translate-key="nav_certificates">Sertifikat</a>
+        <a href="#cv" class="block py-2 text-sm font-mono text-gray-400 hover:text-mars-teal" data-translate-key="nav_cv">CV</a>
+        <div class="flex gap-3 pt-2">
+            <button class="lang-switcher text-xs font-mono font-bold text-mars-teal" data-lang="id">ID</button>
+            <span class="text-mars-border">/</span>
+            <button class="lang-switcher text-xs font-mono font-bold text-gray-400 hover:text-mars-teal" data-lang="en">EN</button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- HERO SECTION -->
+    <section id="profil" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <!-- Background glows -->
+        <div class="hero-glow" style="width:600px;height:600px;background:#2dd4bf;top:-100px;left:-200px;"></div>
+        <div class="hero-glow" style="width:400px;height:400px;background:#f97316;bottom:-100px;right:-100px;"></div>
+
+        <!-- Grid pattern -->
+        <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(45,212,191,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(45,212,191,0.03) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;"></div>
+
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+            <!-- Status badge -->
+            <div class="inline-flex items-center gap-2 counter-badge px-4 py-2 rounded-full text-xs font-mono text-mars-teal mb-8 animate-fade-in-up" style="opacity:0;">
+                <div class="pulse-dot"></div>
+                <span data-translate-key="status_badge">Tersedia untuk peluang baru</span>
+            </div>
+
+            <!-- Profile image -->
+            <div class="animate-fade-in-up delay-100 flex justify-center mb-8" style="opacity:0;">
+                <div>
+                    <img src="img/Mars.jpg" alt="Foto Profil Muhamad Arifin Syam"
+                        class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-mars-border">
                 </div>
             </div>
-        </section>
 
-        <!-- Bagian Pengalaman -->
-        <section id="pengalaman" class="py-20 bg-gray-800">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12" data-aos="fade-up">Pengalaman Saya</h2>
-                <div class="relative wrap p-4 md:p-10 h-full">
-                    <div class="hidden md:block border-2-2 absolute border-opacity-20 border-teal-400 h-full border" style="left: 50%"></div>
-                    
-                    <div class="mb-8 flex md:justify-between items-center w-full flex-row-reverse md:flex-row" data-aos="fade-up">
-                        <div class="hidden md:block w-5/12"></div>
-                        <div class="z-20 hidden md:flex items-center order-1 bg-teal-500 shadow-xl w-10 h-10 md:w-12 md:h-12 rounded-full">
-                            <i class="fas fa-briefcase mx-auto text-white text-xl md:text-2xl"></i>
+            <!-- Name -->
+            <h1 class="font-syne text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-3 tracking-tight glitch-name animate-fade-in-up delay-200 w-full text-center px-4" style="opacity:0;">
+                Muhamad Arifin Syam
+            </h1>
+
+            <!-- Title typewriter -->
+            <p class="font-mono text-mars-teal text-sm md:text-base mb-6 animate-fade-in-up delay-300" style="opacity:0;" data-translate-key="profile_title">
+                Mahasiswa Teknik Informatika, Universitas Lampung
+            </p>
+
+            <!-- Bio -->
+            <p class="max-w-2xl mx-auto text-gray-400 text-sm md:text-base leading-relaxed mb-10 animate-fade-in-up delay-400" style="opacity:0;" data-translate-key="profile_desc">
+                Saya adalah seorang mahasiswa Teknik Informatika dengan antusiasme tinggi di bidang IT, khususnya <em class="text-mars-teal not-italic">Cloud Engineering</em>. Berpengalaman dalam <em class="text-mars-teal not-italic">Cloud Computing</em> dan <em class="text-mars-teal not-italic">Web Development</em>.
+            </p>
+
+            <!-- Socials + CTA -->
+            <div class="flex flex-wrap justify-center items-center gap-4 animate-fade-in-up delay-500" style="opacity:0;">
+                <a href="http://linkedin.com/in/muhamad-arifin-syam" target="_blank"
+                    class="skill-icon flex items-center gap-2 px-4 py-2 rounded-lg bg-mars-card text-gray-300 hover:text-mars-teal text-sm font-mono">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="https://github.com/Aku-Mars" target="_blank"
+                    class="skill-icon flex items-center gap-2 px-4 py-2 rounded-lg bg-mars-card text-gray-300 hover:text-mars-teal text-sm font-mono">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="https://instagram.com/m_arifin_syam" target="_blank"
+                    class="skill-icon flex items-center gap-2 px-4 py-2 rounded-lg bg-mars-card text-gray-300 hover:text-mars-teal text-sm font-mono">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="mailto:marifinsyam73@gmail.com"
+                    class="skill-icon flex items-center gap-2 px-4 py-2 rounded-lg bg-mars-card text-gray-300 hover:text-mars-teal text-sm font-mono">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+                <a href="#cv" class="btn-primary px-6 py-2 rounded-lg text-sm font-syne" data-translate-key="cv_download">
+                    Unduh CV Saya
+                </a>
+            </div>
+
+            <!-- Scroll indicator -->
+            <div class="mt-16 flex justify-center">
+                <div class="flex flex-col items-center gap-2 text-mars-muted text-xs font-mono">
+                    <span>scroll</span>
+                    <div style="width:1px;height:40px;background:linear-gradient(to bottom,var(--teal),transparent);"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARQUEE TECH STRIP -->
+    <div class="py-4 border-y border-mars-border overflow-hidden bg-mars-card/50">
+        <div class="marquee-track text-xs font-mono text-mars-muted uppercase tracking-widest">
+            <span>PHP &nbsp;·&nbsp; Laravel &nbsp;·&nbsp; JavaScript &nbsp;·&nbsp; React &nbsp;·&nbsp; Node.js &nbsp;·&nbsp; HTML/CSS &nbsp;·&nbsp; GCP &nbsp;·&nbsp; AWS &nbsp;·&nbsp; Azure &nbsp;·&nbsp; MySQL &nbsp;·&nbsp; Figma &nbsp;·&nbsp; Python &nbsp;·&nbsp; Docker &nbsp;·</span>
+            <span>PHP &nbsp;·&nbsp; Laravel &nbsp;·&nbsp; JavaScript &nbsp;·&nbsp; React &nbsp;·&nbsp; Node.js &nbsp;·&nbsp; HTML/CSS &nbsp;·&nbsp; GCP &nbsp;·&nbsp; AWS &nbsp;·&nbsp; Azure &nbsp;·&nbsp; MySQL &nbsp;·&nbsp; Figma &nbsp;·&nbsp; Python &nbsp;·&nbsp; Docker &nbsp;·</span>
+        </div>
+    </div>
+
+    <!-- EXPERIENCE SECTION -->
+    <section id="pengalaman" class="py-24 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <p class="section-tag mb-3">02 / Experience</p>
+                <h2 class="font-syne text-3xl md:text-5xl font-extrabold text-white" data-translate-key="experience_title">Pengalaman Saya</h2>
+            </div>
+
+            <!-- Timeline -->
+            <div class="relative max-w-5xl mx-auto" style="--tl-left: calc(50% - 1px);">
+
+                <!-- Center vertical line (desktop only) -->
+                <div class="hidden md:block absolute top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-mars-teal to-transparent opacity-30" style="left:50%;"></div>
+
+                <!-- ── EXP 1 · LEFT ── -->
+                <div class="relative mb-16" data-aos="fade-up">
+                    <!-- Desktop grid: content LEFT · dot CENTER · empty RIGHT -->
+                    <div class="hidden md:grid" style="grid-template-columns:1fr 64px 1fr; align-items:start; gap:0;">
+                        <!-- Left card -->
+                        <div class="pr-8 text-right">
+                            <div class="inline-block bg-mars-card border border-mars-border rounded-xl p-6 text-left w-full">
+                                <span class="section-tag text-xs block mb-2" data-translate-key="exp1_date">Agustus 2024 - Januari 2025</span>
+                                <h3 class="font-syne text-lg font-bold text-white leading-snug mb-1" data-translate-key="exp1_title">Cloud Computing Cohort & Capstone Project Lead</h3>
+                                <p class="text-mars-teal text-sm font-mono mb-4" data-translate-key="exp1_company">Bangkit Academy</p>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal mt-0.5 shrink-0">▸</span><span data-translate-key="exp1_desc1">Mendalami arsitektur cloud, GCP, dan rekayasa perangkat lunak.</span></li>
+                                    <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal mt-0.5 shrink-0">▸</span><span data-translate-key="exp1_desc2">Memimpin proyek capstone "Mindcraft" sebagai Project Manager.</span></li>
+                                    <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal mt-0.5 shrink-0">▸</span><span data-translate-key="exp1_desc3">Merancang arsitektur backend di GCP dan mengembangkan API inti.</span></li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="order-1 bg-gray-900 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4">
-                            <p class="text-sm text-teal-400 mb-1">Agustus 2024 - Januari 2025</p>
-                            <h3 class="text-xl md:text-2xl font-bold text-white">Cloud Computing Cohort & Capstone Project Lead</h3>
-                            <p class="text-base md:text-md text-gray-400 mb-4">Bangkit Academy</p>
-                            <ul class="list-disc text-gray-300 space-y-2 pl-5 text-sm md:text-base">
-                                <li>Mendalami arsitektur cloud, GCP, dan rekayasa perangkat lunak.</li>
-                                <li>Memimpin proyek capstone "Mindcraft" sebagai Project Manager.</li>
-                                <li>Merancang arsitektur backend di GCP dan mengembangkan API inti.</li>
+                        <!-- Center dot -->
+                        <div class="flex flex-col items-center pt-6">
+                            <div class="timeline-dot w-11 h-11 rounded-full flex items-center justify-center shrink-0 z-10">
+                                <i class="fas fa-cloud text-mars-dark text-base"></i>
+                            </div>
+                        </div>
+                        <!-- Right empty -->
+                        <div></div>
+                    </div>
+
+                    <!-- Mobile: single column -->
+                    <div class="md:hidden flex gap-4">
+                        <div class="flex flex-col items-center">
+                            <div class="timeline-dot w-10 h-10 rounded-full flex items-center justify-center shrink-0">
+                                <i class="fas fa-cloud text-mars-dark text-sm"></i>
+                            </div>
+                            <div class="w-px flex-1 bg-mars-teal opacity-20 mt-2"></div>
+                        </div>
+                        <div class="pb-8 flex-1">
+                            <span class="section-tag text-xs block mb-1" data-translate-key="exp1_date">Agustus 2024 - Januari 2025</span>
+                            <h3 class="font-syne text-base font-bold text-white mb-1" data-translate-key="exp1_title">Cloud Computing Cohort & Capstone Project Lead</h3>
+                            <p class="text-mars-teal text-xs font-mono mb-3" data-translate-key="exp1_company">Bangkit Academy</p>
+                            <ul class="space-y-1.5">
+                                <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal shrink-0">▸</span><span data-translate-key="exp1_desc1">Mendalami arsitektur cloud, GCP, dan rekayasa perangkat lunak.</span></li>
+                                <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal shrink-0">▸</span><span data-translate-key="exp1_desc2">Memimpin proyek capstone "Mindcraft" sebagai Project Manager.</span></li>
+                                <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal shrink-0">▸</span><span data-translate-key="exp1_desc3">Merancang arsitektur backend di GCP dan mengembangkan API inti.</span></li>
                             </ul>
                         </div>
                     </div>
+                </div>
 
-                    <div class="mb-8 flex md:justify-between items-center w-full flex-row-reverse" data-aos="fade-up">
-                        <div class="hidden md:block w-5/12"></div>
-                        <div class="z-20 hidden md:flex items-center order-1 bg-teal-500 shadow-xl w-10 h-10 md:w-12 md:h-12 rounded-full">
-                            <i class="fas fa-graduation-cap mx-auto text-white text-xl md:text-2xl"></i>
+                <!-- ── EXP 2 · RIGHT ── -->
+                <div class="relative mb-16" data-aos="fade-up">
+                    <div class="hidden md:grid" style="grid-template-columns:1fr 64px 1fr; align-items:start; gap:0;">
+                        <!-- Left empty -->
+                        <div></div>
+                        <!-- Center dot -->
+                        <div class="flex flex-col items-center pt-6">
+                            <div class="timeline-dot w-11 h-11 rounded-full flex items-center justify-center shrink-0 z-10">
+                                <i class="fas fa-robot text-mars-dark text-base"></i>
+                            </div>
                         </div>
-                        <div class="order-1 bg-gray-900 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4">
-                            <p class="text-sm text-teal-400 mb-1">Februari 2025 - Juni 2025</p>
-                            <h3 class="text-xl md:text-2xl font-bold text-white">Peserta Program AI, elevAlte with Dicoding</h3>
-                            <p class="text-base md:text-md text-gray-400 mb-4">Microsoft & Dicoding</p>
-                            <ul class="list-disc text-gray-300 space-y-2 pl-5 text-sm md:text-base">
-                                <li>Mendalami pengembangan Kecerdasan Buatan (AI) dan Generative AI.</li>
-                                <li>Menguasai teknologi AI dari Microsoft dengan fokus pada platform cloud Azure.</li>
-                                <li>Menyelesaikan jalur pembelajaran intensif untuk menjadi talenta AI yang siap industri.</li>
-                           </ul>
+                        <!-- Right card -->
+                        <div class="pl-8">
+                            <div class="bg-mars-card border border-mars-border rounded-xl p-6 w-full">
+                                <span class="section-tag text-xs block mb-2" data-translate-key="exp2_date">Februari 2025 - Juni 2025</span>
+                                <h3 class="font-syne text-lg font-bold text-white leading-snug mb-1" data-translate-key="exp2_title">Peserta Program AI, elevAlte with Dicoding</h3>
+                                <p class="text-mars-teal text-sm font-mono mb-4" data-translate-key="exp2_company">Microsoft & Dicoding</p>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal mt-0.5 shrink-0">▸</span><span data-translate-key="exp2_desc1">Mendalami pengembangan Kecerdasan Buatan (AI) dan Generative AI.</span></li>
+                                    <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal mt-0.5 shrink-0">▸</span><span data-translate-key="exp2_desc2">Menguasai teknologi AI dari Microsoft dengan fokus pada platform cloud Azure.</span></li>
+                                    <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal mt-0.5 shrink-0">▸</span><span data-translate-key="exp2_desc3">Menyelesaikan jalur pembelajaran intensif untuk menjadi talenta AI yang siap industri.</span></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="mb-8 flex md:justify-between items-center w-full flex-row-reverse md:flex-row" data-aos="fade-up">
-                        <div class="hidden md:block w-5/12"></div>
-                        <div class="z-20 hidden md:flex items-center order-1 bg-teal-500 shadow-xl w-10 h-10 md:w-12 md:h-12 rounded-full">
-                            <i class="fas fa-briefcase mx-auto text-white text-xl md:text-2xl"></i>
+                    <!-- Mobile -->
+                    <div class="md:hidden flex gap-4">
+                        <div class="flex flex-col items-center">
+                            <div class="timeline-dot w-10 h-10 rounded-full flex items-center justify-center shrink-0">
+                                <i class="fas fa-robot text-mars-dark text-sm"></i>
+                            </div>
+                            <div class="w-px flex-1 bg-mars-teal opacity-20 mt-2"></div>
                         </div>
-                        <div class="order-1 bg-gray-900 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4">
-                            <p class="text-sm text-teal-400 mb-1">Oktober 2022 - Sekarang</p>
-                            <h3 class="text-xl md:text-2xl font-bold text-white">Freelance Cloud Engineer</h3>
-                            <p class="text-base md:text-md text-gray-400 mb-4">Freelance</p>
-                            <ul class="list-disc text-gray-300 space-y-2 pl-5 text-sm md:text-base">
-                                <li>Menyediakan solusi cloud computing dan pengembangan web untuk berbagai klien.</li>
-                                <li>Berpengalaman mengelola layanan cloud dari AWS, GCP, Microsoft Azure, dan Alibaba Cloud.</li>
-                                <li>Mengembangkan proyek seperti toko online "Mars Store" dari perancangan hingga implementasi di VPS.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="mb-8 flex md:justify-between items-center w-full flex-row-reverse" data-aos="fade-up">
-                        <div class="hidden md:block w-5/12"></div>
-                        <div class="z-20 hidden md:flex items-center order-1 bg-teal-500 shadow-xl w-10 h-10 md:w-12 md:h-12 rounded-full">
-                            <i class="fas fa-briefcase mx-auto text-white text-xl md:text-2xl"></i>
-                        </div>
-                        <div class="order-1 bg-gray-900 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4">
-                            <p class="text-sm text-teal-400 mb-1">Juni 2025 - Sekarang</p>
-                            <h3 class="text-xl md:text-2xl font-bold text-white">Back End Developer Intern</h3>
-                            <p class="text-base md:text-md text-gray-400 mb-4">Diskominfosantik Kabupaten Serang</p>
-                            <ul class="list-disc text-gray-300 space-y-2 pl-5 text-sm md:text-base">
-                                <li>Bertanggung jawab atas pengembangan dan operasional back-end.</li>
-                                <li>Mengimplementasikan fitur dan layanan menggunakan PHP, Laravel, dan MySQL.</li>
-                                <li>Mendukung pemeliharaan dan optimalisasi sistem di lingkungan pemerintahan.</li>
+                        <div class="pb-8 flex-1">
+                            <span class="section-tag text-xs block mb-1" data-translate-key="exp2_date">Februari 2025 - Juni 2025</span>
+                            <h3 class="font-syne text-base font-bold text-white mb-1" data-translate-key="exp2_title">Peserta Program AI, elevAlte with Dicoding</h3>
+                            <p class="text-mars-teal text-xs font-mono mb-3" data-translate-key="exp2_company">Microsoft & Dicoding</p>
+                            <ul class="space-y-1.5">
+                                <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal shrink-0">▸</span><span data-translate-key="exp2_desc1">Mendalami pengembangan Kecerdasan Buatan (AI) dan Generative AI.</span></li>
+                                <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal shrink-0">▸</span><span data-translate-key="exp2_desc2">Menguasai teknologi AI dari Microsoft dengan fokus pada platform cloud Azure.</span></li>
+                                <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal shrink-0">▸</span><span data-translate-key="exp2_desc3">Menyelesaikan jalur pembelajaran intensif untuk menjadi talenta AI yang siap industri.</span></li>
                             </ul>
                         </div>
                     </div>
                 </div>
+
+                <!-- ── EXP 3 · LEFT ── -->
+                <div class="relative mb-16" data-aos="fade-up">
+                    <div class="hidden md:grid" style="grid-template-columns:1fr 64px 1fr; align-items:start; gap:0;">
+                        <!-- Left card -->
+                        <div class="pr-8">
+                            <div class="bg-mars-card border border-mars-border rounded-xl p-6 w-full">
+                                <span class="section-tag text-xs block mb-2" data-translate-key="exp3_date">Oktober 2022 - Sekarang</span>
+                                <h3 class="font-syne text-lg font-bold text-white leading-snug mb-1" data-translate-key="exp3_title">Freelance Cloud Engineer</h3>
+                                <p class="text-mars-teal text-sm font-mono mb-4" data-translate-key="exp3_company">Freelance</p>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal mt-0.5 shrink-0">▸</span><span data-translate-key="exp3_desc1">Menyediakan solusi cloud computing dan pengembangan web untuk berbagai klien.</span></li>
+                                    <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal mt-0.5 shrink-0">▸</span><span data-translate-key="exp3_desc2">Berpengalaman mengelola layanan cloud dari AWS, GCP, Microsoft Azure, dan Alibaba Cloud.</span></li>
+                                    <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal mt-0.5 shrink-0">▸</span><span data-translate-key="exp3_desc3">Mengembangkan proyek seperti toko online "Mars Store" dari perancangan hingga implementasi di VPS.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Center dot -->
+                        <div class="flex flex-col items-center pt-6">
+                            <div class="timeline-dot w-11 h-11 rounded-full flex items-center justify-center shrink-0 z-10">
+                                <i class="fas fa-briefcase text-mars-dark text-base"></i>
+                            </div>
+                        </div>
+                        <!-- Right empty -->
+                        <div></div>
+                    </div>
+
+                    <!-- Mobile -->
+                    <div class="md:hidden flex gap-4">
+                        <div class="flex flex-col items-center">
+                            <div class="timeline-dot w-10 h-10 rounded-full flex items-center justify-center shrink-0">
+                                <i class="fas fa-briefcase text-mars-dark text-sm"></i>
+                            </div>
+                            <div class="w-px flex-1 bg-mars-teal opacity-20 mt-2"></div>
+                        </div>
+                        <div class="pb-8 flex-1">
+                            <span class="section-tag text-xs block mb-1" data-translate-key="exp3_date">Oktober 2022 - Sekarang</span>
+                            <h3 class="font-syne text-base font-bold text-white mb-1" data-translate-key="exp3_title">Freelance Cloud Engineer</h3>
+                            <p class="text-mars-teal text-xs font-mono mb-3" data-translate-key="exp3_company">Freelance</p>
+                            <ul class="space-y-1.5">
+                                <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal shrink-0">▸</span><span data-translate-key="exp3_desc1">Menyediakan solusi cloud computing dan web development untuk berbagai klien.</span></li>
+                                <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal shrink-0">▸</span><span data-translate-key="exp3_desc2">Mengelola layanan cloud dari AWS, GCP, Azure, dan Alibaba Cloud.</span></li>
+                                <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal shrink-0">▸</span><span data-translate-key="exp3_desc3">Mengembangkan proyek "Mars Store" dari perancangan hingga implementasi VPS.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── EXP 4 · RIGHT ── -->
+                <div class="relative mb-4" data-aos="fade-up">
+                    <div class="hidden md:grid" style="grid-template-columns:1fr 64px 1fr; align-items:start; gap:0;">
+                        <!-- Left empty -->
+                        <div></div>
+                        <!-- Center dot -->
+                        <div class="flex flex-col items-center pt-6">
+                            <div class="timeline-dot w-11 h-11 rounded-full flex items-center justify-center shrink-0 z-10">
+                                <i class="fas fa-code text-mars-dark text-base"></i>
+                            </div>
+                        </div>
+                        <!-- Right card -->
+                        <div class="pl-8">
+                            <div class="bg-mars-card border border-mars-border rounded-xl p-6 w-full">
+                                <span class="section-tag text-xs block mb-2" data-translate-key="exp4_date">Juni 2025 - Sekarang</span>
+                                <h3 class="font-syne text-lg font-bold text-white leading-snug mb-1" data-translate-key="exp4_title">Back End Developer Intern</h3>
+                                <p class="text-mars-teal text-sm font-mono mb-4" data-translate-key="exp4_company">Diskominfosantik Kabupaten Serang</p>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal mt-0.5 shrink-0">▸</span><span data-translate-key="exp4_desc1">Bertanggung jawab atas pengembangan dan operasional back-end.</span></li>
+                                    <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal mt-0.5 shrink-0">▸</span><span data-translate-key="exp4_desc2">Mengimplementasikan fitur dan layanan menggunakan PHP, Laravel, dan MySQL.</span></li>
+                                    <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal mt-0.5 shrink-0">▸</span><span data-translate-key="exp4_desc3">Mendukung pemeliharaan dan optimalisasi sistem di lingkungan pemerintahan.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile -->
+                    <div class="md:hidden flex gap-4">
+                        <div class="flex flex-col items-center">
+                            <div class="timeline-dot w-10 h-10 rounded-full flex items-center justify-center shrink-0">
+                                <i class="fas fa-code text-mars-dark text-sm"></i>
+                            </div>
+                        </div>
+                        <div class="pb-2 flex-1">
+                            <span class="section-tag text-xs block mb-1" data-translate-key="exp4_date">Juni 2025 - Sekarang</span>
+                            <h3 class="font-syne text-base font-bold text-white mb-1" data-translate-key="exp4_title">Back End Developer Intern</h3>
+                            <p class="text-mars-teal text-xs font-mono mb-3" data-translate-key="exp4_company">Diskominfosantik Kabupaten Serang</p>
+                            <ul class="space-y-1.5">
+                                <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal shrink-0">▸</span><span data-translate-key="exp4_desc1">Bertanggung jawab atas pengembangan dan operasional back-end.</span></li>
+                                <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal shrink-0">▸</span><span data-translate-key="exp4_desc2">Mengimplementasikan fitur menggunakan PHP, Laravel, dan MySQL.</span></li>
+                                <li class="flex items-start gap-2 text-gray-400 text-sm"><span class="text-mars-teal shrink-0">▸</span><span data-translate-key="exp4_desc3">Mendukung pemeliharaan dan optimalisasi sistem pemerintahan.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Bagian Proyek -->
-        <section id="proyek" class="pt-10">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-white py-12 bg-gray-900" data-aos="fade-up">Proyek Saya</h2>
-            <div>
-                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center justify-end" style="background-image: url('https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max');" data-aos="fade-left">
-                    <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12 text-left md:text-right">
-                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Mindcraft</h3>
-                        <p class="text-sm md:text-base text-gray-200 mb-4">Aplikasi penghasil kuis otomatis dari materi pengguna.</p>
-                        <a href="https://github.com/The-Petot/Mindcraft" target="_blank" class="inline-block bg-teal-500 text-white font-bold py-2 px-4 text-sm md:py-3 md:px-6 md:text-base rounded-lg hover:bg-teal-600 transition duration-300">Lihat Proyek</a>
-                    </div>
-                </div>
+    <!-- PROJECTS SECTION -->
+    <section id="proyek" class="py-24 bg-mars-card/30">
+        <div class="container mx-auto px-6 mb-12" data-aos="fade-up">
+            <p class="section-tag mb-3 text-center">03 / Projects</p>
+            <h2 class="font-syne text-3xl md:text-5xl font-extrabold text-white text-center" data-translate-key="projects_title">Proyek Saya</h2>
+        </div>
 
-                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center" style="background-image: url('img/epic-dragon.png');" data-aos="fade-right">
-                    <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12">
-                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Epic Dragon</h3>
-                        <p class="text-sm md:text-base text-gray-200 mb-4">Sebuah game turn bases berbasis website dibuat dengan teknologi AI Studio</p>
-                        <a href="https://akumars.my.id/game" target="_blank" class="inline-block bg-teal-500 text-white font-bold py-2 px-4 text-sm md:py-3 md:px-6 md:text-base rounded-lg hover:bg-teal-600 transition duration-300">Lihat Proyek</a>
-                    </div>
-                </div>
-
-                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center justify-end" style="background-image: url('img/monitoring.png');" data-aos="fade-left">
-                    <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12 text-left md:text-right">
-                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Dashboard Monitoring Host</h3>
-                        <p class="text-sm md:text-base text-gray-200 mb-4">Antarmuka web untuk memantau status host secara real-time.</p>
-                        <a href="https://akumars.my.id/monitoring" target="_blank" class="inline-block bg-teal-500 text-white font-bold py-2 px-4 text-sm md:py-3 md:px-6 md:text-base rounded-lg hover:bg-teal-600 transition duration-300">Lihat Proyek</a>
-                    </div>
-                </div>
-
-                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center" style="background-image: url('img/to-do-List.png');" data-aos="fade-right">
-                    <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12">
-                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Aplikasi To-Do List</h3>
-                        <p class="text-sm md:text-base text-gray-200 mb-4">Aplikasi untuk mengelola daftar tugas ataupun pekerjaan yang harus dilakukan.</p>
-                        <a href="https://akumars.my.id/list" target="_blank" class="inline-block bg-teal-500 text-white font-bold py-2 px-4 text-sm md:py-3 md:px-6 md:text-base rounded-lg hover:bg-teal-600 transition duration-300">Lihat Proyek</a>
-                    </div>
-                </div>
-
-                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center justify-end" style="background-image: url('img/crime_management.jpg');" data-aos="fade-left">
-                    <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12 text-left md:text-right">
-                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Sistem Manajemen Kriminal</h3>
-                        <p class="text-sm md:text-base text-gray-200 mb-4">Aplikasi desktop untuk membantu polisi mengelola data kriminal.</p>
-                        <a href="https://github.com/Aku-Mars/middle-project/tree/main/crime_management" target="_blank" class="inline-block bg-teal-500 text-white font-bold py-2 px-4 text-sm md:py-3 md:px-6 md:text-base rounded-lg hover:bg-teal-600 transition duration-300">Lihat Proyek</a>
-                    </div>
-                </div>
-                
-                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center" style="background-image: url('img/edge_detection.jpg');" data-aos="fade-right">
-                    <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12">
-                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Deteksi Tepi & Pencocokan Template</h3>
-                        <p class="text-sm md:text-base text-gray-200 mb-4">Kumpulan skrip Python untuk pemrosesan gambar fundamental.</p>
-                        <a href="https://github.com/Aku-Mars/middle-project/tree/main/edge_detection" target="_blank" class="inline-block bg-teal-500 text-white font-bold py-2 px-4 text-sm md:py-3 md:px-6 md:text-base rounded-lg hover:bg-teal-600 transition duration-300">Lihat Proyek</a>
-                    </div>
-                </div>
-
-                <div class="project-card relative min-h-[40vh] md:min-h-[50vh] bg-cover bg-center flex items-center justify-end" style="background-image: url('img/Jawari.png');" data-aos="fade-left">
-                    <div class="relative z-10 w-full md:w-1/2 p-6 md:p-12 text-left md:text-right">
-                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-4">Jawari (Proyek Dalam Pengerjaan)</h3>
-                        <p class="text-sm md:text-base text-gray-200 mb-4">Aplikasi berbasis web untuk kesenian Tari di Banten - DISPORAPAR</p>
-                        <span class="inline-block bg-gray-500 text-white font-bold py-2 px-4 text-sm md:py-3 md:px-6 md:text-base rounded-lg cursor-not-allowed">Segera Hadir</span>
-                    </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
+            <!-- Project 1 -->
+            <div class="project-card min-h-72 bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?w=800&q=80');" data-aos="fade-up">
+                <div class="relative z-10 p-8 h-full flex flex-col justify-end">
+                    <p class="font-mono text-xs text-mars-teal mb-2">01</p>
+                    <h3 class="font-syne text-2xl font-bold text-white mb-2" data-translate-key="proj1_title">Mindcraft</h3>
+                    <p class="text-gray-300 text-sm mb-4" data-translate-key="proj1_desc">Aplikasi penghasil kuis otomatis dari materi pengguna.</p>
+                    <a href="https://github.com/The-Petot/Mindcraft" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-lg text-sm font-syne w-fit" data-translate-key="proj_view">Lihat Proyek</a>
                 </div>
             </div>
-        </section>
 
-        <!-- Bagian Sertifikat -->
-        <section id="sertifikat" class="py-20 bg-gray-800 pt-20">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12" data-aos="fade-up">Sertifikat Saya</h2>
-                <div class="grid grid-cols-1 m-10 sm:grid-cols-2 gap-8">
-                    <div class="bg-gray-900 rounded-lg shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="100">
-                        <img src="img/ser.png" alt="Sertifikat Belajar Back-End Pemula dengan JavaScript" class="w-full h-128 object-cover">
-                        <p class="text-center py-2">Belajar Back-End Pemula dengan JavaScript</p>
-                    </div>
-                    <div class="bg-gray-900 rounded-lg shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="200">
-                        <img src="img/cloud.png" alt="Sertifikat Menjadi Google Cloud Engineer" class="w-full h-128 object-cover">
-                        <p class="text-center py-2">Menjadi Google Cloud Engineer</p>
-                    </div>
-                    <div class="bg-gray-900 rounded-lg shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="300">
-                        <img src="img/ai.png" alt="Sertifikat Belajar Penggunaan Generative AI" class="w-full h-128 object-cover">
-                        <p class="text-center py-2">Belajar Penggunaan Generative AI</p>
-                    </div>
-                    <div class="bg-gray-900 rounded-lg shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="1250" data-aos-offset="-1000">
-                        <img src="img/ccna.png" alt="Sertifikat CCNA: Enterprise Networking, Security, and Automation" class="w-full h-128 object-cover">
-                        <p class="text-center py-2">CCNA: Enterprise Networking, Security, and Automation</p>
-                    </div>
-                </div>
-                <div class="text-center mt-12">
-                    <a href="https://www.linkedin.com/in/muhamad-arifin-syam/details/certifications/" target="_blank" class="inline-block bg-teal-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-teal-600 transition duration-300">Lihat Semua</a>
+            <!-- Project 2 -->
+            <div class="project-card min-h-72 bg-cover bg-center" style="background-image:url('img/epic-dragon.png');" data-aos="fade-up" data-aos-delay="100">
+                <div class="relative z-10 p-8 h-full flex flex-col justify-end">
+                    <p class="font-mono text-xs text-mars-teal mb-2">02</p>
+                    <h3 class="font-syne text-2xl font-bold text-white mb-2" data-translate-key="proj2_title">Epic Dragon</h3>
+                    <p class="text-gray-300 text-sm mb-4" data-translate-key="proj2_desc">Sebuah game turn-based berbasis website dibuat dengan teknologi AI Studio.</p>
+                    <a href="https://akumars.my.id/game" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-lg text-sm font-syne w-fit" data-translate-key="proj_view">Lihat Proyek</a>
                 </div>
             </div>
-        </section>
 
-        <!-- Bagian Tech & Tools -->
-        <section id="tech" class="py-20 bg-gray-900" data-aos="fade-up">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12">Tech & Tools I Use</h2>
-                <div class="text-center mb-12">
-                    <p align="center">
-                      <a href="https://skillicons.dev">
-                        <img src="https://skillicons.dev/icons?i=php,laravel,js,react,nodejs,html,css,vscode,figma" alt="Ikon Skill Pemrograman" class="h-12 md:h-16"/>
-                      </a>
-                    </p>
-                </div>
-                <h3 class="text-2xl md:text-3xl font-bold text-center text-white mb-12">☁️ Cloud & Hosting Platforms</h3>
-                <div class="text-center">
-                    <p align="center">
-                      <a href="https://skillicons.dev">
-                        <img src="https://skillicons.dev/icons?i=gcp,aws,azure" alt="Ikon Platform Cloud" class="h-12 md:h-16"/>
-                      </a>
-                    </p>
+            <!-- Project 3 -->
+            <div class="project-card min-h-72 bg-cover bg-center" style="background-image:url('img/monitoring.png');" data-aos="fade-up">
+                <div class="relative z-10 p-8 h-full flex flex-col justify-end">
+                    <p class="font-mono text-xs text-mars-teal mb-2">03</p>
+                    <h3 class="font-syne text-2xl font-bold text-white mb-2" data-translate-key="proj3_title">Dashboard Monitoring Host</h3>
+                    <p class="text-gray-300 text-sm mb-4" data-translate-key="proj3_desc">Antarmuka web untuk memantau status host secara real-time.</p>
+                    <a href="https://akumars.my.id/monitoring" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-lg text-sm font-syne w-fit" data-translate-key="proj_view">Lihat Proyek</a>
                 </div>
             </div>
-        </section>
 
-        <!-- Bagian CV -->
-        <section id="cv" class="text-center py-20 bg-gray-800" data-aos="fade-up" data-aos-offset="-1500" data-aos-delay="750">
-            <div class="container mx-auto px-4">
-                <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">Tertarik untuk Bekerja Sama?</h2>
-                <p class="text-gray-300 mb-8">Lihat riwayat hidup saya untuk informasi lebih lanjut.</p>
-                <a href="CV.pdf" class="inline-block bg-teal-500 text-white font-bold py-3 px-6 md:py-4 md:px-8 rounded-lg hover:bg-teal-600 transition duration-300 text-base md:text-lg">Unduh CV Saya</a>
+            <!-- Project 4 -->
+            <div class="project-card min-h-72 bg-cover bg-center" style="background-image:url('img/to-do-List.png');" data-aos="fade-up" data-aos-delay="100">
+                <div class="relative z-10 p-8 h-full flex flex-col justify-end">
+                    <p class="font-mono text-xs text-mars-teal mb-2">04</p>
+                    <h3 class="font-syne text-2xl font-bold text-white mb-2" data-translate-key="proj4_title">Aplikasi To-Do List</h3>
+                    <p class="text-gray-300 text-sm mb-4" data-translate-key="proj4_desc">Aplikasi untuk mengelola daftar tugas ataupun pekerjaan yang harus dilakukan.</p>
+                    <a href="https://akumars.my.id/list" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-lg text-sm font-syne w-fit" data-translate-key="proj_view">Lihat Proyek</a>
+                </div>
             </div>
-        </section>
 
-        <footer class="text-center p-4 bg-gray-900 text-gray-500">
-            <p class="text-sm">&copy; 2024 Muhamad Arifin Syam.</p>
-            <p class="text-sm">Jumlah Pengunjung: <span id="view-count">0</span></p>
-        </footer>
-    </main>
+            <!-- Project 5 -->
+            <div class="project-card min-h-72 bg-cover bg-center" style="background-image:url('img/crime_management.jpg');" data-aos="fade-up">
+                <div class="relative z-10 p-8 h-full flex flex-col justify-end">
+                    <p class="font-mono text-xs text-mars-teal mb-2">05</p>
+                    <h3 class="font-syne text-2xl font-bold text-white mb-2" data-translate-key="proj5_title">Sistem Manajemen Kriminal</h3>
+                    <p class="text-gray-300 text-sm mb-4" data-translate-key="proj5_desc">Aplikasi desktop untuk membantu polisi mengelola data kriminal.</p>
+                    <a href="https://github.com/Aku-Mars/middle-project/tree/main/crime_management" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-lg text-sm font-syne w-fit" data-translate-key="proj_view">Lihat Proyek</a>
+                </div>
+            </div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="js/script.js"></script>
-    <script>
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: window.innerWidth < 768 ? -750 : 10,
+            <!-- Project 6 -->
+            <div class="project-card min-h-72 bg-cover bg-center" style="background-image:url('img/edge_detection.jpg');" data-aos="fade-up" data-aos-delay="100">
+                <div class="relative z-10 p-8 h-full flex flex-col justify-end">
+                    <p class="font-mono text-xs text-mars-teal mb-2">06</p>
+                    <h3 class="font-syne text-2xl font-bold text-white mb-2" data-translate-key="proj6_title">Deteksi Tepi & Pencocokan Template</h3>
+                    <p class="text-gray-300 text-sm mb-4" data-translate-key="proj6_desc">Kumpulan skrip Python untuk pemrosesan gambar fundamental.</p>
+                    <a href="https://github.com/Aku-Mars/middle-project/tree/main/edge_detection" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-lg text-sm font-syne w-fit" data-translate-key="proj_view">Lihat Proyek</a>
+                </div>
+            </div>
+
+            <!-- Project 7 -->
+            <div class="project-card min-h-72 bg-cover bg-center" style="background-image:url('img/Jawari.png');" data-aos="fade-up">
+                <div class="relative z-10 p-8 h-full flex flex-col justify-end">
+                    <p class="font-mono text-xs text-mars-teal mb-2">07</p>
+                    <h3 class="font-syne text-2xl font-bold text-white mb-2" data-translate-key="proj7_title">Jawari</h3>
+                    <p class="text-gray-300 text-sm mb-4" data-translate-key="proj7_desc">Aplikasi berbasis web untuk kesenian Tari di Banten - DISPORAPAR</p>
+                    <a href="https://jawari.serangkab.go.id/" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-lg text-sm font-syne w-fit" data-translate-key="proj_view">Lihat Proyek</a>
+                </div>
+            </div>
+
+            <!-- Project 8 -->
+            <div class="project-card min-h-72 bg-cover bg-center" style="background-image:url('img/plan.png');" data-aos="fade-up" data-aos-delay="100">
+                <div class="relative z-10 p-8 h-full flex flex-col justify-end">
+                    <p class="font-mono text-xs text-mars-teal mb-2">08</p>
+                    <h3 class="font-syne text-2xl font-bold text-white mb-2" data-translate-key="proj8_title">Planner</h3>
+                    <p class="text-gray-300 text-sm mb-4" data-translate-key="proj8_desc">Aplikasi manajemen tugas harian dengan fitur login Google dan sinkronisasi Cloud.</p>
+                    <a href="https://akumars.my.id/plan/" target="_blank" class="btn-primary inline-block px-4 py-2 rounded-lg text-sm font-syne w-fit" data-translate-key="proj_view">Lihat Proyek</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATES SECTION -->
+    <section id="sertifikat" class="py-24">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <p class="section-tag mb-3">04 / Certificates</p>
+                <h2 class="font-syne text-3xl md:text-5xl font-extrabold text-white" data-translate-key="certificates_title">Sertifikat Saya</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <div class="cert-card rounded-xl overflow-hidden bg-mars-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="overflow-hidden">
+                        <img src="img/ser.png" alt="Sertifikat Belajar Back-End Pemula" class="w-full h-auto hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <p class="text-center py-3 text-sm text-gray-300 font-mono" data-translate-key="cert1_title">Belajar Back-End Pemula dengan JavaScript</p>
+                </div>
+                <div class="cert-card rounded-xl overflow-hidden bg-mars-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="overflow-hidden">
+                        <img src="img/cloud.png" alt="Sertifikat Google Cloud Engineer" class="w-full h-auto hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <p class="text-center py-3 text-sm text-gray-300 font-mono" data-translate-key="cert2_title">Menjadi Google Cloud Engineer</p>
+                </div>
+                <div class="cert-card rounded-xl overflow-hidden bg-mars-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="overflow-hidden">
+                        <img src="img/ai.png" alt="Sertifikat Generative AI" class="w-full h-auto hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <p class="text-center py-3 text-sm text-gray-300 font-mono" data-translate-key="cert3_title">Belajar Penggunaan Generative AI</p>
+                </div>
+                <div class="cert-card rounded-xl overflow-hidden bg-mars-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="overflow-hidden">
+                        <img src="img/ccna.png" alt="Sertifikat CCNA" class="w-full h-auto hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <p class="text-center py-3 text-sm text-gray-300 font-mono" data-translate-key="cert4_title">CCNA: Enterprise Networking, Security, and Automation</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-12" data-aos="fade-up">
+                <a href="https://www.linkedin.com/in/muhamad-arifin-syam/details/certifications/" target="_blank"
+                    class="btn-outline inline-block px-8 py-3 rounded-lg font-syne font-bold" data-translate-key="view_all">Lihat Semua</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECH SECTION -->
+    <section id="tech" class="py-24 bg-mars-card/30">
+        <div class="container mx-auto px-6" data-aos="fade-up">
+            <div class="text-center mb-16">
+                <p class="section-tag mb-3">05 / Stack</p>
+                <h2 class="font-syne text-3xl md:text-4xl font-extrabold text-white mb-2">Tech & Tools</h2>
+                <p class="text-mars-muted text-sm font-mono">I Use Every Day</p>
+            </div>
+
+            <div class="max-w-2xl mx-auto text-center mb-12">
+                <p class="font-mono text-xs text-mars-muted mb-4 uppercase tracking-widest">Languages & Frameworks</p>
+                <img src="https://skillicons.dev/icons?i=php,laravel,js,react,nodejs,html,css,vscode,figma&theme=dark" alt="Skills" class="h-12 md:h-14 mx-auto">
+            </div>
+
+            <div class="max-w-2xl mx-auto text-center">
+                <p class="font-mono text-xs text-mars-muted mb-4 uppercase tracking-widest">☁️ Cloud & Hosting Platforms</p>
+                <img src="https://skillicons.dev/icons?i=gcp,aws,azure&theme=dark" alt="Cloud" class="h-12 md:h-14 mx-auto">
+            </div>
+        </div>
+    </section>
+
+    <!-- CV SECTION -->
+    <section id="cv" class="py-24" data-aos="fade-up">
+        <div class="container mx-auto px-6">
+            <div class="max-w-2xl mx-auto text-center border border-mars-border rounded-2xl p-12 bg-mars-card relative overflow-hidden">
+                <!-- Decorative glow -->
+                <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(45,212,191,0.05),transparent 70%);pointer-events:none;"></div>
+
+                <p class="section-tag mb-4">06 / Contact</p>
+                <h2 class="font-syne text-2xl md:text-4xl font-extrabold text-white mb-3" data-translate-key="cv_title">Tertarik untuk Bekerja Sama?</h2>
+                <p class="text-gray-400 text-sm mb-8" data-translate-key="cv_desc">Lihat riwayat hidup saya untuk informasi lebih lanjut.</p>
+                <a href="CV.pdf" class="btn-primary inline-block px-8 py-3 rounded-lg font-syne font-bold text-base" data-translate-key="cv_download">Unduh CV Saya</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="border-t border-mars-border py-8 bg-mars-card/50">
+    <div class="container mx-auto px-6 text-center">
+        <p class="font-syne text-white font-bold text-lg mb-1">MARS</p>
+        <p class="text-mars-muted text-xs font-mono mb-4">&copy; 2025 Muhamad Arifin Syam. All rights reserved.</p>
+        <div class="counter-badge inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono text-mars-teal">
+            <i class="fas fa-eye text-mars-teal"></i>
+            <span data-translate-key="footer_visitors">Jumlah Pengunjung:</span>
+            <span id="view-count" class="font-bold">—</span>
+        </div>
+    </div>
+</footer>
+
+<!-- Firebase SDK -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, doc, runTransaction, getDoc, increment, setDoc, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyA7dbhKGRFAKa_ikf-cl05qFWHiqrToPkg",
+        authDomain: "page-mars.firebaseapp.com",
+        projectId: "page-mars",
+        storageBucket: "page-mars.firebasestorage.app",
+        messagingSenderId: "351677577100",
+        appId: "1:351677577100:web:ea4a40b93c28950b98c8a9"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Rate-limit key (session-based using sessionStorage)
+    const RATE_KEY = 'mars_last_visit';
+    const RATE_LIMIT_MS = 15 * 60 * 1000; // 15 menit
+
+    async function trackVisitor() {
+        try {
+            // Cek rate limit dari sessionStorage
+            const lastVisit = sessionStorage.getItem(RATE_KEY);
+            const now = Date.now();
+            const shouldCount = !lastVisit || (now - parseInt(lastVisit)) > RATE_LIMIT_MS;
+
+            // Ambil count dan update
+            const counterRef = doc(db, 'analytics', 'visitor_counter');
+
+            if (shouldCount) {
+                // Increment counter atomically
+                await runTransaction(db, async (transaction) => {
+                    const counterDoc = await transaction.get(counterRef);
+                    if (!counterDoc.exists()) {
+                        transaction.set(counterRef, { count: 1 });
+                    } else {
+                        transaction.update(counterRef, { count: counterDoc.data().count + 1 });
+                    }
+                });
+
+                sessionStorage.setItem(RATE_KEY, now.toString());
+
+                // Ambil total count terbaru lalu kirim notifikasi Discord
+                try {
+                    const snapAfter = await getDoc(counterRef);
+                    const totalViews = snapAfter.exists() ? snapAfter.data().count : 1;
+                    sendDiscordNotification(navigator.userAgent, totalViews); // fire-and-forget
+                } catch(e) { /* silent */ }
+            }
+
+            // Ambil total count untuk ditampilkan di footer
+            const snap = await getDoc(counterRef);
+            if (snap.exists()) {
+                document.getElementById('view-count').textContent = snap.data().count.toLocaleString();
+            }
+
+        } catch (err) {
+            console.warn('Firebase counter error:', err.message);
+            document.getElementById('view-count').textContent = '—';
+        }
+    }
+
+    async function sendDiscordNotification(ua, totalViews) {
+        const WEBHOOK = '[YOUR_DISCORD_WEBHOOK]';
+
+        // ── Deteksi Device ───────────────────────────────────────
+        let device = 'PC/Desktop';
+        if (/(tablet|ipad|playbook)|(android(?!.*(mobi|opera mini)))/i.test(ua)) device = 'Tablet';
+        else if (/(mobi|ipod|phone|blackberry|opera mini|fennec|minimo|symbian|psp|nintendo ds)/i.test(ua)) device = 'Mobile';
+
+        // ── Deteksi OS (mirip PHP) ────────────────────────────────
+        let os = 'Unknown OS';
+        const osMap = [
+            [/windows nt 10/i,      'Windows 10'],
+            [/windows nt 6\.3/i,    'Windows 8.1'],
+            [/windows nt 6\.2/i,    'Windows 8'],
+            [/windows nt 6\.1/i,    'Windows 7'],
+            [/windows nt 6\.0/i,    'Windows Vista'],
+            [/windows nt 5\.1/i,    'Windows XP'],
+            [/macintosh|mac os x/i, 'Mac OS X'],
+            [/linux/i,              'Linux'],
+            [/ubuntu/i,             'Ubuntu'],
+            [/iphone/i,             'iPhone'],
+            [/ipod/i,               'iPod'],
+            [/ipad/i,               'iPad'],
+            [/android/i,            'Android'],
+            [/blackberry/i,         'BlackBerry'],
+            [/webos/i,              'Mobile'],
+        ];
+        for (const [re, name] of osMap) { if (re.test(ua)) { os = name; break; } }
+
+        // ── Deteksi Browser (mirip PHP, urutan penting) ───────────
+        let browser = 'Unknown Browser';
+        // Edge harus dicek sebelum Chrome karena UA Edge mengandung "Chrome"
+        if (/edg\//i.test(ua))          browser = 'Edge';
+        else if (/opr\//i.test(ua))     browser = 'Opera';
+        else if (/firefox/i.test(ua))   browser = 'Firefox';
+        else if (/chrome/i.test(ua))    browser = 'Chrome';
+        else if (/safari/i.test(ua))    browser = 'Safari';
+        else if (/msie|trident/i.test(ua)) browser = 'Internet Explorer';
+        else if (/netscape/i.test(ua))  browser = 'Netscape';
+        else if (/maxthon/i.test(ua))   browser = 'Maxthon';
+        else if (/konqueror/i.test(ua)) browser = 'Konqueror';
+        else if (/mobile/i.test(ua))    browser = 'Handheld Browser';
+
+        // ── Waktu WIB ─────────────────────────────────────────────
+        const now = new Date();
+        const timeStr = now.toLocaleString('id-ID', {
+            timeZone: 'Asia/Jakarta',
+            weekday: 'long',
+            day: '2-digit',
+            month: 'long',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
         });
 
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+        // ── Fetch IP + Geolocation via ip-api.com ─────────────────
+        let ip      = 'Unknown';
+        let kota    = 'Unknown';
+        let wilayah = 'Unknown';
+        let negara  = 'Unknown';
+        let isp     = 'Unknown';
+        let visitsToday = 1;
 
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Close mobile menu when a link is clicked
-        document.querySelectorAll('#mobile-menu a, nav a[href^="#"]').forEach(link => {
-            link.addEventListener('click', (e) => {
-                if(e.currentTarget.id !== 'mobile-menu-button') {
-                    mobileMenu.classList.add('hidden');
+        try {
+            const geo = await fetch('http://ip-api.com/json/?fields=status,country,regionName,city,isp,query', { cache: 'no-store' });
+            if (geo.ok) {
+                const g = await geo.json();
+                if (g.status === 'success') {
+                    ip      = g.query      || 'Unknown';
+                    kota    = g.city       || 'Unknown';
+                    wilayah = g.regionName || 'Unknown';
+                    negara  = g.country    || 'Unknown';
+                    isp     = g.isp        || 'Unknown';
                 }
-            });
+            }
+        } catch (_) { /* pakai nilai default */ }
+
+        // Hitung kunjungan hari ini dari sessionStorage (approximasi)
+        const todayKey = 'mars_visits_' + new Date().toDateString();
+        visitsToday = parseInt(sessionStorage.getItem(todayKey) || '0') + 1;
+        sessionStorage.setItem(todayKey, visitsToday.toString());
+
+        // ── Build Discord Embed ───────────────────────────────────
+        const payload = {
+            embeds: [{
+                title: "🚀 Pengunjung Baru di Portofolio!",
+                description: "Seseorang baru saja mengunjungi halaman portofolio Anda.",
+                color: 0x2dd4bf,   // hijau — sama seperti PHP asli
+                fields: [
+                    {
+                        name:   "🗓️ Waktu Akses",
+                        value:  timeStr,
+                        inline: false
+                    },
+                    {
+                        name:   "📍 Lokasi",
+                        value:  `**Kota:** ${kota}\n**Wilayah:** ${wilayah}\n**Negara:** ${negara}`,
+                        inline: true
+                    },
+                    {
+                        name:   "🌐 Jaringan",
+                        value:  `**Alamat IP:** ${ip}\n**ISP:** ${isp}`,
+                        inline: true
+                    },
+                    {
+                        name:   "💻 Info Perangkat",
+                        value:  `**Tipe:** ${device}\n**OS:** ${os}\n**Browser:** ${browser}`,
+                        inline: true
+                    },
+                    {
+                        name:   "📈 Statistik",
+                        value:  `**Kunjungan IP Hari Ini:** ${visitsToday}`,
+                        inline: true
+                    },
+                    {
+                        name:   "🕵️ User Agent",
+                        value:  `\`\`\`${ua.substring(0, 900)}\`\`\``,
+                        inline: false
+                    }
+                ],
+                footer: { text: `Total Pengunjung: ${totalViews}` },
+                timestamp: new Date().toISOString()
+            }]
+        };
+
+        // ── Kirim ke Discord ──────────────────────────────────────
+        fetch(WEBHOOK, {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify(payload)
+        }).catch(() => {});
+    }
+
+    // Jalankan tracking setelah DOM siap
+    window.addEventListener('DOMContentLoaded', () => {
+        trackVisitor();
+    });
+</script>
+
+<!-- AOS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<!-- Main Script -->
+<script>
+    // ── Translations ──────────────────────────────────────────
+    const translations = {
+        en: {
+            nav_profile:"Profile", nav_experience:"Experience", nav_projects:"Projects",
+            nav_certificates:"Certificates", nav_cv:"CV",
+            status_badge:"Available for new opportunities",
+            profile_title:"Informatics Engineering Student, University of Lampung",
+            profile_desc:"I am an Informatics Engineering student with high enthusiasm in the IT field, especially <em class='text-mars-teal not-italic'>Cloud Engineering</em>. Experienced in <em class='text-mars-teal not-italic'>Cloud Computing</em> and <em class='text-mars-teal not-italic'>Web Development</em>.",
+            experience_title:"My Experience",
+            exp1_date:"August 2024 - January 2025", exp1_title:"Cloud Computing Cohort & Capstone Project Lead", exp1_company:"Bangkit Academy",
+            exp1_desc1:"Studied cloud architecture, GCP, and software engineering.",
+            exp1_desc2:"Led the 'Mindcraft' capstone project as a Project Manager.",
+            exp1_desc3:"Designed the backend architecture on GCP and developed core APIs.",
+            exp2_date:"February 2025 - June 2025", exp2_title:"AI Program Participant, elevAlte with Dicoding", exp2_company:"Microsoft & Dicoding",
+            exp2_desc1:"Studied Artificial Intelligence (AI) and Generative AI development.",
+            exp2_desc2:"Mastered Microsoft's AI technology with a focus on the Azure cloud platform.",
+            exp2_desc3:"Completed an intensive learning path to become an industry-ready AI talent.",
+            exp3_date:"October 2022 - Present", exp3_title:"Freelance Cloud Engineer", exp3_company:"Freelance",
+            exp3_desc1:"Provided cloud computing and web development solutions for various clients.",
+            exp3_desc2:"Experienced in managing cloud services from AWS, GCP, Microsoft Azure, and Alibaba Cloud.",
+            exp3_desc3:"Developed projects like the 'Mars Store' online shop from design to VPS implementation.",
+            exp4_date:"June 2025 - Present", exp4_title:"Back End Developer Intern", exp4_company:"Diskominfosantik Kabupaten Serang",
+            exp4_desc1:"Responsible for back-end development and operations.",
+            exp4_desc2:"Implemented features and services using PHP, Laravel, and MySQL.",
+            exp4_desc3:"Supported system maintenance and optimization in a government environment.",
+            projects_title:"My Projects",
+            proj1_title:"Mindcraft", proj1_desc:"An application that automatically generates quizzes from user material.",
+            proj2_title:"Epic Dragon", proj2_desc:"A turn-based website game created with AI Studio technology.",
+            proj3_title:"Host Monitoring Dashboard", proj3_desc:"A web interface to monitor host status in real-time.",
+            proj4_title:"To-Do List Application", proj4_desc:"An application to manage a list of tasks or jobs to be done.",
+            proj5_title:"Crime Management System", proj5_desc:"A desktop application to help police manage criminal data.",
+            proj6_title:"Edge Detection & Template Matching", proj6_desc:"A collection of Python scripts for fundamental image processing.",
+            proj7_title:"Jawari", proj7_desc:"A web-based application for the art of dance in Banten - DISPORAPAR",
+            proj8_title:"Planner", proj8_desc:"A daily task management application with Google login and Cloud sync features.",
+            proj_view:"View Project",
+            certificates_title:"My Certificates",
+            cert1_title:"Learning Back-End for Beginners with JavaScript",
+            cert2_title:"Becoming a Google Cloud Engineer",
+            cert3_title:"Learning to Use Generative AI",
+            cert4_title:"CCNA: Enterprise Networking, Security, and Automation",
+            view_all:"View All",
+            cv_title:"Interested in Collaborating?",
+            cv_desc:"Check out my resume for more information.",
+            cv_download:"Download My CV",
+            footer_visitors:"Visitor Count:"
+        },
+        id: {
+            nav_profile:"Profil", nav_experience:"Pengalaman", nav_projects:"Proyek",
+            nav_certificates:"Sertifikat", nav_cv:"CV",
+            status_badge:"Tersedia untuk peluang baru",
+            profile_title:"Mahasiswa Teknik Informatika, Universitas Lampung",
+            profile_desc:"Saya adalah seorang mahasiswa Teknik Informatika dengan antusiasme tinggi di bidang IT, khususnya <em class='text-mars-teal not-italic'>Cloud Engineering</em>. Berpengalaman dalam <em class='text-mars-teal not-italic'>Cloud Computing</em> dan <em class='text-mars-teal not-italic'>Web Development</em>.",
+            experience_title:"Pengalaman Saya",
+            exp1_date:"Agustus 2024 - Januari 2025", exp1_title:"Cloud Computing Cohort & Capstone Project Lead", exp1_company:"Bangkit Academy",
+            exp1_desc1:"Mendalami arsitektur cloud, GCP, dan rekayasa perangkat lunak.",
+            exp1_desc2:"Memimpin proyek capstone \"Mindcraft\" sebagai Project Manager.",
+            exp1_desc3:"Merancang arsitektur backend di GCP dan mengembangkan API inti.",
+            exp2_date:"Februari 2025 - Juni 2025", exp2_title:"Peserta Program AI, elevAlte with Dicoding", exp2_company:"Microsoft & Dicoding",
+            exp2_desc1:"Mendalami pengembangan Kecerdasan Buatan (AI) dan Generative AI.",
+            exp2_desc2:"Menguasai teknologi AI dari Microsoft dengan fokus pada platform cloud Azure.",
+            exp2_desc3:"Menyelesaikan jalur pembelajaran intensif untuk menjadi talenta AI yang siap industri.",
+            exp3_date:"Oktober 2022 - Sekarang", exp3_title:"Freelance Cloud Engineer", exp3_company:"Freelance",
+            exp3_desc1:"Menyediakan solusi cloud computing dan pengembangan web untuk berbagai klien.",
+            exp3_desc2:"Berpengalaman mengelola layanan cloud dari AWS, GCP, Microsoft Azure, dan Alibaba Cloud.",
+            exp3_desc3:"Mengembangkan proyek seperti toko online \"Mars Store\" dari perancangan hingga implementasi di VPS.",
+            exp4_date:"Juni 2025 - Sekarang", exp4_title:"Back End Developer Intern", exp4_company:"Diskominfosantik Kabupaten Serang",
+            exp4_desc1:"Bertanggung jawab atas pengembangan dan operasional back-end.",
+            exp4_desc2:"Mengimplementasikan fitur dan layanan menggunakan PHP, Laravel, dan MySQL.",
+            exp4_desc3:"Mendukung pemeliharaan dan optimalisasi sistem di lingkungan pemerintahan.",
+            projects_title:"Proyek Saya",
+            proj1_title:"Mindcraft", proj1_desc:"Aplikasi penghasil kuis otomatis dari materi pengguna.",
+            proj2_title:"Epic Dragon", proj2_desc:"Sebuah game turn-based berbasis website dibuat dengan teknologi AI Studio.",
+            proj3_title:"Dashboard Monitoring Host", proj3_desc:"Antarmuka web untuk memantau status host secara real-time.",
+            proj4_title:"Aplikasi To-Do List", proj4_desc:"Aplikasi untuk mengelola daftar tugas ataupun pekerjaan yang harus dilakukan.",
+            proj5_title:"Sistem Manajemen Kriminal", proj5_desc:"Aplikasi desktop untuk membantu polisi mengelola data kriminal.",
+            proj6_title:"Deteksi Tepi & Pencocokan Template", proj6_desc:"Kumpulan skrip Python untuk pemrosesan gambar fundamental.",
+            proj7_title:"Jawari", proj7_desc:"Aplikasi berbasis web untuk kesenian Tari di Banten - DISPORAPAR",
+            proj8_title:"Planner", proj8_desc:"Aplikasi manajemen tugas harian dengan fitur login Google dan sinkronisasi Cloud.",
+            proj_view:"Lihat Proyek",
+            certificates_title:"Sertifikat Saya",
+            cert1_title:"Belajar Back-End Pemula dengan JavaScript",
+            cert2_title:"Menjadi Google Cloud Engineer",
+            cert3_title:"Belajar Penggunaan Generative AI",
+            cert4_title:"CCNA: Enterprise Networking, Security, and Automation",
+            view_all:"Lihat Semua",
+            cv_title:"Tertarik untuk Bekerja Sama?",
+            cv_desc:"Lihat riwayat hidup saya untuk informasi lebih lanjut.",
+            cv_download:"Unduh CV Saya",
+            footer_visitors:"Jumlah Pengunjung:"
+        }
+    };
+
+    const setLanguage = (lang) => {
+        document.querySelectorAll('[data-translate-key]').forEach(el => {
+            const key = el.getAttribute('data-translate-key');
+            if (translations[lang]?.[key]) el.innerHTML = translations[lang][key];
         });
-    </script>
+        document.documentElement.lang = lang;
+        localStorage.setItem('mars_lang', lang);
+    };
+
+    // Init language
+    const savedLang = localStorage.getItem('mars_lang') || (navigator.language.startsWith('id') ? 'id' : 'en');
+    setLanguage(savedLang);
+
+    document.querySelectorAll('.lang-switcher').forEach(btn => {
+        btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
+    });
+
+    // ── AOS ─────────────────────────────────────────────────
+    AOS.init({ duration: 900, once: true, offset: window.innerWidth < 768 ? 60 : 80 });
+
+    // ── Mobile Menu ──────────────────────────────────────────
+    const menuBtn = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    document.querySelectorAll('#mobile-menu a').forEach(a => {
+        a.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // ── Custom Cursor ────────────────────────────────────────
+    const dot = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        dot.style.left = mx - 4 + 'px';
+        dot.style.top = my - 4 + 'px';
+    });
+
+    // Smooth ring follow
+    (function animRing() {
+        rx += (mx - rx) * 0.12;
+        ry += (my - ry) * 0.12;
+        ring.style.left = rx - 16 + 'px';
+        ring.style.top = ry - 16 + 'px';
+        requestAnimationFrame(animRing);
+    })();
+
+    // Ring expand on links
+    document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            ring.style.width = '48px'; ring.style.height = '48px';
+            ring.style.borderColor = 'rgba(249,115,22,0.6)';
+        });
+        el.addEventListener('mouseleave', () => {
+            ring.style.width = '32px'; ring.style.height = '32px';
+            ring.style.borderColor = 'rgba(45,212,191,0.5)';
+        });
+    });
+
+    // ── Hero animations ──────────────────────────────────────
+    document.querySelectorAll('.animate-fade-in-up').forEach(el => {
+        el.style.opacity = '1';
+    });
+</script>
 </body>
 </html>
