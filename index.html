@@ -665,6 +665,12 @@
         </div>
 
         <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 gap-0"></div>
+
+        <div class="text-center mt-12" data-aos="fade-up">
+            <button id="toggle-projects-btn" class="btn-outline inline-block px-8 py-3 rounded-lg font-syne font-bold transition-all duration-300">
+                <span id="toggle-projects-text" data-translate-key="show_more">Lihat Lebih Banyak</span>
+            </button>
+        </div>
     </section>
 
     <!-- CERTIFICATES SECTION -->
@@ -1063,6 +1069,8 @@
             proj7_title:"Jawari", proj7_desc:"A web-based application for the art of dance in Banten - DISPORAPAR",
             proj8_title:"Planner", proj8_desc:"A daily task management application with Google login and Cloud sync features.",
             proj_view:"View Project",
+            show_more:"Show More",
+            show_less:"Show Less",
             certificates_title:"My Certificates",
             cert1_title:"Learning Back-End for Beginners with JavaScript",
             cert2_title:"Becoming a Google Cloud Engineer",
@@ -1107,6 +1115,8 @@
             proj7_title:"Jawari", proj7_desc:"Aplikasi berbasis web untuk kesenian Tari di Banten - DISPORAPAR",
             proj8_title:"Planner", proj8_desc:"Aplikasi manajemen tugas harian dengan fitur login Google dan sinkronisasi Cloud.",
             proj_view:"Lihat Proyek",
+            show_more:"Lihat Lebih Banyak",
+            show_less:"Lihat Lebih Sedikit",
             certificates_title:"Sertifikat Saya",
             cert1_title:"Belajar Back-End Pemula dengan JavaScript",
             cert2_title:"Menjadi Google Cloud Engineer",
@@ -1121,16 +1131,6 @@
     };
 
     const projects = [
-        {
-            title: "ChatGPT Render Lite",
-            image: "img/render.png",
-            url: "https://github.com/Aku-Mars/chatgpt-render-lite",
-            type: "Source Code",
-            desc: {
-                id: "Ekstensi Chrome ringan untuk mengoptimalkan performa ChatGPT dengan mengelola DOM secara dinamis.",
-                en: "A lightweight Chrome Extension to optimize ChatGPT performance by dynamically managing the DOM."
-            }
-        },
         {
             title: "ArchPRD",
             image: "img/archprd.png",
@@ -1152,23 +1152,23 @@
             }
         },
         {
-            title: "Acaris App Backend",
-            image: "img/acaris.png",
-            url: "https://github.com/Acaris-App/Backend",
+            title: "ChatGPT Render Lite",
+            image: "img/render.png",
+            url: "https://github.com/Aku-Mars/chatgpt-render-lite",
             type: "Source Code",
             desc: {
-                id: "Project Skripsi: REST API Backend lengkap dengan autentikasi dan database untuk aplikasi Acaris.",
-                en: "Thesis Project: Comprehensive REST API Backend with authentication and database for the Acaris app."
+                id: "Ekstensi Chrome ringan untuk mengoptimalkan performa ChatGPT dengan mengelola DOM secara dinamis.",
+                en: "A lightweight Chrome Extension to optimize ChatGPT performance by dynamically managing the DOM."
             }
         },
         {
-            title: "Mindcraft",
-            image: "https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?w=900&q=80",
-            url: "https://github.com/The-Petot/Mindcraft",
-            type: "Source Code",
+            title: "Planner",
+            image: "img/plan.png",
+            url: "https://akumars.my.id/plan/",
+            type: "Live App",
             desc: {
-                id: "Aplikasi capstone Bangkit untuk membuat kuis otomatis dari materi pengguna.",
-                en: "A Bangkit capstone app that automatically generates quizzes from user material."
+                id: "Aplikasi planner harian berbasis Firebase dengan sinkronisasi cloud.",
+                en: "A Firebase-based daily planner with cloud sync."
             }
         },
         {
@@ -1182,13 +1182,13 @@
             }
         },
         {
-            title: "Shortlink",
-            image: "img/name.png",
-            url: "https://akumars.my.id/shortlink",
+            title: "Mars Store",
+            image: "img/shop.png",
+            url: "https://akumars.my.id/shop",
             type: "Live App",
             desc: {
-                id: "Aplikasi pemendek URL dengan login, custom code, QR code, dan statistik klik.",
-                en: "A URL shortener with login, custom codes, QR codes, and click statistics."
+                id: "Proyek toko online dari perancangan sampai implementasi di VPS.",
+                en: "An online store project from design through VPS deployment."
             }
         },
         {
@@ -1202,6 +1202,16 @@
             }
         },
         {
+            title: "Shortlink",
+            image: "img/name.png",
+            url: "https://akumars.my.id/shortlink",
+            type: "Live App",
+            desc: {
+                id: "Aplikasi pemendek URL dengan login, custom code, QR code, dan statistik klik.",
+                en: "A URL shortener with login, custom codes, QR codes, and click statistics."
+            }
+        },
+        {
             title: "Dashboard Monitoring Host",
             image: "img/monitoring.png",
             url: "https://akumars.my.id/monitoring",
@@ -1212,23 +1222,23 @@
             }
         },
         {
-            title: "Mars Store",
-            image: "img/shop.png",
-            url: "https://akumars.my.id/shop",
-            type: "Live App",
+            title: "Mindcraft",
+            image: "https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?w=900&q=80",
+            url: "https://github.com/The-Petot/Mindcraft",
+            type: "Source Code",
             desc: {
-                id: "Proyek toko online dari perancangan sampai implementasi di VPS.",
-                en: "An online store project from design through VPS deployment."
+                id: "Aplikasi capstone Bangkit untuk membuat kuis otomatis dari materi pengguna.",
+                en: "A Bangkit capstone app that automatically generates quizzes from user material."
             }
         },
         {
-            title: "Planner",
-            image: "img/plan.png",
-            url: "https://akumars.my.id/plan/",
-            type: "Live App",
+            title: "Acaris App Backend",
+            image: "img/acaris.png",
+            url: "https://github.com/Acaris-App/Backend",
+            type: "Source Code",
             desc: {
-                id: "Aplikasi planner harian berbasis Firebase dengan sinkronisasi cloud.",
-                en: "A Firebase-based daily planner with cloud sync."
+                id: "Project Skripsi: REST API Backend lengkap dengan autentikasi dan database untuk aplikasi Acaris.",
+                en: "Thesis Project: Comprehensive REST API Backend with authentication and database for the Acaris app."
             }
         },
         {
@@ -1263,12 +1273,16 @@
         }
     ];
 
+    let isExpanded = false;
+
     const renderProjects = (lang) => {
         const grid = document.getElementById('project-grid');
         if (!grid) return;
 
         grid.innerHTML = '';
-        projects.forEach((project, index) => {
+        const projectsToShow = isExpanded ? projects : projects.slice(0, 6);
+
+        projectsToShow.forEach((project, index) => {
             const card = document.createElement('div');
             const delay = index % 2 ? '100' : '0';
             card.className = 'project-card min-h-72 bg-cover bg-center';
@@ -1317,6 +1331,13 @@
             grid.appendChild(card);
         });
 
+        const toggleBtnText = document.getElementById('toggle-projects-text');
+        if (toggleBtnText) {
+            toggleBtnText.textContent = isExpanded 
+                ? (translations[lang]?.show_less || 'Lihat Lebih Sedikit')
+                : (translations[lang]?.show_more || 'Lihat Lebih Banyak');
+        }
+
         if (window.AOS?.refreshHard) window.AOS.refreshHard();
     };
 
@@ -1347,6 +1368,16 @@
     document.querySelectorAll('.lang-switcher').forEach(btn => {
         btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
     });
+
+    // Toggle Projects Button
+    const toggleProjectsBtn = document.getElementById('toggle-projects-btn');
+    if (toggleProjectsBtn) {
+        toggleProjectsBtn.addEventListener('click', () => {
+            isExpanded = !isExpanded;
+            const currentLang = document.documentElement.lang || 'en';
+            renderProjects(currentLang);
+        });
+    }
 
     // ── AOS ─────────────────────────────────────────────────
     AOS.init({ duration: 900, once: true, offset: window.innerWidth < 768 ? 60 : 80 });
