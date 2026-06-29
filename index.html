@@ -793,7 +793,7 @@
                 <p class="section-tag mb-4">06 / Contact</p>
                 <h2 class="font-syne text-2xl md:text-4xl font-extrabold text-white mb-3" data-translate-key="cv_title">Tertarik untuk Bekerja Sama?</h2>
                 <p class="text-gray-400 text-sm mb-8" data-translate-key="cv_desc">Lihat riwayat hidup saya untuk informasi lebih lanjut.</p>
-                <a href="CV.pdf" class="btn-primary inline-block px-8 py-3 rounded-lg font-syne font-bold text-base" data-translate-key="cv_download">Unduh CV Saya</a>
+                <a id="cv-download-btn" href="CV_en.pdf" class="btn-primary inline-block px-8 py-3 rounded-lg font-syne font-bold text-base" data-translate-key="cv_download">Unduh CV Saya</a>
             </div>
         </div>
     </section>
@@ -1407,6 +1407,10 @@
             btn.classList.toggle('text-gray-400', !isActive);
             btn.setAttribute('aria-pressed', String(isActive));
         });
+        const cvBtn = document.getElementById('cv-download-btn');
+        if (cvBtn) {
+            cvBtn.href = lang === 'id' ? 'CV_id.pdf' : 'CV_en.pdf';
+        }
         renderProjects(lang);
         document.documentElement.lang = lang;
         localStorage.setItem('mars_lang', lang);
