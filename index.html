@@ -1076,6 +1076,41 @@
     });
 </script>
 
+    <!-- FEATURED PROJECTS MODAL -->
+    <div id="featured-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-4 bg-mars-dark/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-500 ease-out">
+        <div class="relative w-full max-w-5xl bg-mars-card/95 border border-mars-border/80 rounded-2xl overflow-hidden shadow-2xl shadow-mars-teal/5 p-6 md:p-8 transform scale-95 transition-all duration-500 ease-out max-h-[90vh] flex flex-col backdrop-blur-xl">
+            
+            <!-- Close Button (X) -->
+            <button id="close-modal-btn" class="absolute top-4 right-4 text-mars-muted hover:text-white transition-colors duration-300 z-10 p-2 focus:outline-none">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <!-- Modal Header -->
+            <div class="mb-6 shrink-0">
+                <span class="text-xs font-mono text-mars-teal tracking-widest uppercase" data-translate-key="modal_subtitle">Pilihan untuk Anda</span>
+                <h3 class="font-syne text-2xl md:text-3xl font-extrabold text-white mt-1" data-translate-key="modal_title">🚀 Proyek Unggulan</h3>
+                <p class="text-sm text-mars-muted mt-2" data-translate-key="modal_description">Berikut adalah 3 proyek terbaik pilihan saya saat ini:</p>
+            </div>
+            
+            <!-- Grid of Projects -->
+            <div id="modal-projects-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 overflow-y-auto mb-6 pr-2 scrollbar-thin">
+                <!-- Cards secara dinamis dimasukkan di sini via JS -->
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-mars-border pt-4 shrink-0">
+                <div class="flex items-center gap-2 text-xs font-mono text-mars-muted">
+                    <span class="inline-block w-2 h-2 rounded-full bg-mars-teal animate-pulse"></span>
+                    <span data-translate-key="modal_footer_text">Terakhir diperbarui Juli 2026</span>
+                </div>
+                <div class="flex gap-3 w-full sm:w-auto">
+                    <button id="close-modal-action-btn" class="w-full sm:w-auto px-6 py-2.5 rounded-lg border border-mars-border text-sm font-syne font-bold text-gray-400 hover:text-white hover:border-white transition-all duration-300" data-translate-key="modal_btn_close">Tutup</button>
+                    <a href="#proyek" id="explore-more-btn" class="w-full sm:w-auto px-6 py-2.5 rounded-lg bg-mars-teal hover:bg-mars-teal-dim text-sm font-syne font-bold text-mars-dark text-center transition-all duration-300 shadow-lg shadow-mars-teal/20" data-translate-key="modal_btn_explore">Lihat Semua Proyek</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <!-- AOS -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
@@ -1131,7 +1166,13 @@
             cv_title:"Interested in Collaborating?",
             cv_desc:"Check out my resume for more information.",
             cv_download:"Download My CV",
-            footer_visitors:"Visitor Count:"
+            footer_visitors:"Visitor Count:",
+            modal_subtitle: "Handpicked for You",
+            modal_title: "🚀 Featured Work",
+            modal_description: "Here are 3 spotlight projects I've built recently:",
+            modal_btn_close: "Close",
+            modal_btn_explore: "Explore All Projects",
+            modal_footer_text: "Last updated July 2026"
         },
         id: {
             nav_profile:"Profil", nav_experience:"Pengalaman", nav_projects:"Proyek",
@@ -1181,16 +1222,33 @@
             cv_title:"Tertarik untuk Bekerja Sama?",
             cv_desc:"Lihat riwayat hidup saya untuk informasi lebih lanjut.",
             cv_download:"Unduh CV Saya",
-            footer_visitors:"Jumlah Pengunjung:"
+            footer_visitors:"Jumlah Pengunjung:",
+            modal_subtitle: "Pilihan untuk Anda",
+            modal_title: "🚀 Proyek Unggulan",
+            modal_description: "Berikut adalah 3 proyek terbaik pilihan saya saat ini:",
+            modal_btn_close: "Tutup",
+            modal_btn_explore: "Lihat Semua Proyek",
+            modal_footer_text: "Terakhir diperbarui Juli 2026"
         }
     };
 
     const projects = [
         {
+            title: "Flowra Studio",
+            image: "img/flowra.png",
+            url: "../underconstruct.html",
+            type: "Under Development",
+            desc: {
+                id: "Dashboard web lokal untuk mengelola upload video ke YouTube secara batch & terjadwal, lengkap dengan render FFmpeg, konverter TikTok ke Shorts, AI Metadata, dan Smart Scheduling.",
+                en: "Local web dashboard to manage batch & scheduled YouTube video uploads, equipped with FFmpeg renderer, TikTok to Shorts converter, AI Metadata, and Smart Scheduling."
+            }
+        },
+        {
             title: "ArchPRD",
             image: "img/archprd.png",
             url: "https://marsy.my.id/archprd/",
             type: "Live App",
+            featured: true,
             desc: {
                 id: "Platform AI Software Architect berbasis React/Vite dan Express untuk analisis, pembuatan dokumen PRD, dan rekomendasi arsitektur sistem.",
                 en: "An AI Software Architect platform powered by React/Vite and Express for PRD generation, analysis, and system architecture recommendations."
@@ -1201,6 +1259,7 @@
             image: "img/nugasin.png",
             url: "https://nugasin.marsy.my.id",
             type: "Live App",
+            featured: true,
             desc: {
                 id: "Aplikasi Jasa Tugas Akademik terintegrasi WhatsApp Bot dan Web Dashboard (Next.js & Express).",
                 en: "Academic Task Service app integrated with WhatsApp Bot and Web Dashboard (Next.js & Express)."
@@ -1221,6 +1280,7 @@
             image: "img/plan.png",
             url: "https://marsy.my.id/plan/",
             type: "Live App",
+            featured: true,
             desc: {
                 id: "Aplikasi planner harian berbasis Firebase dengan sinkronisasi cloud.",
                 en: "A Firebase-based daily planner with cloud sync."
@@ -1396,6 +1456,109 @@
         if (window.AOS?.refreshHard) window.AOS.refreshHard();
     };
 
+    // ── LOGIKA POP-UP MODAL PROYEK UNGGULAN (24 JAM COOLDOWN) ──
+    const initFeaturedModal = (lang) => {
+        const modal = document.getElementById('featured-modal');
+        const modalContent = modal?.querySelector('div');
+        const grid = document.getElementById('modal-projects-grid');
+        const closeX = document.getElementById('close-modal-btn');
+        const closeAction = document.getElementById('close-modal-action-btn');
+        const exploreBtn = document.getElementById('explore-more-btn');
+
+        if (!modal || !grid) return;
+
+        // Ambil 3 proyek unggulan
+        const featuredProjects = projects.filter(p => p.featured).slice(0, 3);
+        if (featuredProjects.length === 0) return;
+
+        const renderModalCards = () => {
+            grid.innerHTML = '';
+            featuredProjects.forEach(proj => {
+                const card = document.createElement('div');
+                card.className = 'group relative flex flex-col justify-end p-5 min-h-[220px] rounded-xl overflow-hidden border border-mars-border/60 bg-cover bg-center transition-all duration-500 hover:border-mars-teal/40 hover:-translate-y-1 shadow-lg';
+                card.style.backgroundImage = `url('${proj.image}')`;
+
+                // Dark overlay gradient
+                const overlay = document.createElement('div');
+                overlay.className = 'absolute inset-0 bg-gradient-to-t from-mars-dark/95 via-mars-dark/80 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-95 z-0';
+                card.appendChild(overlay);
+
+                // Project Type Badge
+                if (proj.type) {
+                    const badge = document.createElement('span');
+                    const isLive = proj.type === 'Live App';
+                    badge.className = `absolute top-3 right-3 text-[9px] font-mono px-2 py-0.5 rounded-full border bg-black/60 z-10 ${
+                        isLive ? 'border-mars-teal/40 text-mars-teal' : 'border-mars-accent/40 text-mars-accent'
+                    }`;
+                    badge.innerHTML = `<span class="inline-block w-1.5 h-1.5 rounded-full mr-1 ${isLive ? 'bg-mars-teal animate-pulse' : 'bg-mars-accent'}"></span>${proj.type}`;
+                    card.appendChild(badge);
+                }
+
+                // Info Container
+                const info = document.createElement('div');
+                info.className = 'relative z-10 w-full flex flex-col';
+
+                const title = document.createElement('h4');
+                title.className = 'font-syne font-bold text-base text-white group-hover:text-mars-teal transition-colors duration-300';
+                title.textContent = proj.title;
+
+                const desc = document.createElement('p');
+                desc.className = 'text-xs text-mars-muted mt-1 leading-relaxed line-clamp-2';
+                desc.textContent = proj.desc[lang] || proj.desc.id;
+
+                const link = document.createElement('a');
+                link.href = proj.url;
+                if (proj.url.includes('underconstruct.html')) {
+                    link.target = '_self';
+                } else {
+                    link.target = '_blank';
+                }
+                link.className = 'inline-flex items-center gap-1 text-[11px] font-mono text-mars-teal hover:text-white mt-3 transition-colors duration-300 w-fit';
+                link.innerHTML = `${translations[lang]?.proj_view || 'View'} <i class="fas fa-arrow-right text-[9px] transform group-hover:translate-x-1 transition-transform"></i>`;
+
+                info.appendChild(title);
+                info.appendChild(desc);
+                info.appendChild(link);
+                card.appendChild(info);
+                grid.appendChild(card);
+            });
+        };
+
+        const showModal = () => {
+            renderModalCards();
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100', 'pointer-events-auto');
+            modalContent?.classList.remove('scale-95');
+            modalContent?.classList.add('scale-100');
+        };
+
+        const hideModal = () => {
+            modal.classList.remove('opacity-100', 'pointer-events-auto');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalContent?.classList.remove('scale-100');
+            modalContent?.classList.add('scale-95');
+            localStorage.setItem('mars_last_modal_time', Date.now().toString());
+        };
+
+        closeX.addEventListener('click', hideModal);
+        closeAction.addEventListener('click', hideModal);
+        exploreBtn.addEventListener('click', hideModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) hideModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') hideModal();
+        });
+
+        const lastModalTime = localStorage.getItem('mars_last_modal_time');
+        const now = Date.now();
+        const cooldown = 24 * 60 * 60 * 1000;
+
+        if (!lastModalTime || (now - parseInt(lastModalTime)) > cooldown) {
+            setTimeout(showModal, 1500);
+        }
+    };
+
     const setLanguage = (lang) => {
         document.querySelectorAll('[data-translate-key]').forEach(el => {
             const key = el.getAttribute('data-translate-key');
@@ -1412,6 +1575,7 @@
             cvBtn.href = lang === 'id' ? 'CV_id.pdf' : 'CV_en.pdf';
         }
         renderProjects(lang);
+        initFeaturedModal(lang);
         document.documentElement.lang = lang;
         localStorage.setItem('mars_lang', lang);
     };
