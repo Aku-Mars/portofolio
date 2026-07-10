@@ -1585,8 +1585,9 @@
         return languages.some(lang => String(lang).toLowerCase().startsWith('id')) ? 'id' : 'en';
     };
 
-    // Init language from visitor browser. Indonesian uses ID, every other language uses EN.
-    setLanguage(getBrowserLanguage());
+    // Init language from local storage or visitor browser.
+    const savedLang = localStorage.getItem('mars_lang') || getBrowserLanguage();
+    setLanguage(savedLang);
 
     document.querySelectorAll('.lang-switcher').forEach(btn => {
         btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
