@@ -1445,7 +1445,7 @@
                     link.target = '_blank';
                     link.rel = 'noopener noreferrer';
                     link.className = 'btn-primary inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded text-xs font-syne w-fit';
-                    link.innerHTML = <i class=""></i> \;
+                    link.innerHTML = `<i class="${l.icon}"></i> ${l.label[lang] || l.label.id}`;
                     linksContainer.appendChild(link);
                 });
             } else {
@@ -1537,19 +1537,34 @@
                 desc.className = 'text-[11px] md:text-xs text-mars-muted mt-0.5 md:mt-1 leading-relaxed line-clamp-2';
                 desc.textContent = proj.desc[lang] || proj.desc.id;
 
-                const link = document.createElement('a');
-                link.href = proj.url;
-                if (proj.url.includes('underconstruct.html')) {
-                    link.target = '_self';
+                const linksContainer = document.createElement('div');
+                linksContainer.className = 'flex flex-wrap gap-3 mt-2 md:mt-3';
+
+                if (proj.links) {
+                    proj.links.forEach(l => {
+                        const link = document.createElement('a');
+                        link.href = l.url;
+                        link.target = '_blank';
+                        link.className = 'inline-flex items-center gap-1.5 text-[10px] md:text-[11px] font-mono text-mars-teal hover:text-white transition-colors duration-300 w-fit';
+                        link.innerHTML = `<i class="${l.icon}"></i> ${l.label[lang] || l.label.id}`;
+                        linksContainer.appendChild(link);
+                    });
                 } else {
-                    link.target = '_blank';
+                    const link = document.createElement('a');
+                    link.href = proj.url;
+                    if (proj.url.includes('underconstruct.html')) {
+                        link.target = '_self';
+                    } else {
+                        link.target = '_blank';
+                    }
+                    link.className = 'inline-flex items-center gap-1 text-[10px] md:text-[11px] font-mono text-mars-teal hover:text-white transition-colors duration-300 w-fit';
+                    link.innerHTML = `${translations[lang]?.proj_view || 'View'} <i class="fas fa-arrow-right text-[8px] transform group-hover:translate-x-1 transition-transform"></i>`;
+                    linksContainer.appendChild(link);
                 }
-                link.className = 'inline-flex items-center gap-1 text-[10px] md:text-[11px] font-mono text-mars-teal hover:text-white mt-2 md:mt-3 transition-colors duration-300 w-fit';
-                link.innerHTML = `${translations[lang]?.proj_view || 'View'} <i class="fas fa-arrow-right text-[8px] transform group-hover:translate-x-1 transition-transform"></i>`;
 
                 info.appendChild(title);
                 info.appendChild(desc);
-                info.appendChild(link);
+                info.appendChild(linksContainer);
                 card.appendChild(info);
                 grid.appendChild(card);
             });
