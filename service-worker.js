@@ -1,4 +1,4 @@
-const CACHE_NAME = 'portfolio-cache-v11';
+const CACHE_NAME = 'portfolio-cache-v10';
 const ASSETS = [
   '/portofolio/',
   '/portofolio/index.html',
@@ -6,7 +6,7 @@ const ASSETS = [
   '/portofolio/img/icon.png',
   '/portofolio/img/ico.png',
   '/portofolio/img/Mars.jpg',
-  '/portofolio/img/flowra.jpg'
+  '/portofolio/img/flowra.png'
 ];
 
 // Install Event
