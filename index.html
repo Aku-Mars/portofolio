@@ -1234,6 +1234,20 @@
 
     const projects = [
         {
+            title: "Acaris",
+            image: "img/acaris.jpg",
+            links: [
+                { url: "https://github.com/Acaris-App", label: { id: "Lihat GitHub", en: "View GitHub" }, icon: "fab fa-github" },
+                { url: "../apk/Acaris_S.apk", label: { id: "Unduh APK", en: "Download APK" }, icon: "fas fa-download" }
+            ],
+            type: "Live App",
+            featured: true,
+            desc: {
+                id: "Sistem Terpadu Bimbingan & Manajemen Dokumen Mahasiswa (AI Chatbot, N8N, Mikroservis).",
+                en: "Integrated Student Guidance & Document Management System (AI Chatbot, N8N, Microservices)."
+            }
+        },
+        {
             title: "Flowra Studio",
             image: "img/flowra.png",
             url: "https://marsy.my.id/flowra/",
@@ -1421,14 +1435,30 @@
             desc.className = 'text-gray-300 text-sm mb-4';
             desc.textContent = project.desc[lang] || project.desc.id;
 
-            const link = document.createElement('a');
-            link.href = project.url;
-            link.target = '_blank';
-            link.rel = 'noopener noreferrer';
-            link.className = 'btn-primary inline-block px-4 py-2 rounded-lg text-sm font-syne w-fit';
-            link.textContent = translations[lang]?.proj_view || 'Lihat Proyek';
+            const linksContainer = document.createElement('div');
+            linksContainer.className = 'flex flex-wrap gap-2 mt-auto';
 
-            body.append(number, title, desc, link);
+            if (project.links) {
+                project.links.forEach(l => {
+                    const link = document.createElement('a');
+                    link.href = l.url;
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                    link.className = 'btn-primary inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded text-xs font-syne w-fit';
+                    link.innerHTML = <i class=""></i> \;
+                    linksContainer.appendChild(link);
+                });
+            } else {
+                const link = document.createElement('a');
+                link.href = project.url;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.className = 'btn-primary inline-block px-4 py-2 rounded-lg text-sm font-syne w-fit';
+                link.textContent = translations[lang]?.proj_view || 'Lihat Proyek';
+                linksContainer.appendChild(link);
+            }
+
+            body.append(number, title, desc, linksContainer);
             card.appendChild(body);
 
             // Add static category badge
