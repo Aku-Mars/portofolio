@@ -1235,7 +1235,8 @@
     const projects = [
         {
             title: "Acaris",
-            image: "img/acaris.jpg",
+            image: "img/acaris.png",
+            modalImage: "img/acaris.jpg",
             links: [
                 { url: "https://github.com/Acaris-App", label: { id: "Lihat GitHub", en: "View GitHub" }, icon: "fab fa-github" },
                 { url: "../apk/Acaris_S.apk", label: { id: "Unduh APK", en: "Download APK" }, icon: "fas fa-download" }
@@ -1348,16 +1349,6 @@
             desc: {
                 id: "Aplikasi capstone Bangkit untuk membuat kuis otomatis dari materi pengguna.",
                 en: "A Bangkit capstone app that automatically generates quizzes from user material."
-            }
-        },
-        {
-            title: "Acaris App Backend",
-            image: "img/acaris.png",
-            url: "https://github.com/Acaris-App/Backend",
-            type: "Source Code",
-            desc: {
-                id: "Project Skripsi: REST API Backend lengkap dengan autentikasi dan database untuk aplikasi Acaris.",
-                en: "Thesis Project: Comprehensive REST API Backend with authentication and database for the Acaris app."
             }
         },
         {
@@ -1496,7 +1487,7 @@
             featuredProjects.forEach(proj => {
                 const card = document.createElement('div');
                 card.className = 'group relative flex flex-col justify-end p-4 md:p-5 min-h-[140px] sm:min-h-[180px] md:min-h-[220px] rounded-xl overflow-hidden border border-mars-border/60 bg-cover bg-center transition-all duration-500 hover:border-mars-teal/40 hover:-translate-y-1 shadow-lg';
-                card.style.backgroundImage = `url('${proj.image}')`;
+                card.style.backgroundImage = `url('${proj.modalImage || proj.image}')`;
 
                 // Dark overlay gradient
                 const overlay = document.createElement('div');
