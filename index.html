@@ -803,7 +803,7 @@
 <footer class="border-t border-mars-border py-8 bg-mars-card/50">
     <div class="container mx-auto px-6 text-center">
         <p class="font-syne text-white font-bold text-lg mb-1">MARS</p>
-        <p class="text-mars-muted text-xs font-mono mb-4">&copy; 2025 Muhamad Arifin Syam. All rights reserved.</p>
+        <p class="text-mars-muted text-xs font-mono mb-4">&copy; <span id="copyright-year">2026</span> Muhamad Arifin Syam. All rights reserved.</p>
         <div class="counter-badge inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono text-mars-teal">
             <i class="fas fa-eye text-mars-teal"></i>
             <span data-translate-key="footer_visitors">Jumlah Pengunjung:</span>
@@ -1612,6 +1612,8 @@
     };
 
     // Init language from local storage or visitor browser.
+    const yearEl = document.getElementById('copyright-year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear().toString();
     const savedLang = localStorage.getItem('mars_lang') || getBrowserLanguage();
     setLanguage(savedLang);
 
