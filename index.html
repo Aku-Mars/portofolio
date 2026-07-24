@@ -1332,7 +1332,7 @@
             }
         },
         {
-            title: "Dashboard Monitoring Host",
+            title: { id: "Dashboard Monitoring Host", en: "Host Monitoring Dashboard" },
             image: "img/monitoring.png",
             url: "https://marsy.my.id/monitoring",
             type: "Live App",
@@ -1352,7 +1352,7 @@
             }
         },
         {
-            title: "Sistem Manajemen Kriminal",
+            title: { id: "Sistem Manajemen Kriminal", en: "Crime Management System" },
             image: "img/crime_management.jpg",
             url: "https://github.com/Aku-Mars/middle-project/tree/main/crime_management",
             type: "Source Code",
@@ -1372,7 +1372,7 @@
             }
         },
         {
-            title: "Deteksi Tepi & Pencocokan Template",
+            title: { id: "Deteksi Tepi & Pencocokan Template", en: "Edge Detection & Template Matching" },
             image: "img/edge_detection.jpg",
             url: "https://github.com/Aku-Mars/middle-project/tree/main/edge_detection",
             type: "Source Code",
@@ -1409,7 +1409,7 @@
 
             const title = document.createElement('h3');
             title.className = 'font-syne text-2xl font-bold text-white mb-2';
-            title.textContent = project.title;
+            title.textContent = typeof project.title === 'object' ? (project.title[lang] || project.title.id) : project.title;
 
             const desc = document.createElement('p');
             desc.className = 'text-gray-300 text-sm mb-4';
@@ -1511,7 +1511,7 @@
 
                 const title = document.createElement('h4');
                 title.className = 'font-syne font-bold text-sm md:text-base text-white group-hover:text-mars-teal transition-colors duration-300';
-                title.textContent = proj.title;
+                title.textContent = typeof proj.title === 'object' ? (proj.title[lang] || proj.title.id) : proj.title;
 
                 const desc = document.createElement('p');
                 desc.className = 'text-[11px] md:text-xs text-mars-muted mt-0.5 md:mt-1 leading-relaxed line-clamp-2';
