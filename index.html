@@ -859,6 +859,40 @@
         return encodeURIComponent(raw).replace(/\./g, '_');
     }
 
+    function getTrafficSource() {
+        const params = new URLSearchParams(window.location.search);
+        const referrer = document.referrer;
+        let referrerHost = '';
+
+        try {
+            referrerHost = referrer ? new URL(referrer).hostname.replace(/^www\./, '') : '';
+        } catch (_) { /* Invalid referrer is treated as direct traffic. */ }
+
+        const campaignSource = params.get('utm_source')?.trim() || '';
+        const sourceValue = campaignSource || referrerHost;
+        const sourceMap = [
+            [/linkedin/i, 'LinkedIn'],
+            [/instagram|l\.instagram/i, 'Instagram'],
+            [/facebook|fb\.com|l\.facebook/i, 'Facebook'],
+            [/t\.co|twitter|x\.com/i, 'X / Twitter'],
+            [/github/i, 'GitHub'],
+            [/google/i, 'Google'],
+            [/bing/i, 'Bing'],
+            [/youtube|youtu\.be/i, 'YouTube'],
+            [/tiktok/i, 'TikTok']
+        ];
+        const matchedSource = sourceMap.find(([pattern]) => pattern.test(sourceValue));
+
+        return {
+            source: matchedSource?.[1] || campaignSource || referrerHost || 'Direct',
+            referrer: referrer || '',
+            landingPage: `${window.location.pathname}${window.location.search}`,
+            utmSource: campaignSource,
+            utmMedium: params.get('utm_medium')?.trim() || '',
+            utmCampaign: params.get('utm_campaign')?.trim() || ''
+        };
+    }
+
     async function getVisitorNetwork() {
         let ip = '';
         let kota = '';
@@ -903,6 +937,11 @@
             const now = Date.now();
             const network = await getVisitorNetwork();
 
+            // Endpoint server menerapkan rate limit sendiri agar notifikasi tidak bergantung pada Firestore.
+            sendDiscordNotification(navigator.userAgent, network, getTrafficSource()).catch((error) => {
+                console.warn('Visitor notification error:', error.message);
+            });
+
             // Ambil count dan update
             const counterRef = doc(db, 'analytics', 'visitor_counter');
             const rateRef = doc(db, 'analytics_visit_rate', makeRateDocId(network.ip));
@@ -935,15 +974,6 @@
                 }
             });
 
-            if (shouldCount) {
-                // Ambil total count terbaru lalu kirim notifikasi Discord
-                try {
-                    sendDiscordNotification(navigator.userAgent, totalViews, network).catch((error) => {
-                        console.warn('Discord webhook error:', error.message);
-                    });
-                } catch(e) { /* silent */ }
-            }
-
             // Ambil total count untuk ditampilkan di footer
             const snap = await getDoc(counterRef);
             if (snap.exists()) {
@@ -956,9 +986,7 @@
         }
     }
 
-    async function sendDiscordNotification(ua, totalViews, network = null) {
-        const WEBHOOK = '[YOUR_DISCORD_WEBHOOK]';
-
+    async function sendDiscordNotification(ua, network = null, traffic = null) {
         // ── Deteksi Device ───────────────────────────────────────
         let device = 'PC/Desktop';
         if (/(tablet|ipad|playbook)|(android(?!.*(mobi|opera mini)))/i.test(ua)) device = 'Tablet';
@@ -967,6 +995,11 @@
         // ── Deteksi OS (mirip PHP) ────────────────────────────────
         let os = 'Unknown OS';
         const osMap = [
+            [/iphone/i,             'iPhone'],
+            [/ipod/i,               'iPod'],
+            [/ipad/i,               'iPad'],
+            [/android/i,            'Android'],
+            [/ubuntu/i,             'Ubuntu'],
             [/windows nt 10/i,      'Windows 10'],
             [/windows nt 6\.3/i,    'Windows 8.1'],
             [/windows nt 6\.2/i,    'Windows 8'],
@@ -975,11 +1008,6 @@
             [/windows nt 5\.1/i,    'Windows XP'],
             [/macintosh|mac os x/i, 'Mac OS X'],
             [/linux/i,              'Linux'],
-            [/ubuntu/i,             'Ubuntu'],
-            [/iphone/i,             'iPhone'],
-            [/ipod/i,               'iPod'],
-            [/ipad/i,               'iPad'],
-            [/android/i,            'Android'],
             [/blackberry/i,         'BlackBerry'],
             [/webos/i,              'Mobile'],
         ];
@@ -990,6 +1018,8 @@
         // Edge harus dicek sebelum Chrome karena UA Edge mengandung "Chrome"
         if (/edg\//i.test(ua))          browser = 'Edge';
         else if (/opr\//i.test(ua))     browser = 'Opera';
+        else if (/crios/i.test(ua))      browser = 'Chrome';
+        else if (/fxios/i.test(ua))      browser = 'Firefox';
         else if (/firefox/i.test(ua))   browser = 'Firefox';
         else if (/chrome/i.test(ua))    browser = 'Chrome';
         else if (/safari/i.test(ua))    browser = 'Safari';
@@ -1019,55 +1049,23 @@
         let wilayah = network?.wilayah || '';
         let negara = network?.negara || '';
         let isp = network?.isp || '';
-        let visitsToday = 1;
-
-        // Hitung kunjungan hari ini dari sessionStorage (approximasi)
-        const todayKey = 'mars_visits_' + new Date().toDateString();
-        visitsToday = parseInt(sessionStorage.getItem(todayKey) || '0') + 1;
-        sessionStorage.setItem(todayKey, visitsToday.toString());
-
-        // ── Build Discord Embed ───────────────────────────────────
-        const valueOrUnknown = (value) => value || 'Unknown';
-        const fields = [
-            { name: "🗓️ Waktu Akses", value: timeStr, inline: false },
-            {
-                name: "📍 Lokasi",
-                value: `**Kota:** ${valueOrUnknown(kota)}\n**Wilayah:** ${valueOrUnknown(wilayah)}\n**Negara:** ${valueOrUnknown(negara)}`,
-                inline: true
-            },
-            {
-                name: "🌐 Jaringan",
-                value: `**Alamat IP:** ${valueOrUnknown(ip)}\n**ISP:** ${valueOrUnknown(isp)}`,
-                inline: true
-            },
-            { name: "💻 Info Perangkat", value: `**Tipe:** ${device}\n**OS:** ${os}\n**Browser:** ${browser}`, inline: true },
-            { name: "📈 Statistik", value: `**Kunjungan IP Hari Ini:** ${visitsToday}`, inline: true },
-            { name: "🕵️ User Agent", value: `\`\`\`${ua.substring(0, 900)}\`\`\``, inline: false }
-        ];
-
         const payload = {
-            embeds: [{
-                title: "🚀 Pengunjung Baru di Portofolio!",
-                description: "Seseorang baru saja mengunjungi halaman portofolio Anda.",
-                color: 0x2dd4bf,   // hijau — sama seperti PHP asli
-                fields,
-                footer: { text: `Total Pengunjung: ${totalViews}` },
-                timestamp: new Date().toISOString()
-            }]
+            accessedAt: timeStr,
+            location: { city: kota, region: wilayah, country: negara },
+            network: { ip, isp },
+            device: { type: device, os, browser, userAgent: ua },
+            traffic
         };
 
-        // ── Kirim ke Discord ──────────────────────────────────────
-        const body = JSON.stringify(payload);
-        const blob = new Blob([body], { type: 'application/json' });
-        if (navigator.sendBeacon?.(WEBHOOK, blob)) return;
-
-        const response = await fetch(WEBHOOK, {
+        const response = await fetch('api/visitor-notification.php', {
             method:  'POST',
             headers: { 'Content-Type': 'application/json' },
-            body,
+            body: JSON.stringify(payload),
             keepalive: true
         });
-        if (!response.ok) throw new Error(`Discord webhook failed: ${response.status}`);
+        if (!response.ok && response.status !== 429) {
+            throw new Error(`Notification endpoint failed: ${response.status}`);
+        }
     }
 
     // Jalankan tracking setelah DOM siap
