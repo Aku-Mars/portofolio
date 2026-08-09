@@ -67,3 +67,14 @@ curl --silent --output /dev/null --write-out '%{http_code}\n' --connect-timeout 
 ```
 
 Endpoint notifikasi harus mengembalikan `405` untuk request GET; ini menandakan endpoint tersedia dan hanya menerima POST.
+
+## SEO dan Indexing Google
+
+`https://marsy.my.id/` adalah canonical URL profil. Metadata halaman mencakup deskripsi, izin indexing, Open Graph, Twitter Card, dan JSON-LD `ProfilePage`/`Person` yang menghubungkan identitas Muhamad Arifin Syam dengan LinkedIn, GitHub, dan Instagram. Variasi nama seperti `M Arifin Syam` dicantumkan melalui `alternateName`.
+
+File crawler berada di root repository `Aku-Mars/page`:
+
+- `/robots.txt`
+- `/sitemap.xml`
+
+Setelah deployment, submit `https://marsy.my.id/sitemap.xml` melalui menu **Sitemaps** di Google Search Console. Lalu gunakan **URL Inspection** untuk `https://marsy.my.id/`, jalankan **Test Live URL**, dan pilih **Request Indexing**. Indexing dan perubahan peringkat tidak instan serta dapat memerlukan beberapa hari hingga beberapa minggu.
