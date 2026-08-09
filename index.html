@@ -9,8 +9,8 @@
     <meta property="og:description" content="Web Portofolio - Muhamad Arifin Syam">
     <meta property="og:url" content="https://marsy.my.id/portofolio">
     <meta property="og:type" content="website">
-    <link rel="icon" href="img/ico.png" type="image/x-icon">
-    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="/portofolio/img/ico.png" type="image/x-icon">
+    <link rel="manifest" href="/portofolio/manifest.json">
     <meta name="theme-color" content="#2dd4bf">
     <meta property="og:image" content="https://raw.githubusercontent.com/Aku-Mars/gambar/main/bannercps.png">
     <title>Portofolio - Muhamad Arifin Syam</title>
@@ -390,7 +390,7 @@
             <!-- Profile image -->
             <div class="animate-fade-in-up delay-100 flex justify-center mb-8" style="opacity:0;">
                 <div>
-                    <img src="img/Mars.jpg" alt="Foto Profil Muhamad Arifin Syam"
+                    <img src="/portofolio/img/Mars.jpg" alt="Foto Profil Muhamad Arifin Syam"
                         class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-mars-border">
                 </div>
             </div>
@@ -731,25 +731,25 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto">
                 <div class="cert-card rounded-xl overflow-hidden bg-mars-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="overflow-hidden">
-                        <img src="img/ser.png" alt="Sertifikat Belajar Back-End Pemula" class="w-full h-auto hover:scale-105 transition-transform duration-500">
+                        <img src="/portofolio/img/ser.png" alt="Sertifikat Belajar Back-End Pemula" class="w-full h-auto hover:scale-105 transition-transform duration-500">
                     </div>
                     <p class="text-center py-3 text-sm text-gray-300 font-mono" data-translate-key="cert1_title">Belajar Back-End Pemula dengan JavaScript</p>
                 </div>
                 <div class="cert-card rounded-xl overflow-hidden bg-mars-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="overflow-hidden">
-                        <img src="img/cloud.png" alt="Sertifikat Google Cloud Engineer" class="w-full h-auto hover:scale-105 transition-transform duration-500">
+                        <img src="/portofolio/img/cloud.png" alt="Sertifikat Google Cloud Engineer" class="w-full h-auto hover:scale-105 transition-transform duration-500">
                     </div>
                     <p class="text-center py-3 text-sm text-gray-300 font-mono" data-translate-key="cert2_title">Menjadi Google Cloud Engineer</p>
                 </div>
                 <div class="cert-card rounded-xl overflow-hidden bg-mars-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="overflow-hidden">
-                        <img src="img/ai.png" alt="Sertifikat Generative AI" class="w-full h-auto hover:scale-105 transition-transform duration-500">
+                        <img src="/portofolio/img/ai.png" alt="Sertifikat Generative AI" class="w-full h-auto hover:scale-105 transition-transform duration-500">
                     </div>
                     <p class="text-center py-3 text-sm text-gray-300 font-mono" data-translate-key="cert3_title">Belajar Penggunaan Generative AI</p>
                 </div>
                 <div class="cert-card rounded-xl overflow-hidden bg-mars-card" data-aos="fade-up" data-aos-delay="400">
                     <div class="overflow-hidden">
-                        <img src="img/ccna.png" alt="Sertifikat CCNA" class="w-full h-auto hover:scale-105 transition-transform duration-500">
+                        <img src="/portofolio/img/ccna.png" alt="Sertifikat CCNA" class="w-full h-auto hover:scale-105 transition-transform duration-500">
                     </div>
                     <p class="text-center py-3 text-sm text-gray-300 font-mono" data-translate-key="cert4_title">CCNA: Enterprise Networking, Security, and Automation</p>
                 </div>
@@ -793,7 +793,7 @@
                 <p class="section-tag mb-4">06 / Contact</p>
                 <h2 class="font-syne text-2xl md:text-4xl font-extrabold text-white mb-3" data-translate-key="cv_title">Tertarik untuk Bekerja Sama?</h2>
                 <p class="text-gray-400 text-sm mb-8" data-translate-key="cv_desc">Lihat riwayat hidup saya untuk informasi lebih lanjut.</p>
-                <a id="cv-download-btn" href="CV_en.pdf" class="btn-primary inline-block px-8 py-3 rounded-lg font-syne font-bold text-base" data-translate-key="cv_download">Unduh CV Saya</a>
+                <a id="cv-download-btn" href="/portofolio/CV_en.pdf" class="btn-primary inline-block px-8 py-3 rounded-lg font-syne font-bold text-base" data-translate-key="cv_download">Unduh CV Saya</a>
             </div>
         </div>
     </section>
@@ -1057,7 +1057,7 @@
             traffic
         };
 
-        const response = await fetch('api/visitor-notification.php', {
+        const response = await fetch('/portofolio/api/visitor-notification.php', {
             method:  'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload),
@@ -1233,8 +1233,8 @@
     const projects = [
         {
             title: "Acaris",
-            image: "img/acaris.png",
-            modalImage: "img/acaris.jpg",
+            image: "/portofolio/img/acaris.png",
+            modalImage: "/portofolio/img/acaris.jpg",
             links: [
                 { url: "https://github.com/Acaris-App", label: { id: "Lihat GitHub", en: "View GitHub" }, icon: "fab fa-github" },
                 { url: "../apk/Acaris_S.apk", label: { id: "Unduh APK", en: "Download APK" }, icon: "fas fa-download" }
@@ -1248,7 +1248,7 @@
         },
         {
             title: "Flowra Studio",
-            image: "img/flowra.png",
+            image: "/portofolio/img/flowra.png",
             url: "https://marsy.my.id/flowra/",
             type: "Live App",
             featured: true,
@@ -1259,7 +1259,7 @@
         },
         {
             title: "NugasIn",
-            image: "img/nugasin.png",
+            image: "/portofolio/img/nugasin.png",
             url: "https://nugasin.marsy.my.id",
             type: "Live App",
             featured: true,
@@ -1270,7 +1270,7 @@
         },
         {
             title: "ChatGPT Render Lite",
-            image: "img/render.png",
+            image: "/portofolio/img/render.png",
             url: "https://github.com/Aku-Mars/chatgpt-render-lite",
             type: "Source Code",
             desc: {
@@ -1280,7 +1280,7 @@
         },
         {
             title: "Planner",
-            image: "img/plan.png",
+            image: "/portofolio/img/plan.png",
             url: "https://marsy.my.id/plan/",
             type: "Live App",
             featured: true,
@@ -1291,7 +1291,7 @@
         },
         {
             title: "Jawari",
-            image: "img/Jawari.png",
+            image: "/portofolio/img/Jawari.png",
             url: "https://jawari.serangkab.go.id/",
             type: "Live App",
             desc: {
@@ -1301,7 +1301,7 @@
         },
         {
             title: "Mars Store",
-            image: "img/shop.png",
+            image: "/portofolio/img/shop.png",
             url: "https://marsy.my.id/shop",
             type: "Live App",
             desc: {
@@ -1311,7 +1311,7 @@
         },
         {
             title: "Epic Dragon",
-            image: "img/epic-dragon.png",
+            image: "/portofolio/img/epic-dragon.png",
             url: "https://marsy.my.id/game/",
             type: "Live App",
             desc: {
@@ -1321,7 +1321,7 @@
         },
         {
             title: "Shortlink",
-            image: "img/name.png",
+            image: "/portofolio/img/name.png",
             url: "https://marsy.my.id/shortlink",
             type: "Live App",
             desc: {
@@ -1331,7 +1331,7 @@
         },
         {
             title: { id: "Dashboard Monitoring Host", en: "Host Monitoring Dashboard" },
-            image: "img/monitoring.png",
+            image: "/portofolio/img/monitoring.png",
             url: "https://marsy.my.id/monitoring",
             type: "Live App",
             desc: {
@@ -1351,7 +1351,7 @@
         },
         {
             title: { id: "Sistem Manajemen Kriminal", en: "Crime Management System" },
-            image: "img/crime_management.jpg",
+            image: "/portofolio/img/crime_management.jpg",
             url: "https://github.com/Aku-Mars/middle-project/tree/main/crime_management",
             type: "Source Code",
             desc: {
@@ -1361,7 +1361,7 @@
         },
         {
             title: "To-Do List",
-            image: "img/to-do-List.png",
+            image: "/portofolio/img/to-do-List.png",
             url: "https://marsy.my.id/list/",
             type: "Live App",
             desc: {
@@ -1371,7 +1371,7 @@
         },
         {
             title: { id: "Deteksi Tepi & Pencocokan Template", en: "Edge Detection & Template Matching" },
-            image: "img/edge_detection.jpg",
+            image: "/portofolio/img/edge_detection.jpg",
             url: "https://github.com/Aku-Mars/middle-project/tree/main/edge_detection",
             type: "Source Code",
             desc: {
@@ -1596,7 +1596,7 @@
         });
         const cvBtn = document.getElementById('cv-download-btn');
         if (cvBtn) {
-            cvBtn.href = lang === 'id' ? 'CV_id.pdf' : 'CV_en.pdf';
+            cvBtn.href = lang === 'id' ? '/portofolio/CV_id.pdf' : '/portofolio/CV_en.pdf';
         }
         renderProjects(lang);
         initFeaturedModal(lang);
@@ -1680,7 +1680,7 @@
     // ── Register Service Worker (PWA) ────────────────────────
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('service-worker.js').catch(err => {
+            navigator.serviceWorker.register('/portofolio/service-worker.js').catch(err => {
                 console.log('Service Worker registration failed:', err);
             });
         });
