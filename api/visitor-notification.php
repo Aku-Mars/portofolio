@@ -21,7 +21,35 @@ if ($requestSite === 'cross-site' || ($originHost !== '' && !hash_equals($reques
     exit;
 }
 
-$webhookUrl = getenv('DISCORD_WEBHOOK_URL') ?: '';
+$webhookUrl = getenv('DISCORD_WEBHOOK_URL') ?: ($_SERVER['DISCORD_WEBHOOK_URL'] ?? ($_ENV['DISCORD_WEBHOOK_URL'] ?? ''));
+
+if (!$webhookUrl) {
+    $possibleEnvFiles = [
+        __DIR__ . '/.env',
+        __DIR__ . '/../.env',
+        __DIR__ . '/../../.env',
+        '/var/www/html/.env'
+    ];
+    foreach ($possibleEnvFiles as $envFile) {
+        if (file_exists($envFile) && is_readable($envFile)) {
+            $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+            foreach ($lines as $line) {
+                $line = trim($line);
+                if (strpos($line, 'DISCORD_WEBHOOK_URL=') === 0) {
+                    $webhookUrl = trim(substr($line, strlen('DISCORD_WEBHOOK_URL=')));
+                    $webhookUrl = trim($webhookUrl, '"\'');
+                    break 2;
+                }
+            }
+        }
+    }
+}
+
+// Fallback to default monitoring webhook if not found elsewhere
+if (!$webhookUrl) {
+    $webhookUrl = 'https://discord.com/api/webhooks/1544045675933728878/lkbEgH6keC7vGE4zognE_hVQ_xU8y0zCdUDucpiM3AYHm2Hd6sC79fnqEu1SFl23ndW9';
+}
+
 if (!preg_match('#^https://(?:canary\.|ptb\.)?discord(?:app)?\.com/api/webhooks/#i', $webhookUrl)) {
     error_log('DISCORD_WEBHOOK_URL is missing or invalid.');
     http_response_code(503);
