@@ -28,7 +28,8 @@ if (!$webhookUrl) {
         __DIR__ . '/.env',
         __DIR__ . '/../.env',
         __DIR__ . '/../../.env',
-        '/var/www/html/.env'
+        '/var/www/html/.env',
+        '/etc/mars/production.env'
     ];
     foreach ($possibleEnvFiles as $envFile) {
         if (file_exists($envFile) && is_readable($envFile)) {
@@ -87,8 +88,9 @@ function display_value($value): string
 
 function client_ip(): string
 {
-    // REMOTE_ADDR tidak mempercayai header spoofable dari klien.
-    return text_value($_SERVER['REMOTE_ADDR'] ?? '', 64);
+    // Prioritaskan header Cloudflare CF-Connecting-IP jika tersedia, fallback ke REMOTE_ADDR
+    $ip = $_SERVER['HTTP_CF_CONNECTING_IP'] ?? ($_SERVER['REMOTE_ADDR'] ?? '');
+    return text_value($ip, 64);
 }
 
 $clientIp = client_ip();
