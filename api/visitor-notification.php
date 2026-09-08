@@ -45,10 +45,6 @@ if (!$webhookUrl) {
     }
 }
 
-// Fallback to default monitoring webhook if not found elsewhere
-if (!$webhookUrl) {
-    $webhookUrl = 'https://discord.com/api/webhooks/1544045675933728878/lkbEgH6keC7vGE4zognE_hVQ_xU8y0zCdUDucpiM3AYHm2Hd6sC79fnqEu1SFl23ndW9';
-}
 
 if (!preg_match('#^https://(?:canary\.|ptb\.)?discord(?:app)?\.com/api/webhooks/#i', $webhookUrl)) {
     error_log('DISCORD_WEBHOOK_URL is missing or invalid.');
@@ -165,8 +161,9 @@ curl_setopt_array($curl, [
     CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
     CURLOPT_POSTFIELDS => $discordPayload,
     CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_CONNECTTIMEOUT => 3,
-    CURLOPT_TIMEOUT => 5,
+    CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
+    CURLOPT_CONNECTTIMEOUT => 5,
+    CURLOPT_TIMEOUT => 10,
 ]);
 curl_exec($curl);
 $curlError = curl_error($curl);
