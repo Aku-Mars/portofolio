@@ -127,6 +127,22 @@ $campaign = array_filter([
     $utmCampaign !== '' ? "Campaign: {$utmCampaign}" : '',
 ]);
 
+$city = text_value($location['city'] ?? '', 64);
+$country = text_value($location['country'] ?? '', 64);
+$isp = text_value($network['isp'] ?? '', 64);
+
+if ($city !== '' && $country !== '' && $city !== 'Unknown') {
+    $latestVisitorFile = __DIR__ . '/../../data/sentinel/latest_visitor.json';
+    @file_put_contents($latestVisitorFile, json_encode([
+        'city' => $city,
+        'country' => $country,
+        'isp' => $isp,
+        'conn_badge' => 'Residential (Wi-Fi / Broadband • Orang Asli)',
+        'service' => 'Portofolio Mars',
+        'timestamp' => time()
+    ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+}
+
 $fields = [
     ['name' => 'Sumber Kunjungan', 'value' => "**Dari:** {$source}\n**Referrer:** " . ($referrer ?: 'Direct / tidak tersedia'), 'inline' => false],
     ['name' => 'Halaman Masuk', 'value' => $landingPage ?: '/', 'inline' => false],

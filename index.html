@@ -1660,14 +1660,15 @@
         const pill = document.getElementById('floating-visitor-pill');
         const msg = document.getElementById('floating-visitor-msg');
         if (pill && msg && v.city && v.country) {
+            const timeAgoStr = lang === 'id' ? (v.timeAgo_id || v.timeAgo) : (v.timeAgo_en || v.timeAgo);
             if (lang === 'id') {
-                msg.innerHTML = `Seseorang dari <strong class="text-white">${v.city}, ${v.country}</strong> baru saja melihat portofolio <span class="text-mars-teal">&bull; ${v.timeAgo}</span>`;
+                msg.innerHTML = `Seseorang dari <strong class="text-white">${v.city}, ${v.country}</strong> baru saja melihat portofolio <span class="text-mars-teal">&bull; ${timeAgoStr}</span>`;
             } else {
-                msg.innerHTML = `Someone from <strong class="text-white">${v.city}, ${v.country}</strong> just viewed the portfolio <span class="text-mars-teal">&bull; ${v.timeAgo}</span>`;
+                msg.innerHTML = `Someone from <strong class="text-white">${v.city}, ${v.country}</strong> just viewed the portfolio <span class="text-mars-teal">&bull; ${timeAgoStr}</span>`;
             }
             setTimeout(() => {
                 pill.classList.remove('translate-y-16', 'opacity-0', 'pointer-events-none');
-            }, 1200);
+            }, 800);
         }
     }
 
