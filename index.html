@@ -829,7 +829,7 @@
                 <p class="section-tag mb-4">06 / Contact</p>
                 <h2 class="font-syne text-2xl md:text-4xl font-extrabold text-white mb-3" data-translate-key="cv_title">Tertarik untuk Bekerja Sama?</h2>
                 <p class="text-gray-400 text-sm mb-8" data-translate-key="cv_desc">Lihat riwayat hidup saya untuk informasi lebih lanjut.</p>
-                <a id="cv-download-btn" href="/portofolio/CV_en.pdf" class="btn-primary inline-block px-8 py-3 rounded-lg font-syne font-bold text-base" data-translate-key="cv_download">Unduh CV Saya</a>
+                <a id="cv-download-btn" href="/portofolio/CV_en.pdf?v=20261025" class="btn-primary inline-block px-8 py-3 rounded-lg font-syne font-bold text-base" data-translate-key="cv_download">Unduh CV Saya</a>
             </div>
         </div>
     </section>
@@ -840,16 +840,11 @@
     <div class="container mx-auto px-6 text-center">
         <p class="font-syne text-white font-bold text-lg mb-1">MARS</p>
         <p class="text-mars-muted text-xs font-mono mb-4">&copy; <span id="copyright-year">2026</span> Muhamad Arifin Syam. All rights reserved.</p>
-        <div class="flex flex-wrap items-center justify-center gap-3">
+        <div class="flex justify-center">
             <div class="counter-badge inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono text-mars-teal border border-mars-teal/20 bg-mars-teal/5">
                 <i class="fas fa-eye text-mars-teal"></i>
                 <span data-translate-key="footer_visitors">Jumlah Pengunjung:</span>
                 <span id="view-count" class="font-bold">&mdash;</span>
-            </div>
-            <div id="latest-visitor-badge" class="counter-badge hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono text-gray-300 border border-white/10 bg-white/5 transition-opacity duration-300 opacity-0">
-                <i class="fas fa-location-dot text-mars-teal"></i>
-                <span data-translate-key="footer_last_visitor">Pengunjung Terakhir:</span>
-                <span id="latest-visitor-text" class="text-white font-medium">&mdash;</span>
             </div>
         </div>
     </div>
@@ -1701,7 +1696,7 @@
         });
         const cvBtn = document.getElementById('cv-download-btn');
         if (cvBtn) {
-            cvBtn.href = lang === 'id' ? '/portofolio/CV_id.pdf' : '/portofolio/CV_en.pdf';
+            cvBtn.href = lang === 'id' ? '/portofolio/CV_id.pdf?v=20261025' : '/portofolio/CV_en.pdf?v=20261025';
         }
         renderProjects(lang);
         renderLatestVisitorUI();

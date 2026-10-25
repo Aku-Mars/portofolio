@@ -12,11 +12,11 @@
         }
         body {
             font-family: Arial, Helvetica, sans-serif;
-            color: #000000;
+            color: #111111;
             background-color: #ffffff;
-            line-height: 1.4;
-            font-size: 9.5pt;
-            padding: 10px;
+            line-height: 1.3;
+            font-size: 8.8pt;
+            padding: 16px;
         }
         .container {
             max-width: 800px;
@@ -26,56 +26,63 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+            border-bottom: 1.5px solid #111111;
         }
         .header-left h1 {
-            font-size: 26pt;
+            font-size: 20pt;
             font-weight: bold;
             color: #000000;
             text-transform: uppercase;
             letter-spacing: -0.01em;
             line-height: 1.1;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
         .header-left h2 {
-            font-size: 10.5pt;
+            font-size: 9.5pt;
             font-weight: bold;
-            color: #000000;
+            color: #222222;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.04em;
         }
         .header-right {
             text-align: right;
-            font-size: 8.5pt;
-            color: #000000;
-            line-height: 1.35;
+            font-size: 8pt;
+            color: #222222;
+            line-height: 1.3;
         }
         .header-right a {
-            color: #000000;
+            color: #111111;
             text-decoration: none;
         }
         .header-right a:hover {
             text-decoration: underline;
         }
         section {
-            margin-bottom: 20px;
+            margin-bottom: 8px;
+        }
+        section:last-child {
+            margin-bottom: 0;
         }
         section h3 {
-            font-size: 11pt;
+            font-size: 9.5pt;
             font-weight: bold;
             color: #000000;
             text-transform: uppercase;
-            border-bottom: 1px solid #000000;
-            padding-bottom: 2px;
-            margin-bottom: 8px;
+            border-bottom: 1px solid #222222;
+            padding-bottom: 1px;
+            margin-bottom: 4px;
+            letter-spacing: 0.03em;
         }
         .summary-text {
-            color: #000000;
+            color: #222222;
             text-align: justify;
-            font-size: 9.5pt;
+            font-size: 8.4pt;
+            line-height: 1.28;
         }
         .item {
-            margin-bottom: 15px;
+            margin-bottom: 6px;
         }
         .item:last-child {
             margin-bottom: 0;
@@ -84,92 +91,167 @@
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
         }
         .item-title-block {
-            font-size: 9.5pt;
+            font-size: 8.8pt;
         }
         .item-title {
             font-weight: bold;
             color: #000000;
         }
         .item-org {
-            color: #000000;
+            color: #333333;
+            font-size: 8.3pt;
+        }
+        .item-role {
+            font-size: 8.2pt;
+            font-style: italic;
+            color: #333333;
+            margin-bottom: 1px;
         }
         .item-date {
-            font-size: 8.5pt;
-            color: #000000;
+            font-size: 8pt;
+            color: #333333;
             font-weight: normal;
         }
         .item-bullets {
             list-style-type: disc;
-            padding-left: 15px;
+            padding-left: 14px;
         }
         .item-bullets li {
-            color: #000000;
-            margin-bottom: 2px;
-            font-size: 9pt;
+            color: #222222;
+            margin-bottom: 1px;
+            font-size: 8.2pt;
+            line-height: 1.24;
         }
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 4px 20px;
+            gap: 2px 18px;
         }
         .skills-category {
-            font-size: 9pt;
-            color: #000000;
+            font-size: 8.2pt;
+            color: #222222;
+            line-height: 1.25;
         }
         .skills-category strong {
             font-weight: bold;
+            color: #000000;
         }
         .certs-list {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 4px 20px;
+            gap: 2px 18px;
         }
         .cert-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 9pt;
-            color: #000000;
+            font-size: 8.2pt;
+            color: #222222;
+            line-height: 1.25;
         }
         .cert-name {
             font-weight: normal;
         }
         .cert-year {
-            color: #000000;
+            color: #444444;
             margin-left: 8px;
             flex-shrink: 0;
+            font-size: 8pt;
         }
 
         @media print {
             @page {
-                size: A4;
-                margin: 0; /* Removes headers and footers */
+                size: A4 portrait;
+                margin: 5mm 10mm 5mm 10mm;
             }
-            body {
-                margin: 7mm 12mm 7mm 12mm; /* Re-applies content margins */
+            html, body {
+                margin: 0;
                 padding: 0;
-                font-size: 9.2pt;
+                background-color: #ffffff;
+                color: #000000;
+                font-size: 8.4pt;
+                line-height: 1.24;
+                height: 100%;
+                overflow: hidden;
+            }
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
             }
             header {
-                margin-bottom: 8px;
-            }
-            section {
-                margin-bottom: 12px;
-            }
-            .item {
-                margin-bottom: 12px;
+                margin-bottom: 6px;
+                padding-bottom: 3px;
+                border-bottom: 1.5px solid #000000;
             }
             .header-left h1 {
-                font-size: 22pt;
+                font-size: 19pt;
+                line-height: 1.05;
+                margin-bottom: 2px;
             }
             .header-left h2 {
-                font-size: 9.5pt;
+                font-size: 9pt;
+            }
+            .header-right {
+                font-size: 7.8pt;
+                line-height: 1.25;
+            }
+            section {
+                margin-bottom: 6px;
+            }
+            section h3 {
+                font-size: 9.2pt;
+                padding-bottom: 1px;
+                margin-bottom: 3px;
+                border-bottom: 1px solid #000000;
+            }
+            .summary-text {
+                font-size: 8.2pt;
+                line-height: 1.24;
+            }
+            .item {
+                margin-bottom: 5px;
+            }
+            .item-title-block {
+                font-size: 8.5pt;
             }
             .item-title {
-                font-size: 9.2pt;
+                font-size: 8.5pt;
+            }
+            .item-org {
+                font-size: 8pt;
+            }
+            .item-role {
+                font-size: 8pt;
+                margin-bottom: 1px;
+            }
+            .item-date {
+                font-size: 7.8pt;
+            }
+            .item-bullets {
+                padding-left: 13px;
+            }
+            .item-bullets li {
+                font-size: 8pt;
+                line-height: 1.22;
+                margin-bottom: 0.5px;
+            }
+            .skills-grid {
+                gap: 1.5px 16px;
+            }
+            .skills-category {
+                font-size: 8pt;
+                line-height: 1.22;
+            }
+            .certs-list {
+                gap: 1.5px 16px;
+            }
+            .cert-item {
+                font-size: 8pt;
+                line-height: 1.22;
             }
         }
     </style>
@@ -179,7 +261,7 @@
         <header>
             <div class="header-left">
                 <h1>M Arifin Syam</h1>
-                <h2>Cloud & Back-End Developer</h2>
+                <h2>Cloud &amp; Back-End Developer</h2>
             </div>
             <div class="header-right">
                 <div><a href="mailto:muhamadarifinsyam@gmail.com">muhamadarifinsyam@gmail.com</a></div>
@@ -192,7 +274,7 @@
         <section id="summary">
             <h3>Summary</h3>
             <p class="summary-text">
-                A Bachelor of Informatics Engineering graduate from Universitas Lampung (GPA 3.74/4.00) with a strong academic foundation and hands-on experience in Cloud Computing and Back-End Development. Proven track record in designing back-end systems, managing multi-cloud deployments (AWS, GCP, Azure), and participating in technology cohorts. Highly skilled in Node.js, Laravel, database design, and cloud architecture, with a passion for building scalable, high-performance web applications.
+                Bachelor of Informatics Engineering graduate from Universitas Lampung (GPA 3.74/4.00) with a strong academic foundation and hands-on experience in Cloud Computing and Back-End Development. Proven track record in designing resilient back-end systems, managing multi-cloud deployments (AWS, GCP, Azure), and leading technology cohorts. Highly proficient in Node.js, Laravel, relational database design, and Linux server hardening with a strong focus on high availability and scalability.
             </p>
         </section>
 
@@ -202,18 +284,18 @@
                 <div class="item-header">
                     <div class="item-title-block">
                         <span class="item-title">Universitas Lampung</span>
-                        <span class="item-org"> (2022 ? 2026)</span>
+                        <span class="item-org"> (2022 — 2026)</span>
                     </div>
-                    <span class="item-date">Bachelor of Informatics Engineering — GPA 3.74</span>
+                    <span class="item-date">Bachelor of Informatics Engineering — GPA 3.74 (Graduated)</span>
                 </div>
             </div>
             <div class="item">
                 <div class="item-header">
                     <div class="item-title-block">
-                        <span class="item-title">SMAN 1 KRAMATWATU</span>
+                        <span class="item-title">SMAN 1 Kramatwatu</span>
                         <span class="item-org"> (2019 — 2022)</span>
                     </div>
-                    <span class="item-date">Natural Science — Grade 89.21 / 100</span>
+                    <span class="item-date">Natural Sciences — Final Grade 89.21 / 100</span>
                 </div>
             </div>
         </section>
@@ -225,13 +307,13 @@
                     <div class="item-title-block">
                         <span class="item-title">Google Cloud Arcade Facilitator Program</span>
                     </div>
-                    <span class="item-date">December 2024 — January 2026</span>
+                    <span class="item-date">December 2024 — January 2025</span>
                 </div>
-                <div style="font-size: 9pt; font-weight: normal; font-style: italic; margin-bottom: 2px;">Google Arcade Facilitator Cohort</div>
+                <div class="item-role">Google Arcade Facilitator Cohort</div>
                 <ul class="item-bullets">
-                    <li>Participated in the Google Cloud Arcade Facilitator program, completing hands-on labs and challenge exercises.</li>
-                    <li>Developed proficiency in Google Cloud Platform (GCP) services, cloud computing, and AI tools.</li>
-                    <li>Collaborated with cohort peers in study groups to solve cloud infrastructure and configuration labs.</li>
+                    <li>Completed intensive hands-on labs and challenge quests covering Google Cloud Platform (GCP) and Generative AI.</li>
+                    <li>Mastered cloud resource management, containerized deployments, identity access control, and cloud security best practices.</li>
+                    <li>Collaborated actively with cohort study groups to solve real-world cloud infrastructure architecture scenarios.</li>
                 </ul>
             </div>
             <div class="item">
@@ -241,53 +323,53 @@
                     </div>
                     <span class="item-date">June 2025 — August 2025</span>
                 </div>
-                <div style="font-size: 9pt; font-weight: normal; font-style: italic; margin-bottom: 2px;">Back End Developer Intern</div>
+                <div class="item-role">Back-End Developer Intern</div>
                 <ul class="item-bullets">
-                    <li>Responsible for backend development and operations.</li>
-                    <li>Implemented features and services using PHP, Laravel, and MySQL.</li>
-                    <li>Supported system maintenance and optimization within a government environment.</li>
+                    <li>Developed backend services and RESTful APIs for local government information systems using PHP and Laravel.</li>
+                    <li>Designed optimized MySQL database schemas and fine-tuned queries for reliable public data access.</li>
+                    <li>Supported regular maintenance, new feature integrations, and live application deployment in production.</li>
                 </ul>
             </div>
             <div class="item">
                 <div class="item-header">
                     <div class="item-title-block">
-                        <span class="item-title">elevAlte with Dicoding</span>
+                        <span class="item-title">elevAIte with Dicoding</span>
                     </div>
                     <span class="item-date">February 2025 — June 2025</span>
                 </div>
-                <div style="font-size: 9pt; font-weight: normal; font-style: italic; margin-bottom: 2px;">AI Program Participant</div>
+                <div class="item-role">AI Program Participant (Azure Cloud)</div>
                 <ul class="item-bullets">
-                    <li>Specialized in the development of Artificial Intelligence (AI) and Generative AI.</li>
-                    <li>Proficient in Microsoft AI technologies, focusing on the Azure cloud platform.</li>
-                    <li>Completed an intensive learning path to become industry-ready AI talent.</li>
+                    <li>Specialized in Generative AI architectures and Microsoft Azure services for enterprise-grade AI applications.</li>
+                    <li>Built cloud-native AI solutions including natural language processing, vector embeddings, and model deployments.</li>
+                    <li>Successfully graduated through an intensive industry-aligned learning path focused on modern AI engineering.</li>
                 </ul>
             </div>
             <div class="item">
                 <div class="item-header">
                     <div class="item-title-block">
-                        <span class="item-title">Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka</span>
+                        <span class="item-title">Bangkit Academy led by Google, Tokopedia, Gojek, &amp; Traveloka</span>
                     </div>
                     <span class="item-date">August 2024 — January 2025</span>
                 </div>
-                <div style="font-size: 9pt; font-weight: normal; font-style: italic; margin-bottom: 2px;">Cloud Computing Cohort & Capstone Project Lead</div>
+                <div class="item-role">Cloud Computing Cohort &amp; Capstone Project Lead</div>
                 <ul class="item-bullets">
-                    <li>Gained in-depth knowledge of cloud architecture, GCP, and software engineering.</li>
-                    <li>Led the capstone project "Mindcraft" as the Project Manager.</li>
-                    <li>Designed backend architecture using GCP and developed core APIs.</li>
+                    <li>Led the capstone project "Mindcraft" as Project Manager and Back-End Architect across cross-functional teams.</li>
+                    <li>Architected Google Cloud Platform (GCP) microservices infrastructure and engineered core RESTful APIs.</li>
+                    <li>Implemented CI/CD pipelines, Docker containerization, and modern software engineering reliability standards.</li>
                 </ul>
             </div>
             <div class="item">
                 <div class="item-header">
                     <div class="item-title-block">
-                        <span class="item-title">Freelance Cloud Engineer</span>
+                        <span class="item-title">Freelance &amp; Independent Projects</span>
                     </div>
-                    <span class="item-date">October 2022 — November 2025</span>
+                    <span class="item-date">October 2022 — Present</span>
                 </div>
-                <div style="font-size: 9pt; font-weight: normal; font-style: italic; margin-bottom: 2px;">Freelance Cloud Engineer</div>
+                <div class="item-role">Cloud Infrastructure &amp; Back-End Engineer</div>
                 <ul class="item-bullets">
-                    <li>Architected and managed cloud deployments across AWS, GCP, Azure, Alibaba Cloud, and Linux VPS for 400+ international clients with 2,000+ successful transactions.</li>
-                    <li>Developed resilient backend APIs, dynamic reverse proxies, and automated pipeline workflows with high availability and minimal latency.</li>
-                    <li>Implemented multi-layer security hardening on production Linux hosts (UFW kernel firewalls, brute-force intrusion prevention, and dynamic SSL management).</li>
+                    <li>Architected and managed cloud infrastructure (AWS, GCP, Azure, Alibaba Cloud, Linux VPS) for 400+ clients with 2,000+ completed orders.</li>
+                    <li>Engineered low-latency backend APIs, dynamic reverse proxies, and automated deployment pipelines with high uptime.</li>
+                    <li>Implemented production Linux security hardening: UFW kernel firewall, brute-force defense, and automated SSL cert management.</li>
                 </ul>
             </div>
         </section>
@@ -296,16 +378,16 @@
             <h3>Skills</h3>
             <div class="skills-grid">
                 <div class="skills-category">
-                    <strong>Cloud & DevOps:</strong> GCP, AWS, Azure, Alibaba Cloud, Docker, Git/GitHub
+                    <strong>Cloud &amp; DevOps:</strong> GCP, AWS, Azure, Alibaba Cloud, Docker, Git/GitHub, Linux (Debian/Ubuntu)
                 </div>
                 <div class="skills-category">
-                    <strong>Back-End:</strong> PHP, Laravel, Node.js, Express, MySQL, PostgreSQL
+                    <strong>Back-End:</strong> Node.js, Express, PHP, Laravel, RESTful API, MySQL, PostgreSQL, Redis
                 </div>
                 <div class="skills-category">
-                    <strong>Front-End:</strong> HTML, CSS, JS, Tailwind CSS, React
+                    <strong>Front-End:</strong> HTML5, CSS3, JavaScript (ES6+), Tailwind CSS, React
                 </div>
                 <div class="skills-category">
-                    <strong>Soft Skills:</strong> Technical Leadership, Project Management, Teamwork
+                    <strong>Soft Skills:</strong> Technical Leadership, Project Management, Problem Solving, Team Collaboration
                 </div>
             </div>
         </section>

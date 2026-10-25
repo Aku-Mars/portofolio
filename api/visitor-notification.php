@@ -102,8 +102,8 @@ if ($rateHandle !== false) {
     if ($lastSentAt > 0 && time() - $lastSentAt < 900) {
         flock($rateHandle, LOCK_UN);
         fclose($rateHandle);
-        http_response_code(429);
-        echo json_encode(['status' => 'rate_limited']);
+        http_response_code(200);
+        echo json_encode(['status' => 'rate_limited', 'message' => 'Visit already logged recently']);
         exit;
     }
 }

@@ -12,11 +12,11 @@
         }
         body {
             font-family: Arial, Helvetica, sans-serif;
-            color: #000000;
+            color: #111111;
             background-color: #ffffff;
-            line-height: 1.4;
-            font-size: 9.5pt;
-            padding: 10px;
+            line-height: 1.3;
+            font-size: 8.8pt;
+            padding: 16px;
         }
         .container {
             max-width: 800px;
@@ -26,56 +26,63 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+            border-bottom: 1.5px solid #111111;
         }
         .header-left h1 {
-            font-size: 26pt;
+            font-size: 20pt;
             font-weight: bold;
             color: #000000;
             text-transform: uppercase;
             letter-spacing: -0.01em;
             line-height: 1.1;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
         .header-left h2 {
-            font-size: 10.5pt;
+            font-size: 9.5pt;
             font-weight: bold;
-            color: #000000;
+            color: #222222;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.04em;
         }
         .header-right {
             text-align: right;
-            font-size: 8.5pt;
-            color: #000000;
-            line-height: 1.35;
+            font-size: 8pt;
+            color: #222222;
+            line-height: 1.3;
         }
         .header-right a {
-            color: #000000;
+            color: #111111;
             text-decoration: none;
         }
         .header-right a:hover {
             text-decoration: underline;
         }
         section {
-            margin-bottom: 20px;
+            margin-bottom: 8px;
+        }
+        section:last-child {
+            margin-bottom: 0;
         }
         section h3 {
-            font-size: 11pt;
+            font-size: 9.5pt;
             font-weight: bold;
             color: #000000;
             text-transform: uppercase;
-            border-bottom: 1px solid #000000;
-            padding-bottom: 2px;
-            margin-bottom: 8px;
+            border-bottom: 1px solid #222222;
+            padding-bottom: 1px;
+            margin-bottom: 4px;
+            letter-spacing: 0.03em;
         }
         .summary-text {
-            color: #000000;
+            color: #222222;
             text-align: justify;
-            font-size: 9.5pt;
+            font-size: 8.4pt;
+            line-height: 1.28;
         }
         .item {
-            margin-bottom: 15px;
+            margin-bottom: 6px;
         }
         .item:last-child {
             margin-bottom: 0;
@@ -84,92 +91,167 @@
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
         }
         .item-title-block {
-            font-size: 9.5pt;
+            font-size: 8.8pt;
         }
         .item-title {
             font-weight: bold;
             color: #000000;
         }
         .item-org {
-            color: #000000;
+            color: #333333;
+            font-size: 8.3pt;
+        }
+        .item-role {
+            font-size: 8.2pt;
+            font-style: italic;
+            color: #333333;
+            margin-bottom: 1px;
         }
         .item-date {
-            font-size: 8.5pt;
-            color: #000000;
+            font-size: 8pt;
+            color: #333333;
             font-weight: normal;
         }
         .item-bullets {
             list-style-type: disc;
-            padding-left: 15px;
+            padding-left: 14px;
         }
         .item-bullets li {
-            color: #000000;
-            margin-bottom: 2px;
-            font-size: 9pt;
+            color: #222222;
+            margin-bottom: 1px;
+            font-size: 8.2pt;
+            line-height: 1.24;
         }
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 4px 20px;
+            gap: 2px 18px;
         }
         .skills-category {
-            font-size: 9pt;
-            color: #000000;
+            font-size: 8.2pt;
+            color: #222222;
+            line-height: 1.25;
         }
         .skills-category strong {
             font-weight: bold;
+            color: #000000;
         }
         .certs-list {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 4px 20px;
+            gap: 2px 18px;
         }
         .cert-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 9pt;
-            color: #000000;
+            font-size: 8.2pt;
+            color: #222222;
+            line-height: 1.25;
         }
         .cert-name {
             font-weight: normal;
         }
         .cert-year {
-            color: #000000;
+            color: #444444;
             margin-left: 8px;
             flex-shrink: 0;
+            font-size: 8pt;
         }
 
         @media print {
             @page {
-                size: A4;
-                margin: 0; /* Removes headers and footers */
+                size: A4 portrait;
+                margin: 5mm 10mm 5mm 10mm;
             }
-            body {
-                margin: 7mm 12mm 7mm 12mm; /* Re-applies content margins */
+            html, body {
+                margin: 0;
                 padding: 0;
-                font-size: 9.2pt;
+                background-color: #ffffff;
+                color: #000000;
+                font-size: 8.4pt;
+                line-height: 1.24;
+                height: 100%;
+                overflow: hidden;
+            }
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
             }
             header {
-                margin-bottom: 8px;
-            }
-            section {
-                margin-bottom: 12px;
-            }
-            .item {
-                margin-bottom: 12px;
+                margin-bottom: 6px;
+                padding-bottom: 3px;
+                border-bottom: 1.5px solid #000000;
             }
             .header-left h1 {
-                font-size: 22pt;
+                font-size: 19pt;
+                line-height: 1.05;
+                margin-bottom: 2px;
             }
             .header-left h2 {
-                font-size: 9.5pt;
+                font-size: 9pt;
+            }
+            .header-right {
+                font-size: 7.8pt;
+                line-height: 1.25;
+            }
+            section {
+                margin-bottom: 6px;
+            }
+            section h3 {
+                font-size: 9.2pt;
+                padding-bottom: 1px;
+                margin-bottom: 3px;
+                border-bottom: 1px solid #000000;
+            }
+            .summary-text {
+                font-size: 8.2pt;
+                line-height: 1.24;
+            }
+            .item {
+                margin-bottom: 5px;
+            }
+            .item-title-block {
+                font-size: 8.5pt;
             }
             .item-title {
-                font-size: 9.2pt;
+                font-size: 8.5pt;
+            }
+            .item-org {
+                font-size: 8pt;
+            }
+            .item-role {
+                font-size: 8pt;
+                margin-bottom: 1px;
+            }
+            .item-date {
+                font-size: 7.8pt;
+            }
+            .item-bullets {
+                padding-left: 13px;
+            }
+            .item-bullets li {
+                font-size: 8pt;
+                line-height: 1.22;
+                margin-bottom: 0.5px;
+            }
+            .skills-grid {
+                gap: 1.5px 16px;
+            }
+            .skills-category {
+                font-size: 8pt;
+                line-height: 1.22;
+            }
+            .certs-list {
+                gap: 1.5px 16px;
+            }
+            .cert-item {
+                font-size: 8pt;
+                line-height: 1.22;
             }
         }
     </style>
@@ -179,7 +261,7 @@
         <header>
             <div class="header-left">
                 <h1>M Arifin Syam</h1>
-                <h2>Cloud & Back-End Developer</h2>
+                <h2>Cloud &amp; Back-End Developer</h2>
             </div>
             <div class="header-right">
                 <div><a href="mailto:muhamadarifinsyam@gmail.com">muhamadarifinsyam@gmail.com</a></div>
@@ -192,7 +274,7 @@
         <section id="summary">
             <h3>Ringkasan</h3>
             <p class="summary-text">
-                Lulusan S1 Teknik Informatika dari Universitas Lampung (IPK 3.74) dengan fondasi akademik yang kuat dan pengalaman praktis dalam bidang Cloud Computing dan Back-End Development. Terbukti memiliki rekam jejak yang baik dalam merancang sistem back-end, mengelola penerapan multi-cloud (AWS, GCP, Azure), dan berpartisipasi dalam kohort teknologi. Sangat terampil dalam Node.js, Laravel, desain database, dan arsitektur cloud, dengan antusiasme tinggi untuk membangun aplikasi web yang skalabel dan berkinerja tinggi.
+                Lulusan S1 Teknik Informatika dari Universitas Lampung (IPK 3.74) dengan fondasi akademik yang kokoh serta pengalaman praktis dalam Cloud Computing dan Back-End Development. Memiliki rekam jejak teruji dalam merancang arsitektur back-end berkinerja tinggi, mengelola multi-cloud deployment (AWS, GCP, Azure), dan memimpin cohort teknologi. Terampil dalam Node.js, Laravel, desain database relasional, dan Linux server hardening dengan komitmen tinggi pada skalabilitas serta ketersediaan sistem.
             </p>
         </section>
 
@@ -201,19 +283,19 @@
             <div class="item">
                 <div class="item-header">
                     <div class="item-title-block">
-                        <span class="item-title">UNIVERSITAS LAMPUNG</span>
+                        <span class="item-title">Universitas Lampung</span>
                         <span class="item-org"> (2022 — 2026)</span>
                     </div>
-                    <span class="item-date">S1 Teknik Informatika — IPK 3.74</span>
+                    <span class="item-date">S1 Teknik Informatika — IPK 3.74 (Lulus)</span>
                 </div>
             </div>
             <div class="item">
                 <div class="item-header">
                     <div class="item-title-block">
-                        <span class="item-title">SMAN 1 KRAMATWATU</span>
+                        <span class="item-title">SMAN 1 Kramatwatu</span>
                         <span class="item-org"> (2019 — 2022)</span>
                     </div>
-                    <span class="item-date">MIPA (Matematika & Ilmu Pengetahuan Alam) — Nilai Akhir 89.21 / 100</span>
+                    <span class="item-date">MIPA (Matematika &amp; IPA) — Nilai Akhir 89.21 / 100</span>
                 </div>
             </div>
         </section>
@@ -225,13 +307,13 @@
                     <div class="item-title-block">
                         <span class="item-title">Google Cloud Arcade Facilitator Program</span>
                     </div>
-                    <span class="item-date">Desember 2024 — Januari 2026</span>
+                    <span class="item-date">Desember 2024 — Januari 2025</span>
                 </div>
-                <div style="font-size: 9pt; font-weight: normal; font-style: italic; margin-bottom: 2px;">Google Arcade Facilitator Cohort</div>
+                <div class="item-role">Google Arcade Facilitator Cohort</div>
                 <ul class="item-bullets">
-                    <li>Berpartisipasi dalam program Google Cloud Arcade Facilitator, menyelesaikan berbagai lab praktis dan tantangan cloud.</li>
-                    <li>Mempelajari dan mendalami teknologi Google Cloud Platform (GCP), konsep komputasi cloud, dan AI.</li>
-                    <li>Berkolaborasi dengan sesama anggota kohort untuk menyelesaikan lab konfigurasi infrastruktur cloud.</li>
+                    <li>Menyelesaikan hands-on labs dan challenge quests seputar infrastruktur Google Cloud Platform (GCP) dan Generative AI.</li>
+                    <li>Mendalami manajemen resource cloud, container computing, identity access management, dan cloud security.</li>
+                    <li>Berkolaborasi secara aktif dalam studi kelompok untuk menyelesaikan skenario arsitektur infrastruktur cloud.</li>
                 </ul>
             </div>
             <div class="item">
@@ -241,53 +323,53 @@
                     </div>
                     <span class="item-date">Juni 2025 — Agustus 2025</span>
                 </div>
-                <div style="font-size: 9pt; font-weight: normal; font-style: italic; margin-bottom: 2px;">Back End Developer Intern</div>
+                <div class="item-role">Back-End Developer Intern</div>
                 <ul class="item-bullets">
-                    <li>Bertanggung jawab atas pengembangan dan operasional back-end.</li>
-                    <li>Mengimplementasikan fitur dan layanan menggunakan PHP, Laravel, dan MySQL.</li>
-                    <li>Mendukung pemeliharaan dan optimalisasi sistem di lingkungan pemerintahan.</li>
+                    <li>Mengembangkan layanan backend dan RESTful API untuk sistem informasi pemerintahan berbasis PHP dan Laravel.</li>
+                    <li>Merancang skema database MySQL yang efisien dan mengoptimalkan performa query untuk penanganan data publik.</li>
+                    <li>Mendukung pemeliharaan berkala, integrasi modul baru, dan deployment aplikasi pada server instansi.</li>
                 </ul>
             </div>
             <div class="item">
                 <div class="item-header">
                     <div class="item-title-block">
-                        <span class="item-title">elevAlte with Dicoding</span>
+                        <span class="item-title">elevAIte with Dicoding</span>
                     </div>
                     <span class="item-date">Februari 2025 — Juni 2025</span>
                 </div>
-                <div style="font-size: 9pt; font-weight: normal; font-style: italic; margin-bottom: 2px;">Peserta Program AI</div>
+                <div class="item-role">Peserta Program AI (Azure Cloud)</div>
                 <ul class="item-bullets">
-                    <li>Mendalami pengembangan Kecerdasan Buatan (AI) dan Generative AI.</li>
-                    <li>Menguasai teknologi AI dari Microsoft dengan fokus pada platform cloud Azure.</li>
-                    <li>Menyelesaikan jalur pembelajaran intensif untuk menjadi talenta AI yang siap industri.</li>
+                    <li>Mendalami arsitektur Generative AI dan ekosistem Microsoft Azure untuk integrasi layanan AI siap produksi.</li>
+                    <li>Membangun solusi AI berbasis cloud mencakup natural language processing, vector embeddings, dan model deployment.</li>
+                    <li>Menuntaskan kurikulum intensif dan evaluasi teknis industri dengan standar kompetensi AI global.</li>
                 </ul>
             </div>
             <div class="item">
                 <div class="item-header">
                     <div class="item-title-block">
-                        <span class="item-title">Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka</span>
+                        <span class="item-title">Bangkit Academy led by Google, Tokopedia, Gojek, &amp; Traveloka</span>
                     </div>
                     <span class="item-date">Agustus 2024 — Januari 2025</span>
                 </div>
-                <div style="font-size: 9pt; font-weight: normal; font-style: italic; margin-bottom: 2px;">Cloud Computing Cohort & Capstone Project Lead</div>
+                <div class="item-role">Cloud Computing Cohort &amp; Capstone Project Lead</div>
                 <ul class="item-bullets">
-                    <li>Mendalami arsitektur cloud, GCP, dan rekayasa perangkat lunak.</li>
-                    <li>Memimpin proyek capstone "Mindcraft" sebagai Project Manager.</li>
-                    <li>Merancang arsitektur backend di GCP dan mengembangkan API inti.</li>
+                    <li>Memimpin proyek capstone "Mindcraft" sebagai Project Manager dan Back-End Architect lintas divisi tim.</li>
+                    <li>Merancang arsitektur cloud di Google Cloud Platform (GCP) dan mengembangkan API core dengan ketersediaan tinggi.</li>
+                    <li>Menerapkan prinsip CI/CD, containerization Docker, dan best practices software engineering modern.</li>
                 </ul>
             </div>
             <div class="item">
                 <div class="item-header">
                     <div class="item-title-block">
-                        <span class="item-title">Freelance Cloud Engineer</span>
+                        <span class="item-title">Freelance &amp; Proyek Independen</span>
                     </div>
-                    <span class="item-date">Oktober 2022 — November 2025</span>
+                    <span class="item-date">Oktober 2022 — Sekarang</span>
                 </div>
-                <div style="font-size: 9pt; font-weight: normal; font-style: italic; margin-bottom: 2px;">Freelance Cloud Engineer</div>
+                <div class="item-role">Cloud Infrastructure &amp; Back-End Engineer</div>
                 <ul class="item-bullets">
-                    <li>Merancang dan mengelola arsitektur cloud di AWS, GCP, Azure, Alibaba Cloud, dan Linux VPS untuk 400+ klien internasional dengan 2.000+ transaksi sukses.</li>
-                    <li>Mengembangkan backend API, reverse proxy dinamis, dan sistem pipeline otomatis dengan ketersediaan tinggi (high availability).</li>
-                    <li>Mengimplementasikan security hardening pada server produksi Linux (firewall UFW kernel, proteksi brute-force, dan manajemen SSL dinamis).</li>
+                    <li>Merancang arsitektur cloud (AWS, GCP, Azure, Alibaba Cloud, Linux VPS) untuk 400+ klien dengan 2.000+ transaksi sukses.</li>
+                    <li>Membangun backend API berlatensi rendah, reverse proxy dinamis, dan sistem automasi workflow deployment.</li>
+                    <li>Menerapkan security hardening pada server Linux produksi: firewall kernel UFW, brute-force defense, dan manajemen SSL dinamis.</li>
                 </ul>
             </div>
         </section>
@@ -296,16 +378,16 @@
             <h3>Keahlian</h3>
             <div class="skills-grid">
                 <div class="skills-category">
-                    <strong>Cloud & DevOps:</strong> GCP, AWS, Azure, Alibaba Cloud, Docker, Git/GitHub
+                    <strong>Cloud &amp; DevOps:</strong> GCP, AWS, Azure, Alibaba Cloud, Docker, Git/GitHub, Linux (Debian/Ubuntu)
                 </div>
                 <div class="skills-category">
-                    <strong>Back-End:</strong> PHP, Laravel, Node.js, Express, MySQL, PostgreSQL
+                    <strong>Back-End:</strong> Node.js, Express, PHP, Laravel, RESTful API, MySQL, PostgreSQL, Redis
                 </div>
                 <div class="skills-category">
-                    <strong>Front-End:</strong> HTML, CSS, JS, Tailwind CSS, React
+                    <strong>Front-End:</strong> HTML5, CSS3, JavaScript (ES6+), Tailwind CSS, React
                 </div>
                 <div class="skills-category">
-                    <strong>Soft Skills:</strong> Kepemimpinan Teknis, Manajemen Proyek, Kerja Sama Tim
+                    <strong>Soft Skills:</strong> Kepemimpinan Teknis, Manajemen Proyek, Pemecahan Masalah, Kerja Sama Tim
                 </div>
             </div>
         </section>
