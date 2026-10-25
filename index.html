@@ -840,10 +840,17 @@
     <div class="container mx-auto px-6 text-center">
         <p class="font-syne text-white font-bold text-lg mb-1">MARS</p>
         <p class="text-mars-muted text-xs font-mono mb-4">&copy; <span id="copyright-year">2026</span> Muhamad Arifin Syam. All rights reserved.</p>
-        <div class="counter-badge inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono text-mars-teal">
-            <i class="fas fa-eye text-mars-teal"></i>
-            <span data-translate-key="footer_visitors">Jumlah Pengunjung:</span>
-            <span id="view-count" class="font-bold">—</span>
+        <div class="flex flex-wrap items-center justify-center gap-3">
+            <div class="counter-badge inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono text-mars-teal border border-mars-teal/20 bg-mars-teal/5">
+                <i class="fas fa-eye text-mars-teal"></i>
+                <span data-translate-key="footer_visitors">Jumlah Pengunjung:</span>
+                <span id="view-count" class="font-bold">&mdash;</span>
+            </div>
+            <div id="latest-visitor-badge" class="counter-badge hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono text-gray-300 border border-white/10 bg-white/5 transition-opacity duration-300 opacity-0">
+                <i class="fas fa-location-dot text-mars-teal"></i>
+                <span data-translate-key="footer_last_visitor">Pengunjung Terakhir:</span>
+                <span id="latest-visitor-text" class="text-white font-medium">&mdash;</span>
+            </div>
         </div>
     </div>
 </footer>
@@ -966,6 +973,23 @@
         }
 
         return { ip, kota, wilayah, negara, isp };
+    }
+
+    async function loadLatestVisitor() {
+        try {
+            const res = await fetch("/portofolio/api/latest-visitor.php");
+            if (!res.ok) return;
+            const data = await res.json();
+            if (data && data.status === "ok" && data.visitor) {
+                const v = data.visitor;
+                const badgeEl = document.getElementById("latest-visitor-badge");
+                const textEl = document.getElementById("latest-visitor-text");
+                if (badgeEl && textEl && v.city && v.country) {
+                    textEl.textContent = `${v.city}, ${v.country} \u2022 ${v.timeAgo}`;
+                    badgeEl.classList.remove("opacity-0");
+                }
+            }
+        } catch (_) {}
     }
 
     async function trackVisitor() {
@@ -1107,6 +1131,7 @@
     // Jalankan tracking setelah DOM siap
     window.addEventListener('DOMContentLoaded', () => {
         trackVisitor();
+        loadLatestVisitor();
     });
 </script>
 
@@ -1201,6 +1226,7 @@
             cv_desc:"Check out my resume for more information.",
             cv_download:"Download My CV",
             footer_visitors:"Visitor Count:",
+            footer_last_visitor:"Recent Visitor:",
             modal_subtitle: "Handpicked for You",
             modal_title: "🚀 Featured Work",
             modal_description: "Here are 3 spotlight projects I've built recently:",
@@ -1257,6 +1283,7 @@
             cv_desc:"Lihat riwayat hidup saya untuk informasi lebih lanjut.",
             cv_download:"Unduh CV Saya",
             footer_visitors:"Jumlah Pengunjung:",
+            footer_last_visitor:"Pengunjung Terakhir:",
             modal_subtitle: "Pilihan untuk Anda",
             modal_title: "🚀 Proyek Unggulan",
             modal_description: "Berikut adalah 3 proyek terbaik pilihan saya saat ini:",
