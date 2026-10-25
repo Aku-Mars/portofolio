@@ -1131,7 +1131,6 @@
     // Jalankan tracking setelah DOM siap
     window.addEventListener('DOMContentLoaded', () => {
         trackVisitor();
-        loadLatestVisitor();
     });
 </script>
 
@@ -1646,6 +1645,49 @@
         }
     };
 
+    let cachedLatestVisitor = null;
+
+    function renderLatestVisitorUI() {
+        if (!cachedLatestVisitor) return;
+        const v = cachedLatestVisitor;
+        const lang = document.documentElement.lang || 'en';
+
+        // 1. Footer capsule
+        const badgeEl = document.getElementById('latest-visitor-badge');
+        const textEl = document.getElementById('latest-visitor-text');
+        if (badgeEl && textEl && v.city && v.country) {
+            textEl.textContent = `${v.city}, ${v.country} &bull; ${v.timeAgo}`;
+            badgeEl.classList.remove('opacity-0');
+        }
+
+        // 2. Floating pill (Opsi B)
+        if (sessionStorage.getItem('dismissed_visitor_pill') === '1') return;
+        const pill = document.getElementById('floating-visitor-pill');
+        const msg = document.getElementById('floating-visitor-msg');
+        if (pill && msg && v.city && v.country) {
+            if (lang === 'id') {
+                msg.innerHTML = `Seseorang dari <strong class="text-white">${v.city}, ${v.country}</strong> baru saja melihat portofolio <span class="text-mars-teal">&bull; ${v.timeAgo}</span>`;
+            } else {
+                msg.innerHTML = `Someone from <strong class="text-white">${v.city}, ${v.country}</strong> just viewed the portfolio <span class="text-mars-teal">&bull; ${v.timeAgo}</span>`;
+            }
+            setTimeout(() => {
+                pill.classList.remove('translate-y-16', 'opacity-0', 'pointer-events-none');
+            }, 1200);
+        }
+    }
+
+    async function loadLatestVisitor() {
+        try {
+            const res = await fetch('/portofolio/api/latest-visitor.php');
+            if (!res.ok) return;
+            const data = await res.json();
+            if (data && data.status === 'ok' && data.visitor) {
+                cachedLatestVisitor = data.visitor;
+                renderLatestVisitorUI();
+            }
+        } catch (_) {}
+    }
+
     const setLanguage = (lang) => {
         document.querySelectorAll('[data-translate-key]').forEach(el => {
             const key = el.getAttribute('data-translate-key');
@@ -1681,6 +1723,16 @@
 
     document.querySelectorAll('.lang-switcher').forEach(btn => {
         btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
+    });
+
+    // Load latest visitor activity
+    loadLatestVisitor();
+
+    // Dismiss floating visitor pill listener
+    document.getElementById('dismiss-visitor-pill')?.addEventListener('click', () => {
+        const pill = document.getElementById('floating-visitor-pill');
+        if (pill) pill.classList.add('translate-y-16', 'opacity-0', 'pointer-events-none');
+        sessionStorage.setItem('dismissed_visitor_pill', '1');
     });
 
     // Toggle Projects Button
