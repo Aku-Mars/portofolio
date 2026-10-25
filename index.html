@@ -1655,8 +1655,7 @@
             badgeEl.classList.remove('opacity-0');
         }
 
-        // 2. Floating pill (Opsi B)
-        if (sessionStorage.getItem('dismissed_visitor_pill') === '1') return;
+        // 2. Floating pill (Opsi B - Auto Hide after 2.5s)
         const pill = document.getElementById('floating-visitor-pill');
         const msg = document.getElementById('floating-visitor-msg');
         if (pill && msg && v.city && v.country) {
@@ -1667,7 +1666,11 @@
                 msg.innerHTML = `Someone from <strong class="text-white">${v.city}, ${v.country}</strong> just viewed the portfolio <span class="text-mars-teal">&bull; ${timeAgoStr}</span>`;
             }
             setTimeout(() => {
-                pill.classList.remove('translate-y-16', 'opacity-0', 'pointer-events-none');
+                pill.classList.remove('translate-y-16', 'opacity-0');
+                // Auto dismiss after 2.5 seconds
+                setTimeout(() => {
+                    pill.classList.add('translate-y-16', 'opacity-0');
+                }, 2500);
             }, 800);
         }
     }
@@ -1724,12 +1727,7 @@
     // Load latest visitor activity
     loadLatestVisitor();
 
-    // Dismiss floating visitor pill listener
-    document.getElementById('dismiss-visitor-pill')?.addEventListener('click', () => {
-        const pill = document.getElementById('floating-visitor-pill');
-        if (pill) pill.classList.add('translate-y-16', 'opacity-0', 'pointer-events-none');
-        sessionStorage.setItem('dismissed_visitor_pill', '1');
-    });
+
 
     // Toggle Projects Button
     const toggleProjectsBtn = document.getElementById('toggle-projects-btn');
@@ -1799,16 +1797,11 @@
     }
 </script>
 
-<!-- FLOATING LIVE VISITOR PILL (Opsi B - Pojok Kiri Bawah) -->
-<div id="floating-visitor-pill" class="fixed bottom-5 left-5 z-50 transform translate-y-16 opacity-0 pointer-events-none transition-all duration-500 ease-out flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-[#12161f]/90 backdrop-blur-md border border-mars-teal/30 shadow-[0_8px_30px_rgb(0,0,0,0.5)] text-xs font-mono text-gray-200">
-    <span class="relative flex h-2 w-2">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-mars-teal opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-2 w-2 bg-mars-teal"></span>
-    </span>
-    <span id="floating-visitor-msg"></span>
-    <button id="dismiss-visitor-pill" type="button" aria-label="Tutup" class="text-gray-400 hover:text-white ml-1 transition-colors focus:outline-none">
-        <i class="fas fa-times text-[10px]"></i>
-    </button>
+<!-- FLOATING LIVE VISITOR PILL (Opsi B - Mobile Centered & Auto-hide 2.5s) -->
+<div class="fixed bottom-5 inset-x-0 sm:inset-x-auto sm:left-5 z-50 flex justify-center sm:justify-start pointer-events-none px-4 sm:px-0">
+    <div id="floating-visitor-pill" class="transform translate-y-16 opacity-0 pointer-events-auto transition-all duration-500 ease-out flex items-center text-center sm:text-left px-4 py-2.5 rounded-full bg-[#12161f]/90 backdrop-blur-md border border-mars-teal/30 shadow-[0_8px_30px_rgb(0,0,0,0.5)] text-xs font-mono text-gray-200 max-w-[92vw] sm:max-w-none">
+        <span id="floating-visitor-msg"></span>
+    </div>
 </div>
 
 </body>
