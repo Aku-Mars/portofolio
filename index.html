@@ -1653,11 +1653,10 @@
 
     function getVisitorMessageHtml(v, lang) {
         const timeAgoStr = lang === 'id' ? (v.timeAgo_id || v.timeAgo || 'Baru saja') : (v.timeAgo_en || v.timeAgo || 'Just now');
-        if (lang === 'id') {
-            return `<span class="hidden sm:inline text-gray-300">Seseorang dari </span><strong class="text-white font-medium">${v.city}, ${v.country}</strong> <span class="hidden sm:inline text-gray-300">baru saja melihat portofolio</span><span class="sm:hidden text-gray-400">melihat portofolio</span> <span class="text-mars-teal font-semibold">&bull; ${timeAgoStr}</span>`;
-        } else {
-            return `<span class="hidden sm:inline text-gray-300">Someone from </span><strong class="text-white font-medium">${v.city}, ${v.country}</strong> <span class="hidden sm:inline text-gray-300">just viewed portfolio</span><span class="sm:hidden text-gray-400">viewed portfolio</span> <span class="text-mars-teal font-semibold">&bull; ${timeAgoStr}</span>`;
-        }
+        const countryClean = (v.country || '').replace(/^The\s+/i, '');
+        const loc = `${v.city}, ${countryClean}`;
+        const actionText = lang === 'id' ? 'dilihat' : 'seen';
+        return `<span class="truncate min-w-0 font-medium text-white">${loc}</span><span class="flex-shrink-0 text-gray-400 mx-1">${actionText}</span><span class="flex-shrink-0 text-mars-teal font-semibold">&bull; ${timeAgoStr}</span>`;
     }
 
     function renderLatestVisitorUI() {
@@ -1930,7 +1929,7 @@
             <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
         </span>
         <!-- Ticker Message with Crossfade Transition -->
-        <div id="floating-visitor-msg" class="truncate transition-all duration-300 leading-tight"></div>
+        <div id="floating-visitor-msg" class="flex items-center min-w-0 flex-1 overflow-hidden transition-all duration-300 leading-tight"></div>
     </div>
 </div>
 
