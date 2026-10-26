@@ -842,7 +842,7 @@
 </main>
 
 <!-- FOOTER -->
-<footer class="border-t border-mars-border py-8 bg-mars-card/50">
+<footer class="border-t border-mars-border pt-8 pb-24 sm:pb-12 bg-mars-card/50">
     <div class="container mx-auto px-6 text-center">
         <p class="font-syne text-white font-bold text-lg mb-1">MARS</p>
         <p class="text-mars-muted text-xs font-mono mb-4">&copy; <span id="copyright-year">2026</span> Muhamad Arifin Syam. All rights reserved.</p>
@@ -1655,7 +1655,7 @@
         const timeAgoStr = lang === 'id' ? (v.timeAgo_id || v.timeAgo || 'Baru saja') : (v.timeAgo_en || v.timeAgo || 'Just now');
         const countryClean = (v.country || '').replace(/^The\s+/i, '');
         const loc = `${v.city}, ${countryClean}`;
-        const actionText = lang === 'id' ? 'dilihat' : 'seen';
+        const actionText = lang === 'id' ? 'melihat' : 'viewed';
         return `<span class="truncate min-w-0 font-medium text-white">${loc}</span><span class="flex-shrink-0 text-gray-400 mx-1">${actionText}</span><span class="flex-shrink-0 text-mars-teal font-semibold">&bull; ${timeAgoStr}</span>`;
     }
 
@@ -1913,7 +1913,7 @@
     // ── Register Service Worker (PWA) ────────────────────────
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/portofolio/service-worker.js?v=33')
+            navigator.serviceWorker.register('/portofolio/service-worker.js?v=34')
                 .then(reg => {
                     reg.update();
                 })
@@ -1926,7 +1926,7 @@
 
 <!-- FLOATING LIVE VISITOR PILL (Persistent Rotating Social Proof Ticker - Compact Mobile) -->
 <div id="floating-visitor-container" class="fixed bottom-3.5 inset-x-0 sm:inset-x-auto sm:left-5 sm:bottom-5 z-40 flex justify-center sm:justify-start pointer-events-none px-3 sm:px-0">
-    <div id="floating-visitor-pill" class="transform translate-y-12 opacity-0 pointer-events-auto transition-all duration-500 ease-out flex items-center gap-2 px-3 h-8 sm:h-9 sm:px-3.5 rounded-full bg-[#0d1117]/90 backdrop-blur-md border border-mars-teal/25 shadow-[0_4px_24px_rgba(0,0,0,0.6)] text-[11px] sm:text-xs font-mono text-gray-200 w-[320px] max-w-[calc(100vw-24px)] sm:w-auto sm:max-w-md">
+    <div id="floating-visitor-pill" class="transform translate-y-12 opacity-0 pointer-events-auto transition-all duration-500 ease-out flex items-center gap-2 px-3 h-8 sm:h-9 sm:px-3.5 rounded-full bg-[#0d1117]/90 backdrop-blur-md border border-mars-teal/25 shadow-[0_4px_24px_rgba(0,0,0,0.6)] text-[11px] sm:text-xs font-mono text-gray-200 w-auto max-w-[calc(100vw-24px)] sm:max-w-md">
         <!-- Pulsing Live Indicator -->
         <span class="relative flex h-2 w-2 flex-shrink-0">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
