@@ -1913,7 +1913,7 @@
     // ── Register Service Worker (PWA) ────────────────────────
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/portofolio/service-worker.js?v=28').catch(err => {
+            navigator.serviceWorker.register('/portofolio/service-worker.js?v=29').catch(err => {
                 console.log('Service Worker registration failed:', err);
             });
         });
