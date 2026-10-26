@@ -1913,16 +1913,20 @@
     // ── Register Service Worker (PWA) ────────────────────────
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/portofolio/service-worker.js?v=32').catch(err => {
-                console.log('Service Worker registration failed:', err);
-            });
+            navigator.serviceWorker.register('/portofolio/service-worker.js?v=33')
+                .then(reg => {
+                    reg.update();
+                })
+                .catch(err => {
+                    console.log('Service Worker registration failed:', err);
+                });
         });
     }
 </script>
 
 <!-- FLOATING LIVE VISITOR PILL (Persistent Rotating Social Proof Ticker - Compact Mobile) -->
 <div id="floating-visitor-container" class="fixed bottom-3.5 inset-x-0 sm:inset-x-auto sm:left-5 sm:bottom-5 z-40 flex justify-center sm:justify-start pointer-events-none px-3 sm:px-0">
-    <div id="floating-visitor-pill" class="transform translate-y-12 opacity-0 pointer-events-auto transition-all duration-500 ease-out flex items-center gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full bg-[#0d1117]/90 backdrop-blur-md border border-mars-teal/25 shadow-[0_4px_24px_rgba(0,0,0,0.6)] text-[11px] sm:text-xs font-mono text-gray-200 max-w-[94vw] sm:max-w-md">
+    <div id="floating-visitor-pill" class="transform translate-y-12 opacity-0 pointer-events-auto transition-all duration-500 ease-out flex items-center gap-2 px-3 h-8 sm:h-9 sm:px-3.5 rounded-full bg-[#0d1117]/90 backdrop-blur-md border border-mars-teal/25 shadow-[0_4px_24px_rgba(0,0,0,0.6)] text-[11px] sm:text-xs font-mono text-gray-200 w-[320px] max-w-[calc(100vw-24px)] sm:w-auto sm:max-w-md">
         <!-- Pulsing Live Indicator -->
         <span class="relative flex h-2 w-2 flex-shrink-0">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
