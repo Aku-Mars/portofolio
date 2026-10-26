@@ -388,23 +388,26 @@
             </div>
         </div>
 
-        <button id="mobile-menu-button" class="md:hidden text-white p-2">
-            <i class="fas fa-bars"></i>
+        <button id="mobile-menu-button" class="md:hidden text-white p-2 rounded-lg hover:bg-white/5 transition-colors focus:outline-none" aria-label="Toggle navigation" aria-expanded="false">
+            <i id="mobile-menu-icon" class="fas fa-bars text-lg transition-transform duration-200"></i>
         </button>
     </nav>
-    <div id="mobile-menu" class="hidden md:hidden bg-mars-card px-6 pb-4">
-        <a href="#profil" class="block py-2 text-sm font-mono text-gray-400 hover:text-mars-teal" data-translate-key="nav_profile">Profil</a>
-        <a href="#pengalaman" class="block py-2 text-sm font-mono text-gray-400 hover:text-mars-teal" data-translate-key="nav_experience">Pengalaman</a>
-        <a href="#proyek" class="block py-2 text-sm font-mono text-gray-400 hover:text-mars-teal" data-translate-key="nav_projects">Proyek</a>
-        <a href="#sertifikat" class="block py-2 text-sm font-mono text-gray-400 hover:text-mars-teal" data-translate-key="nav_certificates">Sertifikat</a>
-        <a href="#cv" class="block py-2 text-sm font-mono text-gray-400 hover:text-mars-teal" data-translate-key="nav_cv">CV</a>
-        <div class="flex gap-3 pt-2">
+    <div id="mobile-menu" class="hidden md:hidden bg-mars-card/95 backdrop-blur-md px-6 pb-5 pt-2 border-t border-mars-border transition-all duration-300">
+        <a href="#profil" class="block py-2.5 text-sm font-mono text-gray-400 hover:text-mars-teal transition-colors" data-translate-key="nav_profile">Profil</a>
+        <a href="#pengalaman" class="block py-2.5 text-sm font-mono text-gray-400 hover:text-mars-teal transition-colors" data-translate-key="nav_experience">Pengalaman</a>
+        <a href="#proyek" class="block py-2.5 text-sm font-mono text-gray-400 hover:text-mars-teal transition-colors" data-translate-key="nav_projects">Proyek</a>
+        <a href="#sertifikat" class="block py-2.5 text-sm font-mono text-gray-400 hover:text-mars-teal transition-colors" data-translate-key="nav_certificates">Sertifikat</a>
+        <a href="#cv" class="block py-2.5 text-sm font-mono text-gray-400 hover:text-mars-teal transition-colors" data-translate-key="nav_cv">CV</a>
+        <div class="flex gap-3 pt-3 border-t border-white/5 mt-1">
             <button class="lang-switcher text-xs font-mono font-bold text-mars-teal" data-lang="id">ID</button>
             <span class="text-mars-border">/</span>
             <button class="lang-switcher text-xs font-mono font-bold text-gray-400 hover:text-mars-teal" data-lang="en">EN</button>
         </div>
     </div>
 </header>
+
+<!-- Mobile Menu Backdrop Overlay -->
+<div id="mobile-menu-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden md:hidden transition-opacity duration-300 opacity-0 pointer-events-none"></div>
 
 <main>
     <!-- HERO SECTION -->
@@ -1641,37 +1644,70 @@
     };
 
     let cachedLatestVisitor = null;
+    let cachedVisitorsList = [];
+    let currentVisitorIndex = 0;
+    let visitorRotateInterval = null;
+
+    function getVisitorMessageHtml(v, lang) {
+        const timeAgoStr = lang === 'id' ? (v.timeAgo_id || v.timeAgo || 'Baru saja') : (v.timeAgo_en || v.timeAgo || 'Just now');
+        if (lang === 'id') {
+            return `<span class="hidden sm:inline text-gray-300">Seseorang dari </span><strong class="text-white font-medium">${v.city}, ${v.country}</strong> <span class="hidden sm:inline text-gray-300">baru saja melihat portofolio</span><span class="sm:hidden text-gray-400">melihat portofolio</span> <span class="text-mars-teal font-semibold">&bull; ${timeAgoStr}</span>`;
+        } else {
+            return `<span class="hidden sm:inline text-gray-300">Someone from </span><strong class="text-white font-medium">${v.city}, ${v.country}</strong> <span class="hidden sm:inline text-gray-300">just viewed portfolio</span><span class="sm:hidden text-gray-400">viewed portfolio</span> <span class="text-mars-teal font-semibold">&bull; ${timeAgoStr}</span>`;
+        }
+    }
 
     function renderLatestVisitorUI() {
-        if (!cachedLatestVisitor) return;
-        const v = cachedLatestVisitor;
+        const v = cachedLatestVisitor || (cachedVisitorsList.length > 0 ? cachedVisitorsList[0] : null);
+        if (!v) return;
         const lang = document.documentElement.lang || 'en';
 
         // 1. Footer capsule
         const badgeEl = document.getElementById('latest-visitor-badge');
         const textEl = document.getElementById('latest-visitor-text');
         if (badgeEl && textEl && v.city && v.country) {
-            textEl.textContent = `${v.city}, ${v.country} &bull; ${v.timeAgo}`;
+            textEl.textContent = `${v.city}, ${v.country} • ${v.timeAgo || (lang === 'id' ? v.timeAgo_id : v.timeAgo_en) || ''}`;
             badgeEl.classList.remove('opacity-0');
         }
 
-        // 2. Floating pill (Opsi B - Auto Hide after 2.5s)
+        // 2. Floating Persistent Rotating Ticker
         const pill = document.getElementById('floating-visitor-pill');
         const msg = document.getElementById('floating-visitor-msg');
-        if (pill && msg && v.city && v.country) {
-            const timeAgoStr = lang === 'id' ? (v.timeAgo_id || v.timeAgo) : (v.timeAgo_en || v.timeAgo);
-            if (lang === 'id') {
-                msg.innerHTML = `Seseorang dari <strong class="text-white">${v.city}, ${v.country}</strong> baru saja melihat portofolio <span class="text-mars-teal">&bull; ${timeAgoStr}</span>`;
-            } else {
-                msg.innerHTML = `Someone from <strong class="text-white">${v.city}, ${v.country}</strong> just viewed the portfolio <span class="text-mars-teal">&bull; ${timeAgoStr}</span>`;
-            }
+        if (pill && msg && cachedVisitorsList.length > 0) {
+            const currentItem = cachedVisitorsList[currentVisitorIndex] || v;
+            msg.innerHTML = getVisitorMessageHtml(currentItem, lang);
+
+            // Slide up and stay persistently visible
             setTimeout(() => {
-                pill.classList.remove('translate-y-16', 'opacity-0');
-                // Auto dismiss after 2.5 seconds
-                setTimeout(() => {
-                    pill.classList.add('translate-y-16', 'opacity-0');
-                }, 2500);
-            }, 800);
+                pill.classList.remove('translate-y-12', 'opacity-0');
+            }, 500);
+
+            // Start smooth crossfade rotation every 4.5 seconds
+            if (!visitorRotateInterval && cachedVisitorsList.length > 1) {
+                visitorRotateInterval = setInterval(() => {
+                    const activePill = document.getElementById('floating-visitor-pill');
+                    const activeMsg = document.getElementById('floating-visitor-msg');
+                    if (!activePill || !activeMsg) return;
+
+                    // Transition out
+                    activeMsg.style.opacity = '0';
+                    activeMsg.style.transform = 'translateY(-3px)';
+
+                    setTimeout(() => {
+                        currentVisitorIndex = (currentVisitorIndex + 1) % cachedVisitorsList.length;
+                        const nextItem = cachedVisitorsList[currentVisitorIndex];
+                        const curLang = document.documentElement.lang || 'en';
+                        activeMsg.innerHTML = getVisitorMessageHtml(nextItem, curLang);
+
+                        // Transition in
+                        activeMsg.style.transform = 'translateY(3px)';
+                        requestAnimationFrame(() => {
+                            activeMsg.style.opacity = '1';
+                            activeMsg.style.transform = 'translateY(0)';
+                        });
+                    }, 280);
+                }, 4500);
+            }
         }
     }
 
@@ -1680,8 +1716,13 @@
             const res = await fetch('/portofolio/api/latest-visitor.php');
             if (!res.ok) return;
             const data = await res.json();
-            if (data && data.status === 'ok' && data.visitor) {
-                cachedLatestVisitor = data.visitor;
+            if (data && data.status === 'ok') {
+                if (data.visitor) cachedLatestVisitor = data.visitor;
+                if (Array.isArray(data.visitors) && data.visitors.length > 0) {
+                    cachedVisitorsList = data.visitors;
+                } else if (data.visitor) {
+                    cachedVisitorsList = [data.visitor];
+                }
                 renderLatestVisitorUI();
             }
         } catch (_) {}
@@ -1743,11 +1784,91 @@
     AOS.init({ duration: 900, once: true, offset: window.innerWidth < 768 ? 60 : 80 });
 
     // ── Mobile Menu ──────────────────────────────────────────
+    // ── Mobile Menu (Enhanced: Auto-close on Outside Click & Scroll/Swipe) ──
     const menuBtn = document.getElementById('mobile-menu-button');
+    const menuIcon = document.getElementById('mobile-menu-icon');
     const mobileMenu = document.getElementById('mobile-menu');
-    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-    document.querySelectorAll('#mobile-menu a').forEach(a => {
-        a.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    const menuBackdrop = document.getElementById('mobile-menu-backdrop');
+
+    function openMobileMenu() {
+        mobileMenu.classList.remove('hidden');
+        if (menuBackdrop) {
+            menuBackdrop.classList.remove('hidden', 'pointer-events-none');
+            requestAnimationFrame(() => {
+                menuBackdrop.classList.add('opacity-100');
+            });
+        }
+        if (menuIcon) {
+            menuIcon.classList.remove('fa-bars');
+            menuIcon.classList.add('fa-times');
+        }
+        menuBtn.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMobileMenu() {
+        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+            if (menuBackdrop) {
+                menuBackdrop.classList.remove('opacity-100');
+                menuBackdrop.classList.add('pointer-events-none');
+                setTimeout(() => {
+                    menuBackdrop.classList.add('hidden');
+                }, 300);
+            }
+            if (menuIcon) {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+            menuBtn.setAttribute('aria-expanded', 'false');
+        }
+    }
+
+    menuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (mobileMenu.classList.contains('hidden')) {
+            openMobileMenu();
+        } else {
+            closeMobileMenu();
+        }
+    });
+
+    if (menuBackdrop) {
+        menuBackdrop.addEventListener('click', closeMobileMenu);
+    }
+
+    // Auto-close on click or tap outside menu
+    document.addEventListener('click', (e) => {
+        if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+            closeMobileMenu();
+        }
+    });
+
+    // Auto-close on scroll (when page is scrolled or swiped)
+    window.addEventListener('scroll', () => {
+        if (!mobileMenu.classList.contains('hidden')) {
+            closeMobileMenu();
+        }
+    }, { passive: true });
+
+    // Auto-close on touchmove gesture outside menu
+    document.addEventListener('touchmove', (e) => {
+        if (!mobileMenu.classList.contains('hidden') && !mobileMenu.contains(e.target)) {
+            closeMobileMenu();
+        }
+    }, { passive: true });
+
+    // Close when clicking any nav link or language toggle in mobile menu
+    document.querySelectorAll('#mobile-menu a, #mobile-menu button').forEach(el => {
+        el.addEventListener('click', () => {
+            closeMobileMenu();
+        });
+    });
+
+    // Close on Escape key press
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeMobileMenu();
+        }
     });
 
     // ── Custom Cursor ────────────────────────────────────────
@@ -1790,17 +1911,23 @@
     // ── Register Service Worker (PWA) ────────────────────────
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/portofolio/service-worker.js').catch(err => {
+            navigator.serviceWorker.register('/portofolio/service-worker.js?v=25').catch(err => {
                 console.log('Service Worker registration failed:', err);
             });
         });
     }
 </script>
 
-<!-- FLOATING LIVE VISITOR PILL (Opsi B - Mobile Centered & Auto-hide 2.5s) -->
-<div class="fixed bottom-5 inset-x-0 sm:inset-x-auto sm:left-5 z-50 flex justify-center sm:justify-start pointer-events-none px-4 sm:px-0">
-    <div id="floating-visitor-pill" class="transform translate-y-16 opacity-0 pointer-events-auto transition-all duration-500 ease-out flex items-center text-center sm:text-left px-4 py-2.5 rounded-full bg-[#12161f]/90 backdrop-blur-md border border-mars-teal/30 shadow-[0_8px_30px_rgb(0,0,0,0.5)] text-xs font-mono text-gray-200 max-w-[92vw] sm:max-w-none">
-        <span id="floating-visitor-msg"></span>
+<!-- FLOATING LIVE VISITOR PILL (Persistent Rotating Social Proof Ticker - Compact Mobile) -->
+<div id="floating-visitor-container" class="fixed bottom-3.5 inset-x-0 sm:inset-x-auto sm:left-5 sm:bottom-5 z-40 flex justify-center sm:justify-start pointer-events-none px-3 sm:px-0">
+    <div id="floating-visitor-pill" class="transform translate-y-12 opacity-0 pointer-events-auto transition-all duration-500 ease-out flex items-center gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full bg-[#0d1117]/90 backdrop-blur-md border border-mars-teal/25 shadow-[0_4px_24px_rgba(0,0,0,0.6)] text-[11px] sm:text-xs font-mono text-gray-200 max-w-[94vw] sm:max-w-md">
+        <!-- Pulsing Live Indicator -->
+        <span class="relative flex h-2 w-2 flex-shrink-0">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+        </span>
+        <!-- Ticker Message with Crossfade Transition -->
+        <div id="floating-visitor-msg" class="truncate transition-all duration-300 leading-tight"></div>
     </div>
 </div>
 
