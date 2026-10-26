@@ -13,7 +13,9 @@
     <meta property="og:site_name" content="Muhamad Arifin Syam">
     <meta property="og:locale" content="id_ID">
     <meta property="og:type" content="website">
-    <link rel="icon" href="/portofolio/img/ico.png" type="image/x-icon">
+    <link rel="icon" href="/portofolio/favicon.ico" sizes="any">
+    <link rel="icon" href="/portofolio/img/ico.png" type="image/png">
+    <link rel="apple-touch-icon" href="/portofolio/img/icon.png">
     <link rel="manifest" href="/portofolio/manifest.json">
     <meta name="theme-color" content="#2dd4bf">
     <meta property="og:image" content="https://raw.githubusercontent.com/Aku-Mars/gambar/main/bannercps.png">
@@ -1911,7 +1913,7 @@
     // ── Register Service Worker (PWA) ────────────────────────
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/portofolio/service-worker.js?v=25').catch(err => {
+            navigator.serviceWorker.register('/portofolio/service-worker.js?v=26').catch(err => {
                 console.log('Service Worker registration failed:', err);
             });
         });
