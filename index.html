@@ -1295,6 +1295,17 @@
 
     const projects = [
         {
+            title: "Flowra Studio",
+            image: "/portofolio/img/flowra.png",
+            url: "https://marsy.my.id/flowra/",
+            type: "Live App",
+            featured: true,
+            desc: {
+                id: "Dashboard web lokal untuk mengelola upload video ke YouTube secara batch & terjadwal, lengkap dengan render FFmpeg, konverter TikTok ke Shorts, AI Metadata, dan Smart Scheduling.",
+                en: "Local web dashboard to manage batch & scheduled YouTube video uploads, equipped with FFmpeg renderer, TikTok to Shorts converter, AI Metadata, and Smart Scheduling."
+            }
+        },
+        {
             title: "Acaris",
             image: "/portofolio/img/acaris.png",
             modalImage: "/portofolio/img/acaris.jpg",
@@ -1307,17 +1318,6 @@
             desc: {
                 id: "Sistem Terpadu Bimbingan & Manajemen Dokumen Mahasiswa (AI Chatbot, N8N, Mikroservis).",
                 en: "Integrated Student Guidance & Document Management System (AI Chatbot, N8N, Microservices)."
-            }
-        },
-        {
-            title: "Flowra Studio",
-            image: "/portofolio/img/flowra.png",
-            url: "https://marsy.my.id/flowra/",
-            type: "Live App",
-            featured: true,
-            desc: {
-                id: "Dashboard web lokal untuk mengelola upload video ke YouTube secara batch & terjadwal, lengkap dengan render FFmpeg, konverter TikTok ke Shorts, AI Metadata, dan Smart Scheduling.",
-                en: "Local web dashboard to manage batch & scheduled YouTube video uploads, equipped with FFmpeg renderer, TikTok to Shorts converter, AI Metadata, and Smart Scheduling."
             }
         },
         {
@@ -1913,7 +1913,7 @@
     // ── Register Service Worker (PWA) ────────────────────────
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/portofolio/service-worker.js?v=34')
+            navigator.serviceWorker.register('/portofolio/service-worker.js?v=35')
                 .then(reg => {
                     reg.update();
                 })
