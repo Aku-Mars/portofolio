@@ -1297,7 +1297,7 @@
         {
             title: "Flowra Studio",
             image: "/portofolio/img/flowra.png",
-            url: "https://marsy.my.id/flowra/",
+            url: "https://flowra.marsy.my.id",
             type: "Live App",
             featured: true,
             desc: {
@@ -1311,7 +1311,7 @@
             modalImage: "/portofolio/img/acaris.jpg",
             links: [
                 { url: "https://github.com/Acaris-App", label: { id: "Lihat GitHub", en: "View GitHub" }, icon: "fab fa-github" },
-                { url: "../apk/Acaris_S.apk", label: { id: "Unduh APK", en: "Download APK" }, icon: "fas fa-download" }
+                { url: "/apk/Acaris_S.apk", label: { id: "Unduh APK", en: "Download APK" }, icon: "fas fa-download" }
             ],
             type: "Live App",
             featured: true,
@@ -1913,7 +1913,7 @@
     // ── Register Service Worker (PWA) ────────────────────────
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/portofolio/service-worker.js?v=35')
+            navigator.serviceWorker.register('/portofolio/service-worker.js?v=36')
                 .then(reg => {
                     reg.update();
                 })
