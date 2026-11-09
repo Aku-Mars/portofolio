@@ -856,24 +856,8 @@
     </div>
 </footer>
 
-<!-- Firebase SDK -->
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getFirestore, doc, runTransaction, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyA7dbhKGRFAKa_ikf-cl05qFWHiqrToPkg",
-        authDomain: "page-mars.firebaseapp.com",
-        projectId: "page-mars",
-        storageBucket: "page-mars.firebasestorage.app",
-        messagingSenderId: "351677577100",
-        appId: "1:351677577100:web:ea4a40b93c28950b98c8a9"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    // Rate-limit key (IP/browser-based using Firestore)
+<!-- Visitor Analytics & UI Scripts -->
+<script>
     const CLIENT_KEY = 'mars_client_id';
     const RATE_LIMIT_MS = 15 * 60 * 1000; // 15 menit
 
@@ -995,55 +979,26 @@
 
     async function trackVisitor() {
         try {
-            const now = Date.now();
             const network = await getVisitorNetwork();
 
-            // Endpoint server menerapkan rate limit sendiri agar notifikasi tidak bergantung pada Firestore.
+            // Endpoint server menerapkan rate limit sendiri agar notifikasi tidak bergantung pada DB.
             sendDiscordNotification(navigator.userAgent, network, getTrafficSource()).catch((error) => {
                 console.warn('Visitor notification error:', error.message);
             });
 
-            // Ambil count dan update
-            const counterRef = doc(db, 'analytics', 'visitor_counter');
-            const rateRef = doc(db, 'analytics_visit_rate', makeRateDocId(network.ip));
-            let shouldCount = false;
-            let totalViews = 1;
-
-            await runTransaction(db, async (transaction) => {
-                const rateDoc = await transaction.get(rateRef);
-                const lastVisitAt = rateDoc.exists() ? Number(rateDoc.data().lastVisitAt || 0) : 0;
-                shouldCount = !lastVisitAt || (now - lastVisitAt) > RATE_LIMIT_MS;
-
-                const counterDoc = await transaction.get(counterRef);
-                const currentCount = counterDoc.exists() ? Number(counterDoc.data().count || 0) : 0;
-
-                if (shouldCount) {
-                    if (!counterDoc.exists()) {
-                        transaction.set(counterRef, { count: 1 });
-                        totalViews = 1;
-                    } else {
-                        totalViews = currentCount + 1;
-                        transaction.update(counterRef, { count: totalViews });
-                    }
-                    transaction.set(rateRef, {
-                        ip: network.ip || null,
-                        lastVisitAt: now,
-                        updatedAt: new Date(now).toISOString()
-                    }, { merge: true });
-                } else {
-                    totalViews = currentCount || 1;
+            // Ambil count dan update via endpoint lokal SQLite
+            const res = await fetch('/portofolio/api/counter.php', { method: 'POST' });
+            if (res.ok) {
+                const data = await res.json();
+                if (data && data.count) {
+                    const el = document.getElementById('view-count');
+                    if (el) el.textContent = Number(data.count).toLocaleString();
                 }
-            });
-
-            // Ambil total count untuk ditampilkan di footer
-            const snap = await getDoc(counterRef);
-            if (snap.exists()) {
-                document.getElementById('view-count').textContent = snap.data().count.toLocaleString();
             }
-
         } catch (err) {
-            console.warn('Firebase counter error:', err.message);
-            document.getElementById('view-count').textContent = '—';
+            console.warn('Visitor counter error:', err.message);
+            const el = document.getElementById('view-count');
+            if (el) el.textContent = '—';
         }
     }
 
@@ -1348,8 +1303,8 @@
             type: "Live App",
             featured: true,
             desc: {
-                id: "Aplikasi planner harian berbasis Firebase dengan sinkronisasi cloud.",
-                en: "A Firebase-based daily planner with cloud sync."
+                id: "Aplikasi planner harian mandiri dengan sinkronisasi cloud lokal.",
+                en: "A daily planner with local cloud sync."
             }
         },
         {
@@ -1428,8 +1383,8 @@
             url: "https://marsy.my.id/list/",
             type: "Live App",
             desc: {
-                id: "Aplikasi daftar tugas static HTML, CSS, JavaScript, dan Firebase.",
-                en: "A static HTML, CSS, JavaScript, and Firebase task list app."
+                id: "Aplikasi daftar tugas static HTML, CSS, JavaScript, dan SQLite.",
+                en: "A static HTML, CSS, JavaScript, and SQLite task list app."
             }
         },
         {
